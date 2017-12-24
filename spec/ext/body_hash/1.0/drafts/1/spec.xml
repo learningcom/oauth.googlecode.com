@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='http://xml.resource.org/authoring/rfc2629.xslt' ?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+
+<rfc category="info" ipr="full3978" docName="oauth-body_hash-1_0.xml">
+
+  <?rfc toc="yes" ?>
+  <?rfc tocdepth="3" ?>
+  <?rfc symrefs="yes" ?>
+  <?rfc sortrefs="yes"?>
+  <?rfc strict="yes" ?>
+  <?rfc iprnotified="no" ?>
+  <?rfc private="Implementers' Draft" ?>
+
+  <front>
+    <title>OAuth Request Body Hash 1.0 Draft 1</title>
+
+    <author initials="B" surname="Eaton" fullname="Brian Eaton">
+      <organization>Google, Inc</organization>
+      <address>
+        <email>beaton@google.com</email>
+      </address>
+    </author>
+
+    <date day="7" month="December" year="2008"/>
+
+    <abstract>
+      <t>
+        The OAuth Core signature workflow guarantees the integrity of the
+        HTTP request body only for
+        <spanx style="verb">application/x-www-form-urlencoded</spanx>
+        content types.  This specification extends the OAuth signature
+        to provide an integrity check of the HTTP request body for other
+        content types.
+        Alternate proposals for providing integrity checks
+        on the request body require signing oracles that are unacceptable
+        in some OAuth deployments.
+      </t>
+    </abstract>
+
+  </front>
+  <middle>
+
+    <section title="Notation and Conventions">
+      <t>
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+        "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+        document are to be interpreted as described in <xref target="RFC2119" />.
+        Domain name examples use <xref target="RFC2606" />.
+      </t>
+      <t>
+        Unless otherwise noted, this specification is written as a direct
+        continuation of <xref target="OAuth Core 1.0" />, inheriting the definitions and
+        guidelines set by it.
+      </t>
+    </section>
+
+    <section title="Related Work">
+      <t>
+        The OAuth Core specification <xref target="OAuth Core 1.0" /> provides
+        integrity checking only for 
+        <spanx style="verb">application/x-www-form-urlencoded</spanx>
+        request bodies.  Other types of request bodies are left unsigned.
+        An eavesdropper or man-in-the-middle who obtains a signed request URL
+        may be able to replay that URL with a different HTTP request body.
+        This security risk is unacceptable for some OAuth deployments.
+      </t>
+      <t>
+        Existing practice in the OAuth community <xref target="OAuth Body Signing" />
+        attempts to address this security
+        concern by adding an HMAC of the request body into the signature workflow.
+        This approach does guarantee the
+        integrity of the request body, but can create additional security problems
+        for some OAuth Consumers because it requires signing a raw, uninterpreted
+        byte stream.  OpenSocial request signing
+        <xref target="OpenSocial Request Signing" /> uses OAuth signatures,
+        but cannot use raw body signing because the OpenSocial specification requires
+        that OpenSocial containers control the value of some of the parameters
+        in the OAuth signature base string (such as opensocial_viewer_id), while
+        allowing application authors to control the value of other parameters.
+        OpenSocial containers cannot provide an oracle that signs raw byte streams
+        because doing so would allow application authors to forge requests that
+        include false opensocial parameters.
+      </t>
+      <t>
+        This specification attempts to address these limitations by providing
+        an integrity check on the request body without requiring that OAuth
+        Consumers create a signing oracle.
+      </t>
+    </section>
+
+    <section title="Body Hash">
+      <t>
+        To access a Protected Resource, the Consumer sends an HTTP request to
+        the Service Provider's resource endpoint URL.  If the request cannot
+        have a body, or if the request body has an 
+        <spanx style="verb">application/x-www-form-urlencoded</spanx>
+        content type, the Consumer MUST NOT include a body hash.  If the 
+        OAuth signature method is PLAINTEXT, the Consumer MUST NOT include
+        a body hash.  Otherwise the Consumer MUST include an oauth_body_hash
+        parameter in the request.
+      </t>
+      <t>
+        If the OAuth signature method is HMAC-SHA1 or RSA-SHA1, the
+        body hash is the SHA1 hash <xref target="RFC3174" />
+        of the bytes of the request body.
+        Updates to OAuth that specify new signature methods SHOULD
+        also specify the hash algorithm used to generate the body hash.
+      </t>
+      <t>
+        The value of the oauth_body_hash parameter is the base64-encoded
+        <xref target="RFC2045" /> hash of the request body.
+      </t>
+    </section>
+
+    <section title="Example">
+      <t>
+        An HTTP request like:
+        <figure>
+          <artwork>
+  PUT /resource
+  Host: www.example.com
+  Content-Type: application/octet-stream
+  Content-Length: 12
+
+  Hello World! 
+          </artwork>
+        </figure>
+        signed using the HMAC-SHA1 or RSA-SHA1 OAuth signature algorithm
+        would generate a Signature Base String of:
+        <figure>
+          <artwork>
+  PUT&http%3A%2F%2Fwww.example.com%2Fresource&oauth_body_hash%3D
+  Lve95gjOVATpfV8EL5X4nxwjKHE%253D
+          </artwork>
+        </figure>
+      </t>
+    </section>
+
+    <section title="Security Considerations">
+      <t>
+        Many factors besides the bytes of the request body can
+        influence the interpretation of the body of the HTTP
+        request.  For example, a content-type or content-encoding
+        header can change the way a server handles an HTTP request.
+        This specification does not include an integrity check
+        on the HTTP request headers.  OAuth deployments whose
+        security could be impacted by an attacker who replays
+        an HTTP request with modified request headers SHOULD
+        use other mechanisms (such as HTTPS) to protect the confidentiality
+        and integrity of the entire HTTP request.
+      </t>
+    </section>
+
+  </middle>
+
+  <back>
+
+    <references title="References">
+
+      <reference anchor="OAuth Core 1.0">
+        <front>
+          <title>OAuth Core 1.0</title>
+          <author initials="" surname="OAuth Core Workgroup" fullname="OAuth Core Workgroup">
+            <organization />
+          </author>
+        </front>
+        <format type="HTML" target="http://oauth.net/core/1.0" />
+      </reference>
+
+      <reference anchor="OAuth Body Signing"
+          target="http://groups.google.com/group/oauth/browse_thread/thread/acd036474649402a/8a07b353faca5cea">
+        <front>     
+          <title>Again : signing the body of HTTP POST and HTTP PUT requests</title>
+          <author fullname="Marc Worrell">
+            <organization></organization>
+          </author>
+          <author fullname="Eran Hammer-Lahav" >
+            <organization></organization>
+          </author>
+        </front>
+      </reference>
+
+      <reference anchor="OpenSocial Request Signing">
+        <front>
+          <title>OpenSocial Request Signing</title>
+          <author initials="" surname="OpenSocial Foundation" fullname="OpenSocial Foundation">
+            <organization />
+          </author>
+        </front>
+        <format type="HTML" target="http://www.opensocial.org/Technical-Resources/opensocial-spec-v08/gadgets-reference08#gadgets.io.makeRequest" />
+      </reference>
+
+      <reference anchor="RFC2606">
+        <front>
+          <title>Reserved Top Level DNS Names</title>
+          <author initials="D.E" surname="Eastlake" fullname="D. Eastlake">
+            <organization></organization>
+          </author>
+          <author initials="A.P" surname="Panitz" fullname="A. Panitz">
+            <organization></organization>
+          </author>
+        </front>
+        <seriesInfo name="RFC" value="2606" />
+      </reference>
+
+      <reference anchor="RFC2119">
+        <front>
+          <title>Key words for use in RFCs to Indicate Requirement Levels</title>
+          <author initials="B.S" surname="Bradner" fullname="Scott Bradner">
+            <organization>Alis Technologies</organization>
+          </author>
+        </front>
+        <seriesInfo name="RFC" value="2119" />
+      </reference>
+
+      <reference anchor="RFC2045">
+        <front>
+          <title>Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies</title>
+          <author initials="N.F" surname="Freed" fullname="N. Freed">
+            <organization>Innosoft</organization>
+          </author>
+          <author initials="N.B" surname="Borenstein" fullname="N. Borenstein">
+            <organization>First Virtual</organization>
+          </author>
+        </front>
+        <seriesInfo name="RFC" value="2045" />
+      </reference>
+
+      <reference anchor="RFC3174">
+        <front>
+          <title>US Secure Hash Algorithm 1 (SHA1)</title>
+          <author initials="D" surname="Eastlake, 3rd" fullname="Donald E. Eastlake, 3rd">
+            <organization>Motorola</organization>
+          </author>
+          <author initials="P" surname="Jones" fullname="Paul E. Jones">
+            <organization>Cisco Systems, Inc.</organization>
+          </author>
+        </front>
+        <seriesInfo name="RFC" value="3174" />
+      </reference>
+    </references>
+  </back>
+
+</rfc>

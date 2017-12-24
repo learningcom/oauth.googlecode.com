@@ -1,0 +1,504 @@
+
+
+
+Implementers' Draft                                             B. Eaton
+                                                             Google, Inc
+                                                        December 7, 2008
+
+
+                  OAuth Request Body Hash 1.0 Draft 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eaton                                                           [Page 1]
+
+                   OAuth Request Body Hash 1.0 Draft 1     December 2008
+
+
+Abstract
+
+   The OAuth Core signature workflow guarantees the integrity of the
+   HTTP request body only for "application/x-www-form-urlencoded"
+   content types.  This specification extends the OAuth signature to
+   provide an integrity check of the HTTP request body for other content
+   types.  Alternate proposals for providing integrity checks on the
+   request body require signing oracles that are unacceptable in some
+   OAuth deployments.
+
+
+Table of Contents
+
+   1.  Notation and Conventions  . . . . . . . . . . . . . . . . . . . 3
+   2.  Related Work  . . . . . . . . . . . . . . . . . . . . . . . . . 4
+   3.  Body Hash . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+   4.  Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . . . 7
+   6.  References  . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . . . 9
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eaton                                                           [Page 2]
+
+                   OAuth Request Body Hash 1.0 Draft 1     December 2008
+
+
+1.  Notation and Conventions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in [RFC2119].  Domain
+   name examples use [RFC2606].
+
+   Unless otherwise noted, this specification is written as a direct
+   continuation of [OAuth Core 1.0], inheriting the definitions and
+   guidelines set by it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eaton                                                           [Page 3]
+
+                   OAuth Request Body Hash 1.0 Draft 1     December 2008
+
+
+2.  Related Work
+
+   The OAuth Core specification [OAuth Core 1.0] provides integrity
+   checking only for "application/x-www-form-urlencoded" request bodies.
+   Other types of request bodies are left unsigned.  An eavesdropper or
+   man-in-the-middle who obtains a signed request URL may be able to
+   replay that URL with a different HTTP request body.  This security
+   risk is unacceptable for some OAuth deployments.
+
+   Existing practice in the OAuth community attempts to address this
+   security concern by adding an HMAC of the request body into the
+   signature workflow. http://groups.google.com/group/oauth/
+   browse_thread/thread/acd036474649402a/8a07b353faca5cea The OAuth Body
+   Signing specification [OAuth Body Signing] attempts to address this
+   security concern by adding an HMAC of the request body into the OAuth
+   signature workflow.  This approach does guarantee the integrity of
+   the request body, but can create additional security problems for
+   some OAuth Consumers because it requires signing a raw, uninterpreted
+   byte stream.  OpenSocial request signing [OpenSocial Request Signing]
+   uses OAuth signatures, but cannot use raw body signing because the
+   OpenSocial specification requires that OpenSocial containers control
+   the value of some of the parameters in the OAuth signature base
+   string (such as opensocial_viewer_id), while allowing application
+   authors to control the value of other parameters.  OpenSocial
+   containers cannot provide an oracle that signs raw byte streams
+   because doing so would allow application authors to forge requests
+   that include false opensocial parameters.
+
+   This specification attempts to address these limitations by providing
+   an integrity check on the request body without requiring that OAuth
+   Consumers create a signing oracle.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eaton                                                           [Page 4]
+
+                   OAuth Request Body Hash 1.0 Draft 1     December 2008
+
+
+3.  Body Hash
+
+   To access a Protected Resource, the Consumer sends an HTTP request to
+   the Service Provider's resource endpoint URL.  If the request cannot
+   have a body, or if the request body has an
+   "application/x-www-form-urlencoded" content type, the Consumer MUST
+   NOT include a body hash.  If the OAuth signature method is PLAINTEXT,
+   the Consumer MUST NOT include a body hash.  Otherwise the Consumer
+   MUST include an oauth_body_hash parameter in the request.
+
+   If the OAuth signature method is HMAC-SHA1 or RSA-SHA1, the body hash
+   is the SHA1 hash [RFC3174] of the bytes of the request body.  Updates
+   to OAuth that specify new signature methods SHOULD also specify the
+   hash algorithm used to generate the body hash.
+
+   The value of the oauth_body_hash parameter is the base64-encoded
+   [RFC2045] hash of the request body.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eaton                                                           [Page 5]
+
+                   OAuth Request Body Hash 1.0 Draft 1     December 2008
+
+
+4.  Example
+
+   An HTTP request like:
+
+     PUT /resource
+     Host: www.example.com
+     Content-Type: application/octet-stream
+     Content-Length: 12
+
+     Hello World!
+
+   signed using the HMAC-SHA1 or RSA-SHA1 OAuth signature algorithm
+   would generate a Signature Base String of:
+
+     PUT&http%3A%2F%2Fwww.example.com%2Fresource&oauth_body_hash%3D
+     Lve95gjOVATpfV8EL5X4nxwjKHE%253D
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eaton                                                           [Page 6]
+
+                   OAuth Request Body Hash 1.0 Draft 1     December 2008
+
+
+5.  Security Considerations
+
+   Many factors besides the bytes of the request body can influence the
+   interpretation of the body of the HTTP request.  For example, a
+   content-type or content-encoding header can change the way a server
+   handles an HTTP request.  This specification does not include an
+   integrity check on the HTTP request headers.  OAuth deployments whose
+   security could be impacted by an attacker who replays an HTTP request
+   with modified request headers SHOULD use other mechanisms (such as
+   HTTPS) to protect the confidentiality and integrity of the entire
+   HTTP request.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eaton                                                           [Page 7]
+
+                   OAuth Request Body Hash 1.0 Draft 1     December 2008
+
+
+6.  References
+
+   [OAuth Body Signing]
+              "Again : signing the body of HTTP POST and HTTP PUT
+              requests", <http://groups.google.com/group/oauth/
+              browse_thread/thread/acd036474649402a/8a07b353faca5cea>.
+
+   [OAuth Core 1.0]
+              OAuth Core Workgroup, "OAuth Core 1.0".
+
+   [OpenSocial Request Signing]
+              OpenSocial Foundation, "OpenSocial Request Signing".
+
+   [RFC2045]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
+              Extensions (MIME) Part One: Format of Internet Message
+              Bodies", RFC 2045.
+
+   [RFC2119]  Bradner, B., "Key words for use in RFCs to Indicate
+              Requirement Levels", RFC 2119.
+
+   [RFC2606]  Eastlake, D. and A. Panitz, "Reserved Top Level DNS
+              Names", RFC 2606.
+
+   [RFC3174]  Eastlake, 3rd, D. and P. Jones, "US Secure Hash Algorithm
+              1 (SHA1)", RFC 3174.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eaton                                                           [Page 8]
+
+                   OAuth Request Body Hash 1.0 Draft 1     December 2008
+
+
+Author's Address
+
+   Brian Eaton
+   Google, Inc
+
+   Email: beaton@google.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eaton                                                           [Page 9]
+

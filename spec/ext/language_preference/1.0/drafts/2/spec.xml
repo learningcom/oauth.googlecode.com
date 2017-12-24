@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='http://xml.resource.org/authoring/rfc2629.xslt' ?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+<!ENTITY rfc2119 PUBLIC '' 
+      'http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml'>
+<!ENTITY rfc2606 PUBLIC '' 
+      'http://xml.resource.org/public/rfc/bibxml/reference.RFC.2606.xml'>
+<!ENTITY rfc2616 PUBLIC '' 
+      'http://xml.resource.org/public/rfc/bibxml/reference.RFC.2616.xml'>
+]
+>
+<?rfc authorship="yes"?>
+<?rfc toc="yes"?>
+<?rfc tocdepth="2" ?>
+<?rfc topblock="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes"?>
+<?rfc iprnotified="no" ?>
+<?rfc private="Draft 2"?>
+<rfc category="info" ipr="full3978" docName="oauth-ext-lang-pref-draft-02">
+   <front>
+      <title abbrev="xoauth-lang-pref-draft-1">
+	    OAuth Extension for Specifying User Language Preference - Draft 2</title>
+      <author initials="GF" surname="Fletcher" fullname="George Fletcher">
+         <organization>AOL LLC</organization>
+            <address>
+               <email>gffletch@aol.com</email>
+            </address>
+         </author>
+         <date month="December" year="2007"/>
+         <area>OAuth Extension</area>
+         <keyword>OAuth</keyword>
+         <keyword>Extension</keyword>
+         <keyword>Language Preference</keyword>
+         <keyword>Draft</keyword>
+         <abstract>
+            <t>This memo describes how the Consumer and Service Provider can
+	    communicate the user's preferred language preference.</t>
+         </abstract>
+      </front>
+      <middle>
+         <section anchor="contrib" title="Contributors">
+            <t>
+               <list style='empty'>
+               	  <t>Allen Tom</t>
+                  <t>Eran Hammer-Lahav</t>
+                  <t>John Kemp</t>
+                  <t>Joseph Holsten</t>
+               </list>
+            </t>
+         </section>
+         <section anchor="conv" title="Notation and Conventions">
+            <t>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, 
+	    “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, 
+	    and “OPTIONAL” in this document are to be interpreted as 
+	    described in <xref target="RFC2119"/>. Domain name examples use 
+	    <xref target="RFC2606"/>.</t>
+         </section>
+         <section anchor="defs" title="Definitions">
+            <t>
+               <list style="hanging">
+                  <t hangText="Service Provider:">A web application that allows 
+	      access via OAuth.</t>
+                  <t hangText="Consumer:">A website or application that uses 
+	      OAuth to access the Service Provider on behalf of the User.</t>
+                  <t hangText="User:">An individual who has an account with the 
+	      Service Provider.</t>
+               </list>
+            </t>
+         </section>
+         <section anchor="desc" title="Description">
+            <t>In certain cases it is necessary or prudent for the Consumer 
+            to specify to the Service Provider the language preference of 
+	    the user so that UI presented during the user authorization 
+	    phase is presented in the preferred language of the user.</t>
+            <t>This language preference specification should be interpreted
+	    by the Service Provider as a UI/UE recommendation. The goal is
+	    to provide a better experience for the user.</t>
+            <t>Note that this is NOT the language preference of the Service 
+	    Provider.</t>
+         </section>
+         <section anchor="parameter" title="Parameter Specification">
+            <t>The OAuth Language Preference MUST be specified with the 
+	    parameter name 'xoauth_lang_pref'. The value of the parameter 
+	    MUST conform to the rules for the Accept-Language HTTP header 
+	    in <xref target="RFC2616"/>.
+            <list>
+                  <t>xoauth_lang_pref = 1#( language-range [ ";" "q" "=" qvalue ] )</t>
+                  <t>language-range  = ( ( 1*8ALPHA *( "-" 1*8ALPHA ) ) | "*" )</t>
+               </list>
+            </t>
+            <t>As this can be in the query params or form data it will also 
+	    then need to be appropriately URL-encoded for transmission and 
+	    decoded for use by the recipient.</t>
+         </section>
+         <section anchor="ext-uri" title="Extension Identifier">
+            <t>The Service Provider can advertise that it supports this
+	    extension by listing the following URI in the public documentation
+	    that also describes the public endpoints. In addition, if the
+	    Service Provider supports the <xref format="none" target="oauth_disco_1_0">[OAuth Discovery 1.0]</xref>
+	    specification, then this URI must be listed for each endpoint where 
+	    the Service Provider will process the parameter.
+	    <list>
+                  <t>http://oauth.net/ext/language_preference/1.0</t>
+               </list>
+            </t>
+         </section>
+         <section anchor="processing" title="Processing Rules">
+            <t>The Consumer MAY specify the language preference of the user by 
+	    adding the xoauth_lang_pref parameter to any Service Provider endpoint that
+	    supports the extension.</t>
+            <t>The Service Provider MUST document publicly which
+	    endpoints support the extension.</t>
+            <t>The Service Provider SHOULD specify which enpoints support the
+            Language Preference extension via the <xref format="none" target="oauth_disco_1_0">[OAuth Discovery 1.0]</xref>
+            specification.</t>
+            <t>The recipient of the xouath_lang_pref parameter MAY combine 
+	    the language preferences found in that parameter with those 
+	    present in any available Accept-Language HTTP header to determine 
+	    the language preference list of the user (by virtue of any 
+	    supplied 'quality values' (see <xref target="RFC2616"/>, section 14).</t>
+            <t>The Consumer SHOULD consider using a higher 'quality value' if precedence
+	    over the HTTP Accept-Language header is desired.</t>
+            <t>If the Service Provider can not provide the UI in the
+	    preferred language, then the Service Provider should attempt a
+	    "best effort match" between the user's preferred languages and the
+	    languages supported by the Service Provider. Definition of the 
+	    "best effort match" algorithm is out of scope for this document.</t>
+         </section>
+         <section anchor="example" title="Examples">
+            <t>Example xoauth_lang_pref with a single language
+               <list>
+                  <t><figure><artwork>xoauth_lang_pref="en-us"</artwork></figure></t>
+               </list>
+            </t>
+            <t>Example xoauth_lang_pref with multiple values
+         <list>
+                  <t><figure><artwork>xoauth_lang_pref=en-gb;q=1.0, en-us;q=0.8</artwork></figure></t>
+               </list>
+            </t>
+            <t>Example xoauth_lang_pref encoded for transport as query
+	    string or form element
+         <list>
+                  <t><figure><artwork>xoauth_lang_pref=en-gb%3bq%3d1.0%2c+en-us%3bq%3d0.8</artwork></figure></t>
+               </list>
+            </t>
+         </section>
+         <section anchor="practice" title="Possible Use Cases">
+            <section title="Language preference as part of Request Token request">
+               <t>[The following flow is for explanatory purposes and describes only
+               	one of many ways to accomplish the specified task.]</t>
+               <t>In this use case the Consumer knows the user's language 
+	      preference and chooses to specify it as part of the request for
+	      the Request Token. By specifying the language preference on
+	      this request, the Service Provider can either encode information
+	      into the request token or potentially dynamically generate an
+	      appropriate authorization URL. This last option requires the
+	      support by both the Consumer and Service Provider of dynamically
+	      generated authorization URLs.</t>
+               <t>The basic flow would be...
+            <list style="numbers">
+                     <t>The user interacts with the Consumer in a way that allows
+		the Consumer to know the user's language preference. It could
+		also be that the Consumer only really supports a single 
+		language and wants the user's experience to all be in the
+		same language.</t>
+                     <t>When the user requests access to a resource that requires
+		authorization with a Service Provider, the Consumer generates
+		the request for the request token and adds the xoauth_lang_pref
+		parameter to those being sent to the Service Provider.</t>
+                     <t>The Service Provider receives the request for the Request
+		Token and processes the xoauth_lang_pref parameter.</t>
+                     <t>The Service Provider encodes the chosen language
+		preference from those specified or it's own default and
+		associates the language preference with the generated request
+		token.</t>
+                     <t>The Consumer receives the request token and generates the
+		authorization URL and redirects the user to the authorization
+		endpoint at the Service Provider.</t>
+                     <t>The Service Provider processes the request token and retrieves
+		the associated language preference.</t>
+                     <t>The Service Provider uses this language preference to display
+		the UI for the user to authorize the resource access request.</t>
+                  </list>
+               </t>
+            </section>
+            <section title="Language preference as part of Authorization request">
+               <t>[The following flow is for explanatory purposes and describes only
+               	one of many ways to accomplish the specified task.]</t>
+               <t>In this use case, the Consumer knows the user's language perference but
+               	the Service Provider only supports acceptance of the xoauth_lang_pref 
+               	parameter as part of the user authorization step. In handling the
+               	authorization request, the Service Provider will process the xoauth_lang_pref
+               	parameter and display the authorization UI in the "best effort match" of
+               	the user's specified language preference and those languages supported
+               	by the Service Provider.</t>
+               	<t>The basic flow would be...
+                <list style="numbers">
+                     <t>The user interacts with the Consumer in a way that allows
+		the Consumer to know the user's language preference. It could
+		also be that the Consumer only really supports a single 
+		language and wants the user's experience to all be in the
+		same language.</t>
+                     <t>When the user requests access to a resource that requires
+		authorization with a Service Provider, the Consumer generates
+		the request for the request token without specifying the
+		xoauth_lang_pref parameter.</t>
+                     <t>The Service Provider receives the request for the Request
+		Token and processes per <xref format="none" target="oauth_core_1_0">[OAuth Core 1.0]</xref>.</t>
+                     <t>The Consumer receives the request token and generates the
+		authorization URL also appending the xoauth_lang_pref parameter.</t>
+                     <t>The Service Provider processes the request token and language preference
+                     	parameter.</t>
+                     <t>The Service Provider determines the "best effort match" of requested
+                     	language preferences and Service Provider supported languages and uses that 
+                     	language to display the UI for the user to authorize the resource access request.</t>
+                </list>
+               </t>
+            </section>
+         </section>
+      </middle>
+      <back>
+         <references>
+      	&rfc2119;
+      	&rfc2606;
+      	&rfc2616;
+      	<reference anchor="oauth_core_1_0">
+               <front>
+                  <title>OAuth Core 1.0</title>
+                  <author initials="OCW" surname="OAuth" fullname="OAuth Core Workgroup">
+                     <organization /></author>
+                     <date day="4" month="December" year="2007"/>
+                  </front>
+                  <format type="HTML" target="http://oauth.net/core/1.0" /></reference>
+                  <reference anchor="oauth_disco_1_0">
+                     <front>
+                        <title>OAuth Discovery 1.0 Draft 1</title>
+                        <author initials="E" surname="Hammer-Lahav" fullname="Eran Hammer-Lahav">
+                           <organization>Hueniverse, LLC</organization>
+                           <address>
+                              <email>eran@hueniverse.com</email>
+                           </address>
+                        </author>
+                        <date day="12" month="December" year="2007"/>
+                     </front>
+                     <format type="HTML" target="http://oauth.googlecode.com/svn/spec/discovery/1.0/drafts/1/spec.html" /></reference>
+                  </references>
+               </back>
+            </rfc>

@@ -1,0 +1,41 @@
+#summary Instructions for Code Review process
+
+= Introduction =
+
+So, you wanna patch some of this beautiful code do ya? Then get ready for code reviews, svn branching and svn merging!
+
+= Setting Up A Branch =
+
+First things first, create your branch and commit it:
+
+{{{
+termie@pito:~/p/oauth % svn cp code/php branches/termie-somebranch                     
+A         branches/termie-somebranch
+
+termie@pito:~/p/oauth % svn commit branches/termie-somebranch -m "branching to get some patches reviewed"       
+Adding         branches/termie--somebranch
+
+Committed revision 877.
+}}}
+
+= Getting It Reviewed =
+
+Work work work, hopefully this doesn't take too long so you don't get out of date from trunk.
+
+Go to and make a new review issue, http://code.google.com/p/oauth/issues/entry?show=review
+
+You'll get comments on your changes.
+
+= Merging In SVN Sucks =
+
+But somebody's got to do it. If nothing has changed in trunk since you started your branch it isn't too tricky. The basic command looks like this:
+
+{{{
+termie@pito:~/p/oauth % svn merge code/php@HEAD branches/termie-somebranch@HEAD code/php
+U    branches/termie-somebranch/tests/OAuthRequestTest.php
+U    branches/termie-somebranch/OAuth.php
+}}}
+
+This will take the changes that `branches/termie-somebranch` has made compared to `code/php` and then apply them to your checked out code at `code/php`.
+
+The first two arguments can be repo urls but the last one always has to be a working copy path.

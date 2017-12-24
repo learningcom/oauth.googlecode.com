@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/968/code/branches/jmkristian-2009-04/java/lib
+END
+junit.jar
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/968/code/branches/jmkristian-2009-04/java/lib/junit.jar
+END
+jetty-util-6.1.11.jar
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/968/code/branches/jmkristian-2009-04/java/lib/jetty-util-6.1.11.jar
+END
+commons-logging-1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/968/code/branches/jmkristian-2009-04/java/lib/commons-logging-1.1.jar
+END
+servlet-api-2.5-6.1.11.jar
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/968/code/branches/jmkristian-2009-04/java/lib/servlet-api-2.5-6.1.11.jar
+END
+jetty-6.1.11.jar
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/968/code/branches/jmkristian-2009-04/java/lib/jetty-6.1.11.jar
+END
+httpcore-4.0-beta2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/968/code/branches/jmkristian-2009-04/java/lib/httpcore-4.0-beta2.jar
+END
+commons-codec-1.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/968/code/branches/jmkristian-2009-04/java/lib/commons-codec-1.3.jar
+END
+commons-httpclient-3.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/968/code/branches/jmkristian-2009-04/java/lib/commons-httpclient-3.1.jar
+END
+httpclient-4.0-beta1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/968/code/branches/jmkristian-2009-04/java/lib/httpclient-4.0-beta1.jar
+END

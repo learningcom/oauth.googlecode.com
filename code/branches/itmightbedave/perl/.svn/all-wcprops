@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/653/code/branches/itmightbedave/perl
+END
+.cvsignore
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/637/code/branches/itmightbedave/perl/.cvsignore
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/637/code/branches/itmightbedave/perl/README
+END
+MANIFEST
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/637/code/branches/itmightbedave/perl/MANIFEST
+END
+Makefile.PL
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/637/code/branches/itmightbedave/perl/Makefile.PL
+END
+Changes
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/649/code/branches/itmightbedave/perl/Changes
+END
+Build.PL
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/637/code/branches/itmightbedave/perl/Build.PL
+END
+MANIFEST.SKIP
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/637/code/branches/itmightbedave/perl/MANIFEST.SKIP
+END

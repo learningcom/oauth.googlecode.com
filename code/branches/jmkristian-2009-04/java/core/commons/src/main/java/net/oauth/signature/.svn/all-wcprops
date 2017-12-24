@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/1025/code/branches/jmkristian-2009-04/java/core/commons/src/main/java/net/oauth/signature
+END
+RSA_SHA1.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/1025/code/branches/jmkristian-2009-04/java/core/commons/src/main/java/net/oauth/signature/RSA_SHA1.java
+END
+OAuthSignatureMethod.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/!svn/ver/989/code/branches/jmkristian-2009-04/java/core/commons/src/main/java/net/oauth/signature/OAuthSignatureMethod.java
+END
+HMAC_SHA1.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/974/code/branches/jmkristian-2009-04/java/core/commons/src/main/java/net/oauth/signature/HMAC_SHA1.java
+END
+Base64.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/989/code/branches/jmkristian-2009-04/java/core/commons/src/main/java/net/oauth/signature/Base64.java
+END
+PLAINTEXT.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/974/code/branches/jmkristian-2009-04/java/core/commons/src/main/java/net/oauth/signature/PLAINTEXT.java
+END

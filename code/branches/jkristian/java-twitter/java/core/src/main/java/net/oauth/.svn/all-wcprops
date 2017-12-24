@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/main/java/net/oauth
+END
+OAuthException.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/main/java/net/oauth/OAuthException.java
+END
+SimpleOAuthValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/main/java/net/oauth/SimpleOAuthValidator.java
+END
+OAuth.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/main/java/net/oauth/OAuth.java
+END
+OAuthProblemException.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/main/java/net/oauth/OAuthProblemException.java
+END
+OAuthAccessor.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/main/java/net/oauth/OAuthAccessor.java
+END
+OAuthMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/main/java/net/oauth/OAuthMessage.java
+END
+consumer.properties.sample
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/main/java/net/oauth/consumer.properties.sample
+END
+OAuthValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/main/java/net/oauth/OAuthValidator.java
+END
+ConsumerProperties.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/main/java/net/oauth/ConsumerProperties.java
+END
+OAuthServiceProvider.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/main/java/net/oauth/OAuthServiceProvider.java
+END
+OAuthConsumer.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/main/java/net/oauth/OAuthConsumer.java
+END

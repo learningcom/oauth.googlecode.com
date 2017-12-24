@@ -1,0 +1,495 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en"><head><title>Draft 2: OAuth Extension for Specifying User Language Preference - Draft 2</title>
+<meta http-equiv="Expires" content="Wed, 19 Dec 2007 17:49:36 +0000">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="OAuth Extension for Specifying User Language Preference - Draft 2">
+<meta name="keywords" content="OAuth, Extension, Language Preference, Draft">
+<meta name="generator" content="xml2rfc v1.32 (http://xml.resource.org/)">
+<style type='text/css'><!--
+        body {
+                font-family: verdana, charcoal, helvetica, arial, sans-serif;
+                font-size: small; color: #000; background-color: #FFF;
+                margin: 2em;
+        }
+        h1, h2, h3, h4, h5, h6 {
+                font-family: helvetica, monaco, "MS Sans Serif", arial, sans-serif;
+                font-weight: bold; font-style: normal;
+        }
+        h1 { color: #900; background-color: transparent; text-align: right; }
+        h3 { color: #333; background-color: transparent; }
+
+        td.RFCbug {
+                font-size: x-small; text-decoration: none;
+                width: 30px; height: 30px; padding-top: 2px;
+                text-align: justify; vertical-align: middle;
+                background-color: #000;
+        }
+        td.RFCbug span.RFC {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: bold; color: #666;
+        }
+        td.RFCbug span.hotText {
+                font-family: charcoal, monaco, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: normal; text-align: center; color: #FFF;
+        }
+
+        table.TOCbug { width: 30px; height: 15px; }
+        td.TOCbug {
+                text-align: center; width: 30px; height: 15px;
+                color: #FFF; background-color: #900;
+        }
+        td.TOCbug a {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, sans-serif;
+                font-weight: bold; font-size: x-small; text-decoration: none;
+                color: #FFF; background-color: transparent;
+        }
+
+        td.header {
+                font-family: arial, helvetica, sans-serif; font-size: x-small;
+                vertical-align: top; width: 33%;
+                color: #FFF; background-color: #666;
+        }
+        td.author { font-weight: bold; font-size: x-small; margin-left: 4em; }
+        td.author-text { font-size: x-small; }
+
+        /* info code from SantaKlauss at http://www.madaboutstyle.com/tooltip2.html */
+        a.info {
+                /* This is the key. */
+                position: relative;
+                z-index: 24;
+                text-decoration: none;
+        }
+        a.info:hover {
+                z-index: 25;
+                color: #FFF; background-color: #900;
+        }
+        a.info span { display: none; }
+        a.info:hover span.info {
+                /* The span will display just on :hover state. */
+                display: block;
+                position: absolute;
+                font-size: smaller;
+                top: 2em; left: -5em; width: 15em;
+                padding: 2px; border: 1px solid #333;
+                color: #900; background-color: #EEE;
+                text-align: left;
+        }
+
+        a { font-weight: bold; }
+        a:link    { color: #900; background-color: transparent; }
+        a:visited { color: #633; background-color: transparent; }
+        a:active  { color: #633; background-color: transparent; }
+
+        p { margin-left: 2em; margin-right: 2em; }
+        p.copyright { font-size: x-small; }
+        p.toc { font-size: small; font-weight: bold; margin-left: 3em; }
+        table.toc { margin: 0 0 0 3em; padding: 0; border: 0; vertical-align: text-top; }
+        td.toc { font-size: small; font-weight: bold; vertical-align: text-top; }
+
+        ol.text { margin-left: 2em; margin-right: 2em; }
+        ul.text { margin-left: 2em; margin-right: 2em; }
+        li      { margin-left: 3em; }
+
+        /* RFC-2629 <spanx>s and <artwork>s. */
+        em     { font-style: italic; }
+        strong { font-weight: bold; }
+        dfn    { font-weight: bold; font-style: normal; }
+        cite   { font-weight: normal; font-style: normal; }
+        tt     { color: #036; }
+        tt, pre, pre dfn, pre em, pre cite, pre span {
+                font-family: "Courier New", Courier, monospace; font-size: small;
+        }
+        pre {
+                text-align: left; padding: 4px;
+                color: #000; background-color: #CCC;
+        }
+        pre dfn  { color: #900; }
+        pre em   { color: #66F; background-color: #FFC; font-weight: normal; }
+        pre .key { color: #33C; font-weight: bold; }
+        pre .id  { color: #900; }
+        pre .str { color: #000; background-color: #CFF; }
+        pre .val { color: #066; }
+        pre .rep { color: #909; }
+        pre .oth { color: #000; background-color: #FCF; }
+        pre .err { background-color: #FCC; }
+
+        /* RFC-2629 <texttable>s. */
+        table.all, table.full, table.headers, table.none {
+                font-size: small; text-align: center; border-width: 2px;
+                vertical-align: top; border-collapse: collapse;
+        }
+        table.all, table.full { border-style: solid; border-color: black; }
+        table.headers, table.none { border-style: none; }
+        th {
+                font-weight: bold; border-color: black;
+                border-width: 2px 2px 3px 2px;
+        }
+        table.all th, table.full th { border-style: solid; }
+        table.headers th { border-style: none none solid none; }
+        table.none th { border-style: none; }
+        table.all td {
+                border-style: solid; border-color: #333;
+                border-width: 1px 2px;
+        }
+        table.full td, table.headers td, table.none td { border-style: none; }
+
+        hr { height: 1px; }
+        hr.insert {
+                width: 80%; border-style: none; border-width: 0;
+                color: #CCC; background-color: #CCC;
+        }
+--></style>
+</head>
+<body>
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<table summary="layout" width="66%" border="0" cellpadding="0" cellspacing="0"><tr><td><table summary="layout" width="100%" border="0" cellpadding="2" cellspacing="1">
+<tr><td class="header">Draft 2</td><td class="header">GF. Fletcher</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">AOL LLC</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">December 19, 2007</td></tr>
+</table></td></tr></table>
+<h1><br />OAuth Extension for Specifying User Language Preference - Draft 2</h1>
+
+<h3>Abstract</h3>
+
+<p>This memo describes how the Consumer and Service Provider can
+	    communicate the user's preferred language preference.
+</p><a name="toc"></a><br /><hr />
+<h3>Table of Contents</h3>
+<p class="toc">
+<a href="#contrib">1.</a>&nbsp;
+Contributors<br />
+<a href="#conv">2.</a>&nbsp;
+Notation and Conventions<br />
+<a href="#defs">3.</a>&nbsp;
+Definitions<br />
+<a href="#desc">4.</a>&nbsp;
+Description<br />
+<a href="#parameter">5.</a>&nbsp;
+Parameter Specification<br />
+<a href="#ext-uri">6.</a>&nbsp;
+Extension Identifier<br />
+<a href="#processing">7.</a>&nbsp;
+Processing Rules<br />
+<a href="#example">8.</a>&nbsp;
+Examples<br />
+<a href="#practice">9.</a>&nbsp;
+Possible Use Cases<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor1">9.1.</a>&nbsp;
+Language preference as part of Request Token request<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor2">9.2.</a>&nbsp;
+Language preference as part of Authorization request<br />
+<a href="#rfc.references1">10.</a>&nbsp;
+References<br />
+<a href="#rfc.authors">&#167;</a>&nbsp;
+Author's Address<br />
+</p>
+<br clear="all" />
+
+<a name="contrib"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1"></a><h3>1.&nbsp;
+Contributors</h3>
+
+<p>
+               </p>
+<blockquote class="text">
+<p>Allen Tom
+</p>
+<p>Eran Hammer-Lahav
+</p>
+<p>John Kemp
+</p>
+<p>Joseph Holsten
+</p>
+</blockquote><p>
+            
+</p>
+<a name="conv"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2"></a><h3>2.&nbsp;
+Notation and Conventions</h3>
+
+<p>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, 
+	    “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, 
+	    and “OPTIONAL” in this document are to be interpreted as 
+	    described in <a class='info' href='#RFC2119'>[RFC2119]<span> (</span><span class='info'>Bradner, S., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; March&nbsp;1997.</span><span>)</span></a>. Domain name examples use 
+	    <a class='info' href='#RFC2606'>[RFC2606]<span> (</span><span class='info'>Eastlake, D. and A. Panitz, &ldquo;Reserved Top Level DNS Names,&rdquo; June&nbsp;1999.</span><span>)</span></a>.
+</p>
+<a name="defs"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3"></a><h3>3.&nbsp;
+Definitions</h3>
+
+<p>
+               </p>
+<blockquote class="text"><dl>
+<dt>Service Provider:</dt>
+<dd>A web application that allows 
+	      access via OAuth.
+</dd>
+<dt>Consumer:</dt>
+<dd>A website or application that uses 
+	      OAuth to access the Service Provider on behalf of the User.
+</dd>
+<dt>User:</dt>
+<dd>An individual who has an account with the 
+	      Service Provider.
+</dd>
+</dl></blockquote><p>
+            
+</p>
+<a name="desc"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4"></a><h3>4.&nbsp;
+Description</h3>
+
+<p>In certain cases it is necessary or prudent for the Consumer 
+            to specify to the Service Provider the language preference of 
+	    the user so that UI presented during the user authorization 
+	    phase is presented in the preferred language of the user.
+</p>
+<p>This language preference specification should be interpreted
+	    by the Service Provider as a UI/UE recommendation. The goal is
+	    to provide a better experience for the user.
+</p>
+<p>Note that this is NOT the language preference of the Service 
+	    Provider.
+</p>
+<a name="parameter"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5"></a><h3>5.&nbsp;
+Parameter Specification</h3>
+
+<p>The OAuth Language Preference MUST be specified with the 
+	    parameter name 'xoauth_lang_pref'. The value of the parameter 
+	    MUST conform to the rules for the Accept-Language HTTP header 
+	    in <a class='info' href='#RFC2616'>[RFC2616]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L., Leach, P., and T. Berners-Lee, &ldquo;Hypertext Transfer Protocol -- HTTP/1.1,&rdquo; June&nbsp;1999.</span><span>)</span></a>.
+            </p>
+<blockquote class="text">
+<p>xoauth_lang_pref = 1#( language-range [ ";" "q" "=" qvalue ] )
+</p>
+<p>language-range  = ( ( 1*8ALPHA *( "-" 1*8ALPHA ) ) | "*" )
+</p>
+</blockquote><p>
+            
+</p>
+<p>As this can be in the query params or form data it will also 
+	    then need to be appropriately URL-encoded for transmission and 
+	    decoded for use by the recipient.
+</p>
+<a name="ext-uri"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6"></a><h3>6.&nbsp;
+Extension Identifier</h3>
+
+<p>The Service Provider can advertise that it supports this
+	    extension by listing the following URI in the public documentation
+	    that also describes the public endpoints. In addition, if the
+	    Service Provider supports the <a class='info' href='#oauth_disco_1_0'>[OAuth Discovery 1.0]<span> (</span><span class='info'>Hammer-Lahav, E., &ldquo;OAuth Discovery 1.0 Draft 1,&rdquo; December&nbsp;2007.</span><span>)</span></a>
+	    specification, then this URI must be listed for each endpoint where 
+	    the Service Provider will process the parameter.
+	    </p>
+<blockquote class="text">
+<p>http://oauth.net/ext/language_preference/1.0
+</p>
+</blockquote><p>
+            
+</p>
+<a name="processing"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.7"></a><h3>7.&nbsp;
+Processing Rules</h3>
+
+<p>The Consumer MAY specify the language preference of the user by 
+	    adding the xoauth_lang_pref parameter to any Service Provider endpoint that
+	    supports the extension.
+</p>
+<p>The Service Provider MUST document publicly which
+	    endpoints support the extension.
+</p>
+<p>The Service Provider SHOULD specify which enpoints support the
+            Language Preference extension via the <a class='info' href='#oauth_disco_1_0'>[OAuth Discovery 1.0]<span> (</span><span class='info'>Hammer-Lahav, E., &ldquo;OAuth Discovery 1.0 Draft 1,&rdquo; December&nbsp;2007.</span><span>)</span></a>
+            specification.
+</p>
+<p>The recipient of the xouath_lang_pref parameter MAY combine 
+	    the language preferences found in that parameter with those 
+	    present in any available Accept-Language HTTP header to determine 
+	    the language preference list of the user (by virtue of any 
+	    supplied 'quality values' (see <a class='info' href='#RFC2616'>[RFC2616]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L., Leach, P., and T. Berners-Lee, &ldquo;Hypertext Transfer Protocol -- HTTP/1.1,&rdquo; June&nbsp;1999.</span><span>)</span></a>, section 14).
+</p>
+<p>The Consumer SHOULD consider using a higher 'quality value' if precedence
+	    over the HTTP Accept-Language header is desired.
+</p>
+<p>If the Service Provider can not provide the UI in the
+	    preferred language, then the Service Provider should attempt a
+	    "best effort match" between the user's preferred languages and the
+	    languages supported by the Service Provider. Definition of the 
+	    "best effort match" algorithm is out of scope for this document.
+</p>
+<a name="example"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.8"></a><h3>8.&nbsp;
+Examples</h3>
+
+<p>Example xoauth_lang_pref with a single language
+               </p>
+<blockquote class="text">
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>xoauth_lang_pref="en-us"</pre></div><p>
+
+</p>
+</blockquote><p>
+            
+</p>
+<p>Example xoauth_lang_pref with multiple values
+         </p>
+<blockquote class="text">
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>xoauth_lang_pref=en-gb;q=1.0, en-us;q=0.8</pre></div><p>
+
+</p>
+</blockquote><p>
+            
+</p>
+<p>Example xoauth_lang_pref encoded for transport as query
+	    string or form element
+         </p>
+<blockquote class="text">
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>xoauth_lang_pref=en-gb%3bq%3d1.0%2c+en-us%3bq%3d0.8</pre></div><p>
+
+</p>
+</blockquote><p>
+            
+</p>
+<a name="practice"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.9"></a><h3>9.&nbsp;
+Possible Use Cases</h3>
+
+<a name="anchor1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.9.1"></a><h3>9.1.&nbsp;
+Language preference as part of Request Token request</h3>
+
+<p>[The following flow is for explanatory purposes and describes only
+               	one of many ways to accomplish the specified task.]
+</p>
+<p>In this use case the Consumer knows the user's language 
+	      preference and chooses to specify it as part of the request for
+	      the Request Token. By specifying the language preference on
+	      this request, the Service Provider can either encode information
+	      into the request token or potentially dynamically generate an
+	      appropriate authorization URL. This last option requires the
+	      support by both the Consumer and Service Provider of dynamically
+	      generated authorization URLs.
+</p>
+<p>The basic flow would be...
+            </p>
+<ol class="text">
+<li>The user interacts with the Consumer in a way that allows
+		the Consumer to know the user's language preference. It could
+		also be that the Consumer only really supports a single 
+		language and wants the user's experience to all be in the
+		same language.
+</li>
+<li>When the user requests access to a resource that requires
+		authorization with a Service Provider, the Consumer generates
+		the request for the request token and adds the xoauth_lang_pref
+		parameter to those being sent to the Service Provider.
+</li>
+<li>The Service Provider receives the request for the Request
+		Token and processes the xoauth_lang_pref parameter.
+</li>
+<li>The Service Provider encodes the chosen language
+		preference from those specified or it's own default and
+		associates the language preference with the generated request
+		token.
+</li>
+<li>The Consumer receives the request token and generates the
+		authorization URL and redirects the user to the authorization
+		endpoint at the Service Provider.
+</li>
+<li>The Service Provider processes the request token and retrieves
+		the associated language preference.
+</li>
+<li>The Service Provider uses this language preference to display
+		the UI for the user to authorize the resource access request.
+</li>
+</ol><p>
+               
+</p>
+<a name="anchor2"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.9.2"></a><h3>9.2.&nbsp;
+Language preference as part of Authorization request</h3>
+
+<p>[The following flow is for explanatory purposes and describes only
+               	one of many ways to accomplish the specified task.]
+</p>
+<p>In this use case, the Consumer knows the user's language perference but
+               	the Service Provider only supports acceptance of the xoauth_lang_pref 
+               	parameter as part of the user authorization step. In handling the
+               	authorization request, the Service Provider will process the xoauth_lang_pref
+               	parameter and display the authorization UI in the "best effort match" of
+               	the user's specified language preference and those languages supported
+               	by the Service Provider.
+</p>
+<p>The basic flow would be...
+                </p>
+<ol class="text">
+<li>The user interacts with the Consumer in a way that allows
+		the Consumer to know the user's language preference. It could
+		also be that the Consumer only really supports a single 
+		language and wants the user's experience to all be in the
+		same language.
+</li>
+<li>When the user requests access to a resource that requires
+		authorization with a Service Provider, the Consumer generates
+		the request for the request token without specifying the
+		xoauth_lang_pref parameter.
+</li>
+<li>The Service Provider receives the request for the Request
+		Token and processes per <a class='info' href='#oauth_core_1_0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; December&nbsp;2007.</span><span>)</span></a>.
+</li>
+<li>The Consumer receives the request token and generates the
+		authorization URL also appending the xoauth_lang_pref parameter.
+</li>
+<li>The Service Provider processes the request token and language preference
+                     	parameter.
+</li>
+<li>The Service Provider determines the "best effort match" of requested
+                     	language preferences and Service Provider supported languages and uses that 
+                     	language to display the UI for the user to authorize the resource access request.
+</li>
+</ol><p>
+               
+</p>
+<a name="rfc.references1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>10.&nbsp;References</h3>
+<table width="99%" border="0">
+<tr><td class="author-text" valign="top"><a name="RFC2119">[RFC2119]</a></td>
+<td class="author-text"><a href="mailto:sob@harvard.edu">Bradner, S.</a>, &ldquo;<a href="ftp://ftp.isi.edu/in-notes/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a>,&rdquo; BCP&nbsp;14, RFC&nbsp;2119, March&nbsp;1997 (<a href="ftp://ftp.isi.edu/in-notes/rfc2119.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2119.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2119.xml">XML</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2606">[RFC2606]</a></td>
+<td class="author-text"><a href="mailto:dee3@us.ibm.com">Eastlake, D.</a> and <a href="mailto:buglady@fuschia.net">A. Panitz</a>, &ldquo;<a href="ftp://ftp.isi.edu/in-notes/rfc2606.txt">Reserved Top Level DNS Names</a>,&rdquo; BCP&nbsp;32, RFC&nbsp;2606, June&nbsp;1999.</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2616">[RFC2616]</a></td>
+<td class="author-text"><a href="mailto:fielding@ics.uci.edu">Fielding, R.</a>, <a href="mailto:jg@w3.org">Gettys, J.</a>, <a href="mailto:mogul@wrl.dec.com">Mogul, J.</a>, <a href="mailto:frystyk@w3.org">Frystyk, H.</a>, <a href="mailto:masinter@parc.xerox.com">Masinter, L.</a>, <a href="mailto:paulle@microsoft.com">Leach, P.</a>, and <a href="mailto:timbl@w3.org">T. Berners-Lee</a>, &ldquo;<a href="ftp://ftp.isi.edu/in-notes/rfc2616.txt">Hypertext Transfer Protocol -- HTTP/1.1</a>,&rdquo; RFC&nbsp;2616, June&nbsp;1999 (<a href="ftp://ftp.isi.edu/in-notes/rfc2616.txt">TXT</a>, <a href="ftp://ftp.isi.edu/in-notes/rfc2616.ps">PS</a>, <a href="ftp://ftp.isi.edu/in-notes/rfc2616.pdf">PDF</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2616.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2616.xml">XML</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="oauth_core_1_0">[oauth_core_1_0]</a></td>
+<td class="author-text">OAuth, OCW., &ldquo;<a href="http://oauth.net/core/1.0">OAuth Core 1.0</a>,&rdquo; December&nbsp;2007.</td></tr>
+<tr><td class="author-text" valign="top"><a name="oauth_disco_1_0">[oauth_disco_1_0]</a></td>
+<td class="author-text"><a href="mailto:eran@hueniverse.com">Hammer-Lahav, E.</a>, &ldquo;<a href="http://oauth.googlecode.com/svn/spec/discovery/1.0/drafts/1/spec.html">OAuth Discovery 1.0 Draft 1</a>,&rdquo; December&nbsp;2007.</td></tr>
+</table>
+
+<a name="rfc.authors"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>Author's Address</h3>
+<table width="99%" border="0" cellpadding="0" cellspacing="0">
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">George Fletcher</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">AOL LLC</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:gffletch@aol.com">gffletch@aol.com</a></td></tr>
+</table>
+</body></html>

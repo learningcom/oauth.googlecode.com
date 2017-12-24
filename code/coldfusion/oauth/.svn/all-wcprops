@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/1257/code/coldfusion/oauth
+END
+oauthtokendao.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/1242/code/coldfusion/oauth/oauthtokendao.cfc
+END
+oauthserver.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/1242/code/coldfusion/oauth/oauthserver.cfc
+END
+oauthdatastore.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/1243/code/coldfusion/oauth/oauthdatastore.cfc
+END
+oauthsignaturemethod_hmac_sha1.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/1242/code/coldfusion/oauth/oauthsignaturemethod_hmac_sha1.cfc
+END
+oauthrequest.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/1257/code/coldfusion/oauth/oauthrequest.cfc
+END
+oauthsignaturemethod_plaintext.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/1242/code/coldfusion/oauth/oauthsignaturemethod_plaintext.cfc
+END
+oauthconsumer.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/1242/code/coldfusion/oauth/oauthconsumer.cfc
+END
+oauthutil.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/1242/code/coldfusion/oauth/oauthutil.cfc
+END
+oauthtest.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/1242/code/coldfusion/oauth/oauthtest.cfc
+END
+oauthconsumerdao.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/1242/code/coldfusion/oauth/oauthconsumerdao.cfc
+END
+oauthtoken.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/1242/code/coldfusion/oauth/oauthtoken.cfc
+END
+oauthsignaturemethod.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/1242/code/coldfusion/oauth/oauthsignaturemethod.cfc
+END

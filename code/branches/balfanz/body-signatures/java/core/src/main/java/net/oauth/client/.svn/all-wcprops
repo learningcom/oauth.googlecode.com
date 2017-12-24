@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/core/src/main/java/net/oauth/client
+END
+HttpClientPool.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/core/src/main/java/net/oauth/client/HttpClientPool.java
+END
+OAuthHttpClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/core/src/main/java/net/oauth/client/OAuthHttpClient.java
+END
+OAuthClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/core/src/main/java/net/oauth/client/OAuthClient.java
+END
+HttpMethodResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/core/src/main/java/net/oauth/client/HttpMethodResponse.java
+END
+URLConnectionResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/core/src/main/java/net/oauth/client/URLConnectionResponse.java
+END
+OAuthURLConnectionClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/core/src/main/java/net/oauth/client/OAuthURLConnectionClient.java
+END
+OAuthResponseMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/core/src/main/java/net/oauth/client/OAuthResponseMessage.java
+END

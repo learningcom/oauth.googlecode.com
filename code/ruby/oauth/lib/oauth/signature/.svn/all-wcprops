@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/397/code/ruby/oauth/lib/oauth/signature
+END
+plaintext.rb
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/265/code/ruby/oauth/lib/oauth/signature/plaintext.rb
+END
+base.rb
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/397/code/ruby/oauth/lib/oauth/signature/base.rb
+END
+sha1.rb
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/328/code/ruby/oauth/lib/oauth/signature/sha1.rb
+END
+md5.rb
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/265/code/ruby/oauth/lib/oauth/signature/md5.rb
+END

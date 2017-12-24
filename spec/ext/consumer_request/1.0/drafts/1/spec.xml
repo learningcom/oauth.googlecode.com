@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='http://xml.resource.org/authoring/rfc2629.xslt' ?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+
+<rfc category="info" ipr="full3978" docName="oauth-consumer_request-1_0.xml">
+
+  <?rfc toc="yes" ?>
+  <?rfc tocdepth="3" ?>
+  <?rfc symrefs="yes" ?>
+  <?rfc sortrefs="yes"?>
+  <?rfc strict="yes" ?>
+  <?rfc iprnotified="no" ?>
+  <?rfc private="Implementers' Draft" ?>
+
+  <front>
+    <title>OAuth Consumer Request 1.0 Draft 1</title>
+
+    <author initials="E" surname="Hammer-Lahav" fullname="Eran Hammer-Lahav">
+      <organization>Hueniverse, LLC</organization>
+      <address>
+        <email>eran@hueniverse.com</email>
+      </address>
+    </author>
+
+    <date day="14" month="December" year="2007"/>
+
+    <abstract>
+      <t>
+        This memo describes a method for using the OAuth flow to sign
+        a request made between a Consumer and Service Provider where no User
+        is involved. This enables OAuth to be used as a replacement to HTTP
+        Basic authentication, which is not as complex as HTTP Digest
+        authentication, and extends the capabilities of the OAuth Consumer
+        credentials.
+      </t>
+      <t>
+        OAuth Core 1.0 defines a protocol for delegating user access to
+        Consumer applications without sharing the user's private credentials.
+        The protocol centers on a three-legged scenario, delegating User
+        access to a Consumer for resources held by a Service Provider. In
+        some cases, a two-legged scenario is needed, in which the Consumer
+        is acting on behalf of itself, without a User involvement.
+      </t>
+      <t>
+        OAuth was created to solve the problem of sharing two-legged credentials
+        in three-legged situations. However, within the OAuth context, Consumers
+        might still need to communicate with the Service Provider using requests
+        that are Consumer-specific. Since the Consumers already established a
+        Consumer Key and Consumer Secret, there is value in being able to use
+        them for requests where the Consumer identity is verified.
+      </t>
+    </abstract>
+
+  </front>
+  <middle>
+
+    <section title="Notation and Conventions">
+      <t>
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+        "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+        document are to be interpreted as described in <xref target="RFC2119" />.
+        Domain name examples use <xref target="RFC2606" />.
+      </t>
+      <t>
+        Unless otherwise noted, this specification is written as a direct
+        continuation of <xref target="OAuth Core 1.0" />, inheriting the definitions and
+        guidelines set by it.
+      </t>
+    </section>
+
+    <section title="Definitions">
+      <t>
+        <list style="hanging">
+          <t hangText="Service Provider:">
+            A web application that allows access via OAuth.
+          </t>
+          <t hangText="Consumer:">
+            A website or application that uses OAuth to access resources
+            controlled by the Service Provider.
+          </t>
+          <t hangText="Protected Resource(s):">
+            Data controlled by the Service Provider, which the Consumer can
+            access through authentication.
+          </t>
+          <t hangText="Consumer Key:">
+            A value used by the Consumer to identify itself to the Service
+            Provider.
+          </t>
+          <t hangText="Consumer Secret:">
+            A secret used by the Consumer to establish ownership of the
+            Consumer Key.
+          </t>
+        </list>
+      </t>
+    </section>
+
+    <section title="Consumer Identity">
+      <t>
+        This memo defines a method in which the Consumer Key and Consumer
+        Secret, established by means left unspecified, are used to authenticate
+        a Consumer against credentials stored by the Service Provider. For the
+        purpose of this memo, it is assumed the Consumer already established
+        a Consumer Key and Consumer Secret with the Service Provider.
+      </t>
+      <t>
+        While the method described in this memo can be used with an empty
+        Consumer Secret, it does not provide any security or protection in such
+        a scenario, unless other means of identification are used, such as a
+        Public Key.
+      </t>
+    </section>
+
+    <section title="Consumer Request">
+      <t>
+        The Consumer requests the Protected Resource by making an HTTP request
+        to the Service Provider. The request HTTP method and URL are provided by
+        the Service Provider by means not specified in this memo. This workflow
+        has been designed to imitate the flow used to obtain a Request Token in
+        a three-legged OAuth flow as defined in <xref target="OAuth Core 1.0" />
+        section 6.1.
+      </t>
+
+      <section title="Consumer Sends Request">
+        <t>
+          To access a Protected Resource, the Consumer sends an HTTP request to
+          the Service Provider's resource endpoint URL. The request MUST be
+          signed as defined in <xref target="OAuth Core 1.0" /> section 9 with an
+          empty Token Secret. The request contains the following REQUIRED
+          parameters, unless otherwise noted:
+
+          <list style="hanging">
+            <t hangText="oauth_consumer_key:">
+              The Consumer Key.
+            </t>
+            <t hangText="oauth_signature_method:">
+              The signature method the Consumer used to sign the request.
+            </t>
+            <t hangText="oauth_signature:">
+              The signature as defined in
+              <xref target="OAuth Core 1.0" /> section 9: Signing Requests.
+            </t>
+            <t hangText="oauth_timestamp:">
+              As defined in <xref target="OAuth Core 1.0" /> section 8: Nonce
+              and Timestamp.
+            </t>
+            <t hangText="oauth_nonce:">
+              As defined in <xref target="OAuth Core 1.0" /> section 8: Nonce
+              and Timestamp.
+            </t>
+            <t hangText="oauth_version:">
+              OPTIONAL. If present, value MUST be <spanx style="verb">1.0</spanx>. Service Providers
+              MUST assume the protocol version to be <spanx style="verb">1.0</spanx> if this parameter
+              is not present. Service Providers' response to non-<spanx style="verb">1.0</spanx> value
+              is left undefined.
+            </t>
+            <t hangText="Additional parameters:">
+              OPTIONAL. Any additional parameters, as defined by the Service Provider.
+            </t>
+          </list>
+        </t>
+      </section>
+
+      <section title="Service Provider Replies">
+        <t>
+          The Service Provider verifies the signature and Consumer identity as
+          defined in <xref target="OAuth Core 1.0" /> section 9. If successful,
+          it replies with the appropriate response to the Consumer request. The
+          format of the reply is left unspecified by this memo.
+      </t>
+        <t>
+          If the request fails verification or is rejected for other reasons,
+          the Service Provider SHOULD respond with the appropriate response
+          code as defined in <xref target="OAuth Core 1.0" /> section 10: HTTP
+          Response Codes. The Service Provider MAY include some further details
+          about why the request was rejected in the HTTP response body as
+          defined in  <xref target="OAuth Core 1.0" /> section 5.3: Service
+          Provider Response Parameters.
+        </t>
+      </section>
+
+    </section>
+
+    <section title="Security Considerations">
+      <t>
+        This memo abides by the security considerations specified in
+        <xref target="OAuth Core 1.0" />.
+      </t>
+    </section>
+
+    <appendix title="Appendix A - Example">
+      <t>
+        In this example, the Service Provider <spanx style="verb">provider.example.net</spanx> is an
+        OAuth-enabled website, and the Consumer <spanx style="verb">consumer.example.com</spanx> uses
+        resource offered by the Service Provider on behalf of its Users.
+        The Service Provider allows Consumers to manage their Consumer profile
+        which includes their name and description using an API call, in
+        addition to a manual HTML page. The Consumer profile is used by the
+        Service Provider when asking Users to grant Consumer access.
+      </t>
+      <t>
+        The Service Provider allows Consumers to see their profile at the
+        following endpoint URL:
+
+        <list style="hanging">
+          <t hangText="Profile Request URL:">
+            <spanx style="verb">http://provider.example.net/profile</spanx>, using HTTP <spanx style="verb">GET</spanx>
+          </t>
+        </list>
+      </t>
+      <t>
+        The Service Provider supports the <spanx style="verb">HMAC-SHA1</spanx>
+        signature method and the OAuth Authorization Header. No additional
+        parameters are defined for the profile request.
+      </t>
+      <t>
+        The Consumer already has an established identity with the Service
+        Provider:
+
+        <list style="hanging">
+          <t hangText="Consumer Key:">
+            <spanx style="verb">dpf43f3p2l4k3l03</spanx>
+          </t>
+          <t hangText="Consumer Secret:">
+            <spanx style="verb">kd94hf93k423kf44</spanx>
+          </t>
+        </list>
+      </t>
+      <t>
+        The consumer needs to sign the request before sending it to the Service
+        Provider. To generate the signature, it first needs to generate the
+        Signature Base String. The request contains the following parameters
+        (<spanx style="verb">oauth_signature</spanx> excluded) which are
+        ordered and concatenated into a normalized string:
+
+        <list style="hanging">
+          <t hangText="oauth_consumer_key:">
+            <spanx style="verb">dpf43f3p2l4k3l03</spanx>
+          </t>
+          <t hangText="oauth_signature_method:">
+            <spanx style="verb">HMAC-SHA1</spanx>
+          </t>
+          <t hangText="oauth_timestamp:">
+            <spanx style="verb">1191242096</spanx>
+          </t>
+          <t hangText="oauth_nonce:">
+            <spanx style="verb">kllo9940pd9333jh</spanx>
+          </t>
+          <t hangText="oauth_version:">
+            <spanx style="verb">1.0</spanx>
+          </t>
+        </list>
+      </t>
+      <t>
+        The following inputs are used to generate the Signature Base String:
+
+        <list style="numbers">
+          <t hangText="The HTTP request method:">
+            <spanx style="verb">GET</spanx>
+          </t>
+          <t hangText="The request URL:">
+            <spanx style="verb">http://provider.example.net/profile</spanx>
+          </t>
+          <t hangText="The encoded normalized request parameters string:">
+            <spanx style="verb">oauth_consumer_key=dpf43f3p2l4k3l03&amp;oauth_nonce=kllo9940pd9333jh&amp;oauth_signature_method=HMAC-SHA1&amp;oauth_timestamp=1191242096&amp;oauth_version=1.0</spanx>
+          </t>
+        </list>
+      </t>
+      <t>
+        The Signature Base String is:
+
+        <figure>
+          <artwork>
+    GET&amp;http%3A%2F%2Fprovider.example.net%2Fprofile&amp;oauth_consumer_key%3Ddpf43f3p2l4k3l03%26oauth_nonce%3Dkllo9940pd9333jh%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1191242096%26oauth_version%3D1.0
+          </artwork>
+        </figure>
+      </t>
+      <t>
+        <spanx style="verb">HMAC-SHA1</spanx> produces the following <spanx style="verb">digest</spanx> value as a base64-encoded
+        string, using the Signature Base String as <spanx style="verb">text</spanx> and
+        <spanx style="verb">kd94hf93k423kf44&amp;</spanx> as <spanx style="verb">key</spanx> (empty
+        Token Secret):
+
+        <figure>
+          <artwork>
+    SGtGiOrgTGF5Dd4RUMguopweOSU=
+          </artwork>
+        </figure>
+      </t>
+      <t>
+        All together, the Consumer request for its profile is:
+
+        <figure>
+          <artwork>
+    http://provider.example.net/profile
+
+    Authorization: OAuth realm="http://provider.example.net/",
+                    oauth_consumer_key="dpf43f3p2l4k3l03",
+                    oauth_signature_method="HMAC-SHA1",
+                    oauth_signature="SGtGiOrgTGF5Dd4RUMguopweOSU%3D",
+                    oauth_timestamp="1191242096",
+                    oauth_nonce="kllo9940pd9333jh",
+                    oauth_version="1.0"
+          </artwork>
+        </figure>
+      </t>
+      <t>
+        <spanx style="verb">provider.example.net</spanx> checks the signature and responds with the
+        requested profile.
+      </t>
+    </appendix>
+
+    <appendix title="Appendix B - Discovery">
+      <t>
+        When using OAuth Discovery as defined in <xref target="OAuth Discovery 1.0" />,
+        the Consumer Request 1.0 extension service type URI is:
+        <spanx style="verb">http://oauth.net/ext/consumer_request/1.0</spanx>.
+        It follows the same rules and workflow as the
+        <spanx style="verb">http://oauth.net/core/1.0/endpoint/resource</spanx> service type.
+      </t>
+    </appendix>
+
+  </middle>
+
+  <back>
+
+    <references title="References">
+
+      <reference anchor="OAuth Core 1.0">
+        <front>
+          <title>OAuth Core 1.0</title>
+          <author initials="" surname="OAuth Core Workgroup" fullname="OAuth Core Workgroup">
+            <organization />
+          </author>
+        </front>
+        <format type="HTML" target="http://oauth.net/core/1.0" />
+      </reference>
+
+      <reference anchor="OAuth Discovery 1.0">
+        <front>
+          <title>OAuth Discovery 1.0</title>
+          <author initials="E.HL" surname="Hammer-Lahav" fullname="Eran Hammer-Lahav">
+            <organization>Hueniverse, LLC</organization>
+          </author>
+        </front>
+        <format type="HTML" target="http://oauth.net/core/1.0" />
+      </reference>
+
+      <reference anchor="RFC2606">
+        <front>
+          <title>Reserved Top Level DNS Names</title>
+          <author initials="D.E" surname="Eastlake" fullname="D. Eastlake">
+            <organization></organization>
+          </author>
+          <author initials="A.P" surname="Panitz" fullname="A. Panitz">
+            <organization></organization>
+          </author>
+        </front>
+        <seriesInfo name="RFC" value="2606" />
+      </reference>
+
+      <reference anchor="RFC2119">
+        <front>
+          <title>Key words for use in RFCs to Indicate Requirement Levels</title>
+          <author initials="B.S" surname="Bradner" fullname="Scott Bradner">
+            <organization>Alis Technologies</organization>
+          </author>
+        </front>
+        <seriesInfo name="RFC" value="2119" />
+      </reference>
+      <reference anchor="SHA1">
+        <front>
+          <title>Finding SHA-1 Characteristics: General Results and Applications</title>
+          <author initials="C.DC" surname="De Canniere" fullname="Christophe De Canniere">
+            <organization />
+          </author>
+          <author initials="C.R" surname="Rechberger" fullname="Christian Rechberger">
+            <organization />
+          </author>
+        </front>
+        <format type="HTML" target="http://dx.doi.org/10.1007/11935230_1" />
+      </reference>
+
+      <reference anchor="RFC2617">
+        <front>
+          <title>
+            HTTP Authentication: Basic and Digest Access Authentication
+          </title>
+          <author initials="J.F" surname="Franks" fullname="J. Franks">
+            <organization />
+          </author>
+          <author initials="P.HB" surname="Hallam-Baker" fullname="P. Hallam-Baker">
+            <organization />
+          </author>
+          <author initials="J.H" surname="Hostetler" fullname="J. Hostetler">
+            <organization />
+          </author>
+          <author initials="S.L" surname="Lawrence" fullname="S. Lawrence">
+            <organization />
+          </author>
+          <author initials="P.L" surname="Leach" fullname="P. Leach">
+            <organization />
+          </author>
+          <author initials="A.L" surname="Luotonen" fullname="A. Luotonen">
+            <organization />
+          </author>
+          <author initials="L.S" surname="Stewart" fullname="L. Stewart">
+            <organization />
+          </author>
+        </front>
+        <seriesInfo name="RFC" value="2617" />
+      </reference>
+
+    </references>
+  </back>
+
+</rfc>

@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/313/code/branches/jkristian/java/example/oauth-provider/src/net/oauth/example/provider/core
+END
+provider.properties
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/!svn/ver/313/code/branches/jkristian/java/example/oauth-provider/src/net/oauth/example/provider/core/provider.properties
+END
+SampleOAuthProvider.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/!svn/ver/313/code/branches/jkristian/java/example/oauth-provider/src/net/oauth/example/provider/core/SampleOAuthProvider.java
+END

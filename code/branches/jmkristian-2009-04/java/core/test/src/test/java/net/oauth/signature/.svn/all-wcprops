@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/1025/code/branches/jmkristian-2009-04/java/core/test/src/test/java/net/oauth/signature
+END
+Echo.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/1025/code/branches/jmkristian-2009-04/java/core/test/src/test/java/net/oauth/signature/Echo.java
+END
+RSA_SHA1SignatureTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/!svn/ver/1025/code/branches/jmkristian-2009-04/java/core/test/src/test/java/net/oauth/signature/RSA_SHA1SignatureTest.java
+END
+OAuthSignatureMethodTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/!svn/ver/975/code/branches/jmkristian-2009-04/java/core/test/src/test/java/net/oauth/signature/OAuthSignatureMethodTest.java
+END

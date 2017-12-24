@@ -1,0 +1,19 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.oauth</groupId>
+    <artifactId>oauth-all</artifactId>
+    <version>20090425</version>
+  </parent>
+  <groupId>net.oauth.samples</groupId>
+  <artifactId>oauth-samples</artifactId>
+  <version>20090425</version>
+  <packaging>pom</packaging>
+  <name>OAuth::Samples</name>
+  <modules>
+    <module>desktop</module>
+    <module>oauth-provider</module>
+    <module>webapp</module>
+  </modules>
+</project>

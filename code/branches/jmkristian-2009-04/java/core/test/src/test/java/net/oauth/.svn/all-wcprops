@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/1030/code/branches/jmkristian-2009-04/java/core/test/src/test/java/net/oauth
+END
+OAuthValidatorTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/975/code/branches/jmkristian-2009-04/java/core/test/src/test/java/net/oauth/OAuthValidatorTest.java
+END
+OAuthTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/975/code/branches/jmkristian-2009-04/java/core/test/src/test/java/net/oauth/OAuthTest.java
+END
+OAuthMessageTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/!svn/ver/975/code/branches/jmkristian-2009-04/java/core/test/src/test/java/net/oauth/OAuthMessageTest.java
+END

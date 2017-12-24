@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='http://xml.resource.org/authoring/rfc2629.xslt' ?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+<!ENTITY rfc2119 PUBLIC '' 
+      'http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml'>
+<!ENTITY rfc2606 PUBLIC '' 
+      'http://xml.resource.org/public/rfc/bibxml/reference.RFC.2606.xml'>
+<!ENTITY rfc2616 PUBLIC '' 
+      'http://xml.resource.org/public/rfc/bibxml/reference.RFC.2616.xml'>
+<!ENTITY rfc4627 PUBLIC '' 
+      'http://xml.resource.org/public/rfc/bibxml/reference.RFC.4627.xml'>
+]
+>
+<?rfc authorship="yes"?>
+<?rfc toc="yes"?>
+<?rfc tocdepth="2" ?>
+<?rfc topblock="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes"?>
+<?rfc iprnotified="no" ?>
+<?rfc private="Draft 1"?>
+<rfc category="info" ipr="full3978" docName="oauth-ext-response-format-draft-01">
+   <front>
+      <title abbrev="xoauth-response-format-draft-1">
+	    OAuth Extension for Response Data Format - Draft 1</title>
+      <author initials="P" surname="Alavilli" fullname="Praveen Alavilli">
+         <organization>AOL LLC</organization>
+            <address>
+               <email>AlavilliPraveen@aol.com</email>
+            </address>
+         </author>
+         <date month="July" year="2008"/>
+         <area>OAuth Extension</area>
+         <keyword>OAuth</keyword>
+         <keyword>Extension</keyword>
+         <keyword>Response Data Format</keyword>
+         <keyword>Draft</keyword>
+         <abstract>
+            <t>This memo describes how a Consumer can request the Service Provider to return the OAuth response data in a different format (ex. json, xml, etc.).</t>
+         </abstract>
+      </front>
+      <middle>
+         <section anchor="contrib" title="Contributors">
+            <t>
+               <list style='empty'>
+               	  <t>George Fletcher</t>
+               </list>
+            </t>
+         </section>
+         <section anchor="conv" title="Notation and Conventions">
+            <t>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, 
+	    “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, 
+	    and “OPTIONAL” in this document are to be interpreted as 
+	    described in <xref target="RFC2119"/>. Domain name examples use 
+	    <xref target="RFC2606"/>.</t>
+         </section>
+         <section anchor="defs" title="Definitions">
+            <t>
+               <list style="hanging">
+                  <t hangText="Service Provider:">A web application that allows 
+	      access via OAuth.</t>
+                  <t hangText="Consumer:">A website or application that uses 
+	      OAuth to access the Service Provider on behalf of the User.</t>
+                  <t hangText="User:">An individual who has an account with the 
+	      Service Provider.</t>
+				  <t hangText="Response Data:">Parameters returned by the Service Provider in response to an OAuth request.</t>
+				  <t hangText="Response Code:">A numeric code returned by the Service Provider indicating the result of the request (Ex. success, failure, unauthorized, etc.). The Service Provider SHOULD use the response codes defined in <xref target="RFC2616"/> Section 10.</t>
+				  <t hangText="Direct Request:">A request is initiated by the Consumer to a Service Provider endpoint URL. Direct Request mechanism is used for the Request Token and Access Token requests as defined in <xref format="none" target="oauth_core_1_0">OAuth Core 1.0</xref>.</t>
+				  <t hangText="Indirect Request:">A request is initiated by the Consumer through an User-Agent to a Service Provider endpoint URL. Indirect Request mechanism is used for the Authorization request as defined in the <xref format="none" target="oauth_core_1_0">OAuth Core 1.0</xref>.</t>
+               </list>
+            </t>
+         </section>
+         <section anchor="desc" title="Description">
+            <t> 
+			In certain cases it is necessary or prudent for the Consumer 
+            to request the Service Provider to return the response data in a different format in the response body (Ex. json, xml, amf3, php, yaml, etc.) in both direct (Request Token and Access Token) and indirect (Authorization) requests.	
+			</t>
+			
+			<t>The most common use case is a Javascript based Consumer running in a browser on a domain (Ex. sampleblog.com) that's not the same as the Service Provider's domain (Ex. example.provider.com). In this case usually the Javascript Consumers use the &lt;SCRIPT&gt; tag injection mechanism (called 'JSONP') to make cross domain requests to the Service Provider. One of the side effects of using the JSONP mechanism is to have the response data also returned in 'JSON' <xref target="RFC4627"/>format. Similar to 'JSON' there have been other data serialization formats defined to help applications built in other technologies like Flash, PHP, Java, C/C++, etc.. Some of them include 'amf0', 'amf3', and 'php' targeting specific technologies and some are more generic formats like 'yaml' and 'xml'.</t>
+			<t>This Response Data Format Specification addresses such requirements so a Consumer can request the Service Provider to return data in a specific format instead of the default format (a form-encoded string using '&amp;' and '=' signs to separate name-value pairs) encoded as specified in the OAuth Core 1.0 Specification.<xref format="none" target="oauth_core_1_0">[OAuth Core 1.0]</xref></t>
+			   
+			
+		  </section>
+         <section anchor="parameter" title="Parameter Specification">
+		 <t>This extension defines a new parameter that the Consumer can use to request the Service Provider to return the response data in a specific format instead of the default format as specified in the OAuth Core 1.0 Specification<xref format="none" target="oauth_core_1_0">[OAuth Core 1.0]</xref> . Please see section <xref target="ext-uri">Extension Identifier</xref> for information on how the Service Provider can advertise the supported response data formats.</t>
+		 <t>As specified in Section 5 &amp; 5.1 in the OAuth Core 1.0 Specification<xref format="none" target="oauth_core_1_0">[OAuth Core 1.0]</xref>, all parameter names and values are case sensitive, and MUST be encoded to be URL safe. </t> 
+		<section anchor="parameter-format" title="Response Data Format Type">
+		 
+            <t>The OAuth Response Data Format MUST be specified with the 
+	    parameter name 'xoauth_response_format'. The value of the parameter 
+	    MUST be a URI, which is used for referring to the response format values. <xref target="schema"/> specifies the format of the data returned in the response body.</t>
+		<t> To identity the Response Data Format, each format is given a unique URI:</t>
+			<t>
+			<list>
+				<t>XML:</t>
+				<figure><artwork>http://oauth.net/ext/response_data_format/types/xml</artwork></figure>
+				<t>JSON:</t>
+				<figure><artwork>http://oauth.net/ext/response_data_format/types/json</artwork></figure>
+				<t>PHP:</t>
+				<figure><artwork>http://oauth.net/ext/response_data_format/types/php</artwork></figure>
+				<t>YAML:</t>
+				<figure><artwork>http://oauth.net/ext/response_data_format/types/yaml</artwork></figure>
+				<t>AMF0:</t>
+				<figure><artwork>http://oauth.net/ext/response_data_format/types/amf0</artwork></figure>
+				<t>AMF3:</t>
+				<figure><artwork>http://oauth.net/ext/response_data_format/types/amf3</artwork></figure>
+				<t>OAUTH [default - same as when xoauth_response_format is not specified]:</t>
+				<figure><artwork>http://oauth.net/ext/response_data_format/types/oauth</artwork></figure>
+			</list>
+			</t>			
+			
+		<t> Ex. 
+            <list>
+                  <t>xoauth_response_format = http%3A//schema.oauth.net/ext/response_data_format/types/json</t>                  
+               </list>
+            </t>      
+			    
+		</section>
+		
+         </section>
+         <section anchor="ext-uri" title="Extension Identifier">
+            <t>The Service Provider can advertise that it supports this
+	    extension by listing the following URI in the public documentation
+	    that also describes the public endpoints. When using OAuth Discovery as defined in <xref format="none" target="oauth_disco_1_0">[OAuth Discovery 1.0]</xref>, the Response Data Format Type extension service type URI is: <spanx style="verb">http://oauth.net/ext/response_data_format/1.0</spanx>. It follows the same rules and workflow as the <spanx style="verb">http://oauth.net/core/1.0/endpoint/resource</spanx> service type. 
+            </t>
+			<t>The Service Provider can also advertise the response formats that are supported by specifying the response data format values as defined in <xref target="parameter-format">Response Data Format</xref> section. </t>
+			<t> Sample Discovery entry:
+			<figure>
+				<artwork>
+      &lt;Service&gt;
+        &lt;Type&gt;http://oauth.net/ext/response_data_format/1.0&lt;/Type&gt;
+        &lt;Type&gt;http://oauth.net/ext/response_data_format/types/xml&lt;/Type&gt;
+        &lt;Type&gt;http://oauth.net/ext/response_data_format/types/json&lt;/Type&gt;
+        &lt;Type&gt;http://oauth.net/ext/response_data_format/types/oauth&lt;/Type&gt;
+      &lt;/Service&gt;
+				</artwork>
+			</figure>			
+			</t>
+
+         </section>
+         <section anchor="processing" title="Processing Rules">
+		 
+			<t>If the response format value provided by the Consumer is not supported by the Service Provider, the Service Provider MUST format the response data as defined in the OAuth Core 1.0 Specification.<xref format="none" target="oauth_core_1_0">[OAuth Core 1.0]</xref></t>
+            
+			<t>The Consumer MAY specify the response data format by 
+	    adding the xoauth_response_format parameter to any Service Provider endpoints (both direct and indirect requests) that
+	    supports the extension. However it is recommended that the Consumer SHOULD first determine if the Service Provider supports the extension before adding the parameter.</t>
+		
+			<t>
+			When requesting the response data format as "JSON", the Consumers MAY pass the 'xoauth_json_callback' with the JSONP callback and the Service Provider MUST return a JSONP callback using the value from the 'xoauth_json_callback' parameter.
+			</t>  			
+            
+			<t> When returning response data in the format requested by the Consumer, the Service Provider MUST set the HTTP 'Content-Type' header with the appropriate value that corresponds to the response data format. The 'Content-Type' header SHOULD also include a 'CharSet' to let the Consumer know which character set is used in the response data.
+			</t>
+			
+			<t> It is RECOMMENDED that the Service Providers SHOULD also return the response data in the same format in case of errors and MAY return Service Provider specific data in the same format to make it easy for the Consumers to handle the response data in a consistent way.</t>
+			 
+			<section anchor="indirect-requests" title="Indirect Requests">
+			<t>Service Providers MUST support "xoauth_response_format" parameter in the Indirect Requests only if the Consumer provides the "oauth_callback" parameter and HTTP POST method (not using 301/302/303 redirects) is used to redirect the user back to the Consumer. </t>
+			<list style="symbols">
+			<t>If the Service Provider is using a HTTP POST method to redirect the user back to the Consumer's "oauth_callback" URL, then the response data in the requested format as specified in the "xoauth_response_format" parameter, goes in the HTTP POST body.</t>
+			<t>If the Service Provider is using a HTTP GET method (a redirect based on HTTP status codes 301/302/303) to redirect the user back to the Consumer's "oauth_callback" URL, the "xoauth_response_format" MUST be ignored and the response data SHOULD be returned in the default format (form encoded parameters) as defined in the <xref format="none" target="oauth_core_1_0">[OAuth Core 1.0]</xref></t>
+			</list>
+			</section>			
+         </section>
+		 <section anchor="schema" title="Response Data Format">
+		 <t>The following sections define the format of the response data for the different format types defined in the <xref target="parameter-format">Response Data Format Type</xref> section. When the Consumer requests the response data in a different format than the default format specified in <xref format="none" target="oauth_core_1_0">OAuth Core 1.0</xref>, the Service Provider (if it supports this extension) MUST return the response data as specified below. The Service Provider MAY add additional parameters in the response data but they MUST be included inside the 'response' object as per the given response data format. The Service Providers SHALL document the additional parameters if any in their own documentation. </t>
+		 <t>Below is the XML Schema representation of the response data format. The response data in other (non-xml) formats MUST follow the same schema and convert it to it's language specifics as described below.</t>
+		   
+		   <t><figure><artwork>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified"&gt;
+&lt;xs:element name="response"&gt;
+	&lt;xs:complexType&gt;
+	&lt;xs:sequence&gt;
+		&lt;xs:element name="oauth_parameter" minOccurs="0" maxOccurs="unbounded"&gt;
+			&lt;xs:complexType&gt;
+				&lt;xs:simpleContent&gt;
+					&lt;xs:extension base="xs:string"&gt;
+						&lt;xs:attribute name="name" type="xs:string" use="required"/&gt;
+					&lt;/xs:extension&gt;
+				&lt;/xs:simpleContent&gt;
+			&lt;/xs:complexType&gt;
+		&lt;/xs:element&gt;
+		&lt;xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/&gt;
+	&lt;/xs:sequence&gt;
+	&lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;/xs:schema&gt;			
+			</artwork></figure></t>
+			
+			<section anchor="xml-schema" title="XML">
+			<t>The XML format directly derives from the XML Schema defined above. Service Providers may add their service specific parameters in the response. Please refer to <xref target="xml"/> for more information on XML format. </t>
+			<t><figure><artwork>
+&lt;response&gt;
+	&lt;oauth_parameter name="oauth_token"&gt;token&lt;/oauth_parameter&gt;
+	&lt;oauth_parameter name="oauth_token_secret"&gt;secret&lt;/oauth_parameter&gt;
+&lt;/response&gt;					
+				</artwork></figure>
+			</t>
+			<t>
+			'Content-Type' HTTP response header value MUST be:
+				<t><figure><artwork>Content-Type: text/xml</artwork></figure></t>
+			</t>
+			</section>
+			<section anchor="json-schema" title="JSON">
+				<t>The JSON format represents data as JavaScript literals. The object literal produced by JSON can be directly evaluated by a JSON parser. Please refer to <xref target="json"/> for more information on JSON format. </t>
+				<t><figure><artwork>
+{"response":{"oauth_parameter":{ "oauth_token": "token", "oauth_token_secret": "secret"	}}}
+				</artwork></figure></t>
+				<t>
+			'Content-Type' HTTP response header value MUST be :
+				<t><figure><artwork>Content-Type: text/json</artwork></figure></t>
+				
+				<t>If the Consumer needs the response as a callback (JSONP), the xoauth_json_callback parameter MUST be passed as one of the input parameter as defined in the <xref target="processing">Processing Rules section</xref>. </t>
+			</t>
+				
+			</section>
+			<section anchor="yaml-schema" title="YAML">
+				<t>YAML is a human-friendly, cross language, Unicode based data serialization language designed around the common native data strutures of modern programming languages. <xref target="yaml"/> </t>
+				<t><figure><artwork>
+'response' => {
+    'oauth_parameter' => {
+		'oauth_token' => 'token',
+		'oauth_token_secet' => 'secret'
+	}
+}
+				</artwork></figure></t>
+				<t>
+			'Content-Type' HTTP response header value MUST be :
+				<t><figure><artwork>Content-Type: text/yaml</artwork></figure></t>
+			</t>
+
+			</section>
+			<section anchor="php-schema" title="PHP">
+				<t>Serialized PHP is a data encoding format for PHP programming language to easily store and transmit data. The Serialized PHP data can be directly evaluated by using the built in 'unserialize' function in PHP. The general format of the PHP data is:
+				<list style="hanging"><t>&lt;data type&gt;:&lt;length&gt;:&lt;value&gt;</t></list> 
+				Please refer to <xref target="serialized_php"/> and <xref target="serialized_php_yahoo"/> for more information on Serialized PHP data encoding format.
+				</t>
+				<t><figure><artwork>
+a:1:{s:14:"response";a:1:{s:14:"oauth_parameter";a:2:{s:11:"oauth_token";s:5:"token";s:18:"oauth_token_secret";s::"secret"}}
+				</artwork></figure></t>
+				<t>
+			'Content-Type' HTTP response header value MUST be :
+				<t><figure><artwork>Content-Type: text/php</artwork></figure></t>
+			</t>
+
+			</section>
+			<section anchor="amf0-schema" title="AMF0">
+				<t>AMF0 is a binary data format Flash uses to transfer information from and to a server. ActionScript 2.0 and earlier versions use AMF0 format.</t>
+				<t><figure><artwork>
+response (object) {
+    oauth_parameter (object) {
+		oauth_token (string) = 'token'
+		oauth_token_secet (string) = 'secret'
+	}
+}
+				</artwork></figure></t>
+				<t>
+			'Content-Type' HTTP response header value MUST be :
+				<t><figure><artwork>Content-Type: application/x-amf</artwork></figure></t>
+			</t>
+
+			</section>
+			<section anchor="amf3-schema" title="AMF3">
+				<t>AMF3 is a binary data format Flash uses to transfer information from and to a server. ActionScript 3 uses AMF3 format.<xref target="amf3_spec"/></t>
+
+				<t><figure><artwork>
+response (object) {
+    oauth_parameter (object) {
+		oauth_token (string) = 'token'
+		oauth_token_secet (string) = 'secret'
+	}
+}
+				</artwork></figure></t>
+				<t>
+			'Content-Type' HTTP response header value MUST be :
+				<t><figure><artwork>Content-Type: application/x-amf</artwork></figure></t>
+			</t>
+
+			</section>
+		 </section>
+              <appendix title="Response Data in XML Format with Service Specific Parameters">
+			  <t> This is an example of sample response data in XML format from a Service Provider with some provider specific parameters.
+			  </t>
+			  <t><figure><artwork>
+&lt;response&gt;
+	&lt;oauth_parameter name="oauth_token"&gt;token&lt;/oauth_parameter&gt;
+	&lt;oauth_parameter name="oauth_token_secret"&gt;secret&lt;/oauth_parameter&gt;
+	&lt;sp_parameter1&gt;value1&lt;/sp_parameter&gt;
+	&lt;sp_data&gt;
+		&lt;somethingelse&gt;data&lt;/somethingelse&gt;
+	&lt;/sp_data&gt;	
+&lt;/response&gt;				
+				</artwork></figure></t>
+			  </appendix>    
+			  <appendix title="Security considerations for xoauth_json_callback">
+			  <t> Service Providers SHOULD apply necessary security filters on the xoauth_json_callback parameter value provided by the Consumers to prevent XSS attacks. 
+			  </t>			  
+			  </appendix>  
+      </middle>
+      <back>
+         <references>
+      	&rfc2119;
+      	&rfc2606;
+      	&rfc2616;
+		&rfc4627;
+				<reference anchor="oauth_core_1_0">
+               <front>
+                  <title>OAuth Core 1.0</title>
+                  <author initials="OCW" surname="OAuth" fullname="OAuth Core Workgroup">
+                     <organization /></author>
+                     <date day="4" month="December" year="2007"/>
+                  </front>
+                  <format type="HTML" target="http://oauth.net/core/1.0" />
+				</reference>
+                  <reference anchor="oauth_disco_1_0">
+                     <front>
+                        <title>OAuth Discovery 1.0 Draft 1</title>
+                        <author initials="E" surname="Hammer-Lahav" fullname="Eran Hammer-Lahav">
+                           <organization>Hueniverse, LLC</organization>
+                           <address>
+                              <email>eran@hueniverse.com</email>
+                           </address>
+                        </author>
+                        <date day="12" month="December" year="2007"/>
+                     </front>
+                     <format type="HTML" target="http://oauth.googlecode.com/svn/spec/discovery/1.0/drafts/1/spec.html" /></reference>
+					 
+					 <reference anchor="xml">
+               <front>
+                  <title>XML</title>
+                  <author initials="" surname="" fullname="">
+                     <organization></organization></author>                     
+                  </front>
+                  <format type="HTML" target="http://en.wikipedia.org/wiki/XML" />
+				</reference>
+					 
+					 <reference anchor="amf3_spec">
+               <front>
+                  <title>Action Message Format -- AMF3</title>
+                  <author initials="" surname="" fullname="">
+                     <organization>Adobe Systems Inc.</organization></author>                     
+                  </front>
+                  <format type="HTML" target="http://download.macromedia.com/pub/labs/amf/amf3_spec_121207.pdf" />
+				</reference>
+					 <reference anchor="serialized_php">
+               <front>
+                  <title>Serialized PHP</title>
+                  <author initials="" surname="" fullname="">
+                     <organization></organization></author>                     
+                  </front>
+				  <format type="HTML" target="http://us3.php.net/serialize"/>
+				</reference>
+				<reference anchor="serialized_php_yahoo">
+               <front>
+                  <title>Using Serialized PHP with Yahoo! Web Services</title>
+                  <author initials="" surname="" fullname="">
+                     <organization></organization></author>                     
+                  </front>
+                  <format type="HTML" target="http://developer.yahoo.com/common/phpserial.html" />
+				</reference>
+				<reference anchor="json">
+               <front>
+                  <title>JSON</title>
+                  <author initials="" surname="" fullname="">
+                     <organization></organization></author>                     
+                  </front>
+                  <format type="HTML" target="http://www.json.org/" />
+				</reference>
+				<reference anchor="yaml">
+               <front>
+                  <title>YAML</title>
+                  <author initials="" surname="" fullname="">
+                     <organization></organization></author>                     
+                  </front>
+                  <format type="HTML" target="http://yaml.org/" />
+				</reference>
+				
+                  </references>
+               </back>
+            </rfc>

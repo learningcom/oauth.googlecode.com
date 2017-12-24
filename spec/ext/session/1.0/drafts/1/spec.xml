@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='http://xml.resource.org/authoring/rfc2629.xslt' ?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+
+<rfc category="info" ipr="full3978" docName="oauth-session-1_0.xml">
+
+  <?rfc toc="yes" ?>
+  <?rfc tocdepth="3" ?>
+  <?rfc symrefs="yes" ?>
+  <?rfc sortrefs="yes"?>
+  <?rfc strict="yes" ?>
+  <?rfc iprnotified="no" ?>
+  <?rfc private="Implementers' Draft" ?>
+
+  <front>
+    <title>OAuth Session 1.0 Draft 1</title>
+
+    <author initials="A" surname="Tom" fullname="Allen Tom">
+      <organization>Yahoo!</organization>
+      <address>
+        <email>atom@yahoo-inc.com</email>
+      </address>
+    </author>
+
+    <author initials="P" surname="Alavilli" fullname="Praveen Alavilli">
+      <organization>AOL</organization>
+      <address>
+        <email>AlavilliPraveen@aol.com</email>
+      </address>
+    </author>
+
+
+    <author initials="G" surname="George Fletcher" fullname="George Fletcher">
+      <organization>AOL</organization>
+      <address>
+        <email>gffletch@aol.com</email>
+      </address>
+    </author>
+
+
+    <date day="21" month="August" year="2008"/>
+    <abstract>
+      <t>
+	This specification defines the concept of an Authorization Session which 
+	represents the authorization granted to the Consumer to access Protected Resources
+	on behalf of the User. OAuth Core 1.0 assumes that the Authorization Session lifetime
+	and the Access Token lifetime are equal. This specification defines a mechanism for 
+	Service Providers to issue Access Tokens with shorter lifetimes than the Authorization 
+	Session, along with a way for Consumers to refresh their Access Tokens while the 
+	Authorization Session is valid.
+	</t>
+      <t>
+	This specification also defines a mechanism for Consumers to request additional 
+	privileges  to be added to their Authorization Session after being initially authorized
+	by the User, without having to manage multiple sets of Access Tokens for the 
+	same Service Provider.
+      </t>
+      <t>
+	Finally, this specification defines an interface for Consumers to terminate their
+	Authorization Session with the Service Provider when the Consumer no longer
+	needs to access Protected Resources.
+      </t>
+    </abstract>
+  </front>
+  <middle>
+    
+    <section title="Acknowledgements">
+      <t>
+        Several members of the community contributed valuable feedback and suggestions, including 
+	Naveen Agarwal, 
+	Dirk Balfanz, 
+	Blaine Cook,
+	Shreyas Doshi, 
+	Brian Eaton, 
+	Eran Hammer-Lahav, 
+	Joseph Holsten, 
+	Hugo Haas,
+	John Panzer, 
+	Scott Renfro, 
+	Adam Rosien, 
+	Eric Sachs, 
+	and
+	Gregg Stefancik.
+      </t>
+      <t>
+      This extension depends on the <xref target="OAuth Problem Reporting Extension" /> by John Kristian. 
+      </t>
+    </section>
+
+    <section title="Definitions">
+      <t>
+        <list style="hanging">
+          <t hangText="Authorization Session:">
+	    The period during which a Consumer has authenticated with the Service Provider, and has been authorized to access 
+	    Protected Resources on behalf of the User. 
+          </t>
+          <t hangText="Authorization Session Handle:">
+	    Information used by the Consumer to identify its Authorization Session with the Service Provider.
+          </t>
+	  <t hangText="OAuth Enabled Identity Provider:">
+	    A Service Provider's identity and authorization service, which is separate from the other Protected Resources offered 
+	    by a Service Provider.
+	  </t>
+        </list>
+      </t>
+    </section>
+    <section anchor="conv" title="Notation and Conventions">
+          <t>The keywords MUST, MUST NOT, REQUIRED, SHALL, 
+	    SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, 
+	    and OPTIONAL in this document are to be interpreted as 
+	    described in <xref target="RFC2119"/>. Domain name examples use 
+	    <xref target="RFC2606"/>.
+           </t>
+	  <t>
+            Unless otherwise noted, this specification is written as a direct
+            continuation of <xref target="OAuth Core 1.0" />, inheriting the definitions and
+            guidelines set by it.
+	  </t>
+	  
+
+    </section>
+    <section title="Overview">
+      <t>
+        The features defined in this extension are:
+	
+	<list style="numbers">
+	  <t>A method for Consumers to request the Service Provider to renew its Access Token and Secret, provided that the Consumer still has a valid Authorization Session with the Service Provider.</t>
+	  <t>A method for Consumers that have already been authorized by the User to request additional authorization from the User to access additional Protected Resources provided by the same Service Provider without requiring Consumers to manage multiple Access Tokens </t>
+	  <t>A method for consumers to request the Service Provider to invalidate its credentials</t>
+	  <t>A new oauth_expires_in response parameter to describe the lifetime of an Access Token</t>
+	</list>
+      </t>
+      <t>
+	Consumers request access to Protected Resources as specified in <xref target="OAuth Core 1.0" /> Sections 6.1, 
+	6.2, and 6.3. Consumers obtain an Access Token, as defined in <xref target="OAuth Core 1.0" /> Section 6.3.2 and also 
+	an optional Authentication Session Handle that can be used to refresh the Access Token if it expires, 
+	or to update the Access Token if the Consumer needs to request additional priveleges.
+      </t>
+      <t>
+	Consumers access Protected Resources as defined in <xref target="OAuth Core 1.0" /> Section 7. Consumers accessing
+	a Protected Resource using an expired access token are informed using the Problem Reporting Extension that 
+	they should refresh their Access Token, provided that they still have a valid Authorization Session with the 
+	Service Provider.
+      </t>
+    </section>
+    <section title="Access Token Renewal">
+      <t>
+	Service Providers MAY wish to grant Authorization Sessions to Consumers with longer lifetimes than the
+	lifetime of the Access Token. This section defines a workflow for Consumers to update their Access Token
+	without user intervention while the Consumer has a valid Authorization Session with the Service Provider.
+      </t>
+
+      <t>
+	Service Providers SHOULD NOT implement the Access Token Renewal 
+	workflow if the lifetime of their Access Tokens is equal to the lifetime of the
+	Authorization Session.
+      </t>
+      <section title="Consumer Obtains an Access Token and Session Handle" anchor="request_access_token">
+	<t>
+	  Consumers obtain an Access Token and Access Token Secret as defined in 
+	  <xref target="OAuth Core 1.0" /> Section 6. In addition to the oauth_token and oauth_token_secret parameters, the Service Provider MAY return three additional parameters:
+	</t>
+	<t>
+	  <list style="hanging"> 
+	    <t hangText="oauth_session_handle:">
+	      REQUIRED. Used to identify the instance of the Consumer after it has been authorized by the User.
+	    </t>
+	    <t hangText="oauth_authorization_expires_in:">
+	      OPTIONAL. The duration that the Consumer is authorized to access Protected Resources 
+	      on behalf of the user in seconds. The Service Provider MAY revoke access to the Consumer 
+	      prior to the expected expiration time as deemed necessary for reasons specific to 
+	      the Service Provider. 
+	    </t>
+	    <t hangText="oauth_expires_in:">
+	      OPTIONAL. The lifetime of the Access Token in seconds. If the Access Token lifetime
+	      is shorter than the lifetime of the authorization (oauth_authorization_expires_in), 
+	      then the Consumer SHOULD proactively refresh its Access Token before it expires. 
+	      The Access Token could be invalidated before the expected expiration time due to reasons 
+	      specific to the Service Provider.
+	    </t>
+	  </list>
+	</t>
+	</section>
+      <section title="Accessing Protected Resources">
+	<t>
+	  Consumers access Protected Resources as defined in <xref target="OAuth Core 1.0" /> Section 7. If the
+	  Service Provider denies the request because the Access Token has expired the Service Provider MUST respond
+	  with HTTP 401 and use the <xref target="OAuth Problem Reporting Extension" /> to inform the Consumer 
+	  to go through the  Reauthorization workflow.
+	</t>
+	<figure>
+	  <artwork>
+	    HTTP/1.1 401 Unauthorized
+	    WWW-Authenticate: OAuth oauth_problem=access_token_expired
+	    Content-type: application/x-www-form-urlencoded
+
+            oauth_problem=access_token_expired
+	  </artwork>
+	</figure>
+
+      </section>
+      <section title="Consumer Requests to Update Access Token" anchor="update_access_token">
+	<t>
+	Consumers SHOULD attempt to update their Access Token proactively before the token expires, 
+	or when denied a protected resource due to the access_token_expired problem.
+	To update an Access Token, the Consumer makes an HTTP request to the Service Provider's 
+	Access Token URL, with the following parameters:
+	</t>
+	<t>
+	  <list style="hanging">
+	    <t hangText="oauth_consumer_key:">
+	      The Consumer Key.
+	    </t>
+	    <t hangText="oauth_token:">
+	      The Access Token obtained previously.
+	    </t>
+	    <t hangText="oauth_signature_method:">
+	      The signature method the Consumer used to sign the request
+	    </t>
+	    <t hangText="oauth_signature:">
+	      The signature as defined in <xref target="OAuth Core 1.0" /> Section 9: Signing Requests.
+	    </t>
+	    <t hangText="oauth_timestamp:">
+	      As defined in <xref target="OAuth Core 1.0" /> Section 8: Nonce and Timestamp.
+	    </t>
+	    <t hangText="oauth_nonce:">
+	      As defined in <xref target="OAuth Core 1.0" /> Section 8: Nonce and Timestamp.
+	    </t>
+	    <t hangText="oauth_session_handle:">
+	      REQUIRED. The Authentication Session Handle obtained previously.
+	    </t>
+	  </list>
+	</t>
+	    </section>
+      <section title="Service Provider Updates Access Token">
+	<t>
+	  The Service Provider MUST verify that the the Consumer is still authorized to 
+	  access the Protected Resources, and if so, the format of the response is identical to the
+	  response defined in 
+	  <xref target="request_access_token" />.
+	  The Consumer MUST replace its previous copy of the Access Token, Access Token Secret, and 
+	  Authentication Session Handle with the new values. 
+	</t>
+	<t>
+	  After obtaining the new Access Token, the Consumer can access Protected Resources using 
+	  the new Access Token.
+	</t>
+	<t>
+	  If the Consumer is no longer authorized to access the Protected Resources, the Service Provider
+	  should return the HTTP 401 and the "permission_denied" problem to the Consumer.
+	  
+	</t>
+	<figure>
+	  <artwork>
+	    HTTP/1.1 401 Unauthorized
+	    WWW-Authenticate: OAuth oauth_problem=permission_denied
+	    Content-type: application/x-www-form-urlencoded
+
+            oauth_problem=permission_denied
+	  </artwork>
+	</figure>
+      </section>
+    </section>
+    <section title="Multiple Resource Authorization">
+      <t>
+	Service Providers may offer multiple Protected Resources that are protected by the 
+	same OAuth enabled Identity Provider. Over time, Consumers may want to access 
+	additional Protected Resources than what was originally authorized by the User. This 
+	section defines a workflow for Consumers to upgrade their credentials to access 
+	additional Protected Resources without having to manage multiple sets of credentials.
+      </t>
+      <t>
+	This workflow assumes that the Consumer has obtained an Access Token, Access Token Secret, and
+	an Authentication Session Handle as defined in <xref target="request_access_token" />.
+      </t>
+
+      <section title="Additional Authorization Required">
+	<t>
+	  Service Providers SHOULD return HTTP 401 with the additional_authorization_required
+	  problem to Consumers that access a Protected Resource using an Access Token without sufficient 
+	  credentials.
+	</t>
+	<figure>
+	  <artwork>
+	    HTTP/1.1 401 Unauthorized
+	    WWW-Authenticate: OAuth oauth_problem=additional_authorization_required
+	    Content-type: application/x-www-form-urlencoded
+
+            oauth_problem=additional_authorization_required
+	  </artwork>
+	</figure>	
+      </section>
+
+      <section title="Consumer Requests User Authorization">
+	<t>
+	  The OAuth enabled Identity Provider SHOULD only ask the user for the additional 
+	  authorization required by the Consumer and MAY display the Authorizations that 
+	  have already given by the user to the same Consumer.
+	</t>
+	<t>
+	  It is out of scope of this specification to define how the Service Provider passes the required
+	  Authorization (oauth_scope) to it's OAuth enabled IDP. 
+	</t>
+
+	<t>
+	  In order for the Consumer to obtain additional authorization, the Consumer repeats
+	  <xref target="OAuth Core 1.0" /> Sections 6.1  and 6.2. The Consumer obtains an unauthorized
+	  Request Token and directs the User to the Service Provider to authorize the Request Token. However, 
+	  when exchanging the Request Token for the Access Token, the Consumer submits the 
+	  Authentication Session Handle that was obtained previously in addition to the Request Token. The Service
+	  Provider responds with an Access Token that is authorized for the new set of privileges, as well as 
+	  the Access Token Secret, and Authentication Session Handle. The previously issued Access Token, Access Token
+	  Secret, and Authentication Session Handle MUST be discarded.
+	</t>
+	<t>
+	  Service Providers MAY choose to re-issue the same Access Token, Access Token Secret, and 
+	  Authentication Session Handle	as long as the new set of credentials are authorized to access the new 
+	  set of protected resources that were authorized by the User.
+	</t>
+      </section>
+    </section>
+    <section title="Authorization Revocation">
+      <t>
+	Consumers MAY provide a session termination or Sign Out functionality in which the 
+	Consumer requests the OAuth enabled IDP to terminate the Consumer's Authentication Session, and to invalidate
+	the Access Token and Secret. Service Providers MUST invalidate the 
+	Consumer's Access Token after receiving this request. The Access Token Invalidation end point is 
+	defined in the OAuth Discovery Information as "http://oauth.net/oauth_token_invalidation_request" 
+	(TODO - correct the namespace).
+	The request contains the following parameters:
+      </t>
+
+      	<t>
+	  <list style="hanging">
+	    <t hangText="oauth_consumer_key:">
+	      The Consumer Key.
+	    </t>
+	    <t hangText="oauth_token:">
+	      The Access Token obtained previously.
+	    </t>
+	    <t hangText="oauth_signature_method:">
+	      The signature method the Consumer used to sign the request
+	    </t>
+	    <t hangText="oauth_signature:">
+	      The signature as defined in <xref target="OAuth Core 1.0" /> Section 9: Signing Requests.
+	    </t>
+	    <t hangText="oauth_timestamp:">
+	      As defined in <xref target="OAuth Core 1.0" /> Section 8: Nonce and Timestamp.
+	    </t>
+	    <t hangText="oauth_nonce:">
+	      As defined in <xref target="OAuth Core 1.0" /> Section 8: Nonce and Timestamp.
+	    </t>
+	    <t hangText="oauth_session_handle:">
+	      REQUIRED IF the Service Provider returned an oauth_session_handle value with the previous Access Token.
+	    </t>
+	  </list>
+	</t>
+
+    </section>
+
+    <section title="Security Considerations">
+      <t>
+	Service Providers may want to issue Access Tokens with relatively short lifetimes
+	for a variety of reasons. Issuing permanent credentials can be risky if the credentials 
+	are stolen due to a compromised Protected Resource or Consumer. The Authentication Session 
+	Handle that is shared by the Consumer and the Service Provider's Identity Provider,
+	but not with the Protected Resource helps defend against the scenario where 
+	the Protected Resource is compromised. 
+      </t>
+      <t>
+	Allowing Access Tokens to be revoked before they expire requires Service Providers to 
+	perform a database lookup before serving a Protected Resource. For performance reasons, Service
+	Providers may want to issue Access Tokens that can be validated without a database lookup, 
+	provided that the Access Token lifetime is less than then the Service Provider's allowable 
+	latency for Access Token revocation.
+      </t>
+      <t>
+	Over time, new versions of Consumers may be released which require additional privileges than
+	what their users originally granted. Users SHOULD have the opportunity to either approve or deny 
+	additional privileges for a Consumer after the initial authorization.
+      </t>
+      <t>
+	All secrets and the Authentication Session Handle SHOULD only be transmitted using HTTPS.
+      </t>
+
+    </section>
+
+    <appendix title="Workflow Diagram">
+	<t>
+	  Workflow Diagram
+	</t>
+    </appendix>
+
+    <appendix title="Example">
+	<t>
+	  Example goes here
+	</t>
+    </appendix>
+
+
+  </middle>
+    
+  <back>
+    <references title="References">
+
+      <reference anchor="OAuth Core 1.0">
+        <front>
+          <title>OAuth Core 1.0</title>
+          <author initials="" surname="OAuth Core Workgroup" fullname="OAuth Core Workgroup">
+            <organization />
+          </author>
+        </front>
+        <format type="HTML" target="http://oauth.net/core/1.0" />
+      </reference>
+
+      <reference anchor="OAuth Problem Reporting Extension">
+        <front>
+          <title>OAuth Problem Reporting Extension</title>
+          <author initials="J.K." surname="Kristian" fullname="John Kristian">
+            <organization />
+          </author>
+        </front>
+        <format type="HTML" target="http://oauth.pbwiki.com/ProblemReporting" />
+      </reference>
+
+
+
+      <reference anchor="RFC2606">
+        <front>
+          <title>Reserved Top Level DNS Names</title>
+          <author initials="D.E" surname="Eastlake" fullname="D. Eastlake">
+            <organization></organization>
+          </author>
+          <author initials="A.P" surname="Panitz" fullname="A. Panitz">
+            <organization></organization>
+          </author>
+        </front>
+        <seriesInfo name="RFC" value="2606" />
+      </reference>
+
+      <reference anchor="RFC2119">
+        <front>
+          <title>Key words for use in RFCs to Indicate Requirement Levels</title>
+          <author initials="B.S" surname="Bradner" fullname="Scott Bradner">
+            <organization>Alis Technologies</organization>
+          </author>
+        </front>
+        <seriesInfo name="RFC" value="2119" />
+      </reference>
+
+    </references>
+  </back>
+</rfc>

@@ -1,0 +1,80 @@
+10
+
+dir
+1276
+http://oauth.googlecode.com/svn/code/branches/jmkristian-2009-04/java/core
+http://oauth.googlecode.com/svn
+
+
+
+2009-05-30T19:56:16.949151Z
+1031
+jmkristian
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+f7ae4463-c52f-0410-a7dc-93bad6e629e8
+
+httpclient4
+dir
+
+provider
+dir
+
+pom.xml
+file
+
+
+
+
+2016-03-15T10:40:12.468889Z
+8067b79a521ab7d407aed13a5681de11
+2009-05-26T04:03:56.156987Z
+1028
+jmkristian
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+930
+
+consumer
+dir
+
+commons
+dir
+
+test
+dir
+
+httpclient3
+dir
+

@@ -1,0 +1,55 @@
+10
+
+dir
+1276
+http://oauth.googlecode.com/svn/code/maven/net/oauth/example
+http://oauth.googlecode.com/svn
+
+
+
+2009-06-04T17:04:52.742570Z
+1043
+jmkristian
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+f7ae4463-c52f-0410-a7dc-93bad6e629e8
+
+oauth-desktop
+dir
+
+oauth-provider
+dir
+
+oauth-consumer
+dir
+
+provider
+dir
+
+consumer
+dir
+
+oauth-example-desktop
+dir
+
+oauth-example-provider
+dir
+
+oauth-example-consumer
+dir
+
+oauth-examples-parent
+dir
+

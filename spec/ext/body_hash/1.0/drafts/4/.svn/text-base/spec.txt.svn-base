@@ -1,0 +1,672 @@
+
+
+
+Implementers' Draft                                             B. Eaton
+                                                             Google, Inc
+                                                          March 23, 2009
+
+
+                  OAuth Request Body Hash 1.0 Draft 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eaton                                                           [Page 1]
+
+                   OAuth Request Body Hash 1.0 Draft 4        March 2009
+
+
+Abstract
+
+   This specification extends the OAuth signature to include integrity
+   checks on HTTP request bodies with content types other than
+   "application/x-www-form-urlencoded".
+
+
+Table of Contents
+
+   1.  Notation and Conventions . . . . . . . . . . . . . . . . . . .  3
+   2.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  4
+   3.  The oauth_body_hash Parameter  . . . . . . . . . . . . . . . .  5
+     3.1.  Hash Algorithm . . . . . . . . . . . . . . . . . . . . . .  5
+     3.2.  Signing the Request  . . . . . . . . . . . . . . . . . . .  5
+     3.3.  Verifying the Request  . . . . . . . . . . . . . . . . . .  5
+   4.  Example  . . . . . . . . . . . . . . . . . . . . . . . . . . .  7
+   5.  Security Considerations  . . . . . . . . . . . . . . . . . . .  8
+   Appendix A.  Obtaining the HTTP Entity Body  . . . . . . . . . . .  9
+   Appendix B.  Unkeyed vs Keyed Hash Algorithms  . . . . . . . . . . 10
+   6.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+   Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 12
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eaton                                                           [Page 2]
+
+                   OAuth Request Body Hash 1.0 Draft 4        March 2009
+
+
+1.  Notation and Conventions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in [RFC2119].
+
+   Unless otherwise noted, this specification is written as a direct
+   continuation of [OAuth Core 1.0], inheriting the definitions and
+   guidelines set by it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eaton                                                           [Page 3]
+
+                   OAuth Request Body Hash 1.0 Draft 4        March 2009
+
+
+2.  Introduction
+
+   The OAuth Core specification [OAuth Core 1.0] provides body integrity
+   checking only for "application/x-www-form-urlencoded" request bodies.
+   Other types of request bodies are left unsigned.  An eavesdropper or
+   man-in-the-middle who captures a signed request URL may be able to
+   forward or replay that URL with a different HTTP request body.  Nonce
+   checking and the use of https can mitigate this risk, but may not be
+   available or effective in some environments.
+
+   This specification describes a method to provide an integrity check
+   on the request body without requiring signatures of arbitrary byte
+   streams.  An unkeyed hash of the request body is taken, the resulting
+   hash value is added to the list of OAuth parameters, and the normal
+   OAuth signature base string is signed.
+
+   This extension is forward compatible: Service Providers that have not
+   implemented this extension can verify requests sent by Consumers that
+   have implemented this extension.  If the Service Provider implements
+   this specification the integrity of the body is guaranteed.  If the
+   Service Provider does not check body signatures, the remainder of the
+   request will still validate using the OAuth Core signature algorithm.
+
+   This specification is only useful when cryptographic signatures are
+   used.  The OAuth PLAINTEXT signature algorithm does not provide
+   integrity checks for any portion of the request.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eaton                                                           [Page 4]
+
+                   OAuth Request Body Hash 1.0 Draft 4        March 2009
+
+
+3.  The oauth_body_hash Parameter
+
+   The body hash parameter MUST NOT be sent on requests that use the
+   application/x-www-form-urlencoded content-type.  The body hash
+   parameter MUST NOT be sent on HTTP GET or HEAD requests.  The body
+   hash parameter SHOULD be sent on all other requests.
+
+3.1.  Hash Algorithm
+
+   The body hash algorithm is determined by the OAuth signature method
+   used.
+
+   o  If the OAuth signature method is HMAC-SHA1 or RSA-SHA1, SHA1
+      [RFC3174] MUST be used as the body hash algorithm.
+
+   o  If the OAuth signature method is PLAINTEXT, use of this
+      specification provides no security benefit and is NOT RECOMMENDED.
+
+   New OAuth signature methods SHOULD specify the hash algorithm used to
+   generate the body hash.
+
+3.2.  Signing the Request
+
+   To sign a request, the OAuth Consumer MUST:
+
+   1.  Calculate the body hash value by executing the selected hash
+       algorithm over the request body.  The request body is the Entity
+       Body as defined in [RFC2616] section 7.2.  If the request does
+       not have an entity body, the hash should be taken over the empty
+       string.
+
+   2.  Base64 [RFC2045] encode the hash value.
+
+   3.  Set the oauth_body_hash parameter to the Base64 encoded hash
+       value.
+
+   4.  Sign the request as per section 9 "Signing Request" of [OAuth
+       Core 1.0].  The oauth_body_hash parameter is included in the
+       Signature Base String together with the other request parameters.
+
+   5.  Include the oauth_body_hash parameter along with the other OAuth
+       Protocol parameters in the signed OAuth request.
+
+3.3.  Verifying the Request
+
+   Service Providers verify the integrity of request bodies by verifying
+   the OAuth signature as described in [OAuth Core 1.0]. and also
+   verifying the value of the oauth_body_hash OAuth protocol parameter.
+
+
+
+Eaton                                                           [Page 5]
+
+                   OAuth Request Body Hash 1.0 Draft 4        March 2009
+
+
+   1.  Verify the request as described in OAuth Core.
+
+   2.  Determine whether the request should have an oauth_body_hash
+       parameter according to the rules described in The oauth_body_hash
+       Parameter (Section 3).
+
+   3.  If the request should not have an oauth_body_hash parameter,
+       verify that no oauth_body_hash parameter is present.  If an
+       oauth_body_hash parameter is present on a request that should not
+       contain an oauth_body_hash parameter, the request has been
+       tampered with and MUST be rejected.
+
+   4.  If the request should have an oauth_body_hash parameter but does
+       not contain one, the request was sent by a Consumer that does not
+       support this extension.  Service Providers MAY accept such
+       requests for interoperability, or they MAY reject such requests
+       in favor of security.
+
+   5.  The request contains an oauth_body_hash parameter and body that
+       should be hashed.  Calculate the expected body hash for the
+       request as described in Signing the Request (Section 3.2).
+
+   6.  Compare the calculated body hash with the value sent by the
+       client in the oauth_body_hash parameter.  If the values match,
+       the body is intact and the request can proceed.  (Rather than
+       comparing text values, Service Providers MAY base64 decode the
+       oauth_body_hash parameter and perform the comparison on the
+       octets of the hash.  This reduces the risk of minor differences
+       in URL encoding or base64 encoding causing spurious integrity
+       check failures.)
+
+   To summarize, Service Providers may encounter any of the following
+   situations:
+
+   o  Request should not have oauth_body_hash, no oauth_body_hash is
+      present: no additional checks are necessary.
+
+   o  Request should not have oauth_body_hash, oauth_body_hash is
+      present: reject request.
+
+   o  Request should have oauth_body_hash, no oauth_body_hash is
+      present: Consumer does not support extension.  Service Provider
+      may or may not reject request, according to local security policy.
+
+   o  Request should have oauth_body_hash, oauth_body_hash is present:
+      Verify the body hash.
+
+
+
+
+
+Eaton                                                           [Page 6]
+
+                   OAuth Request Body Hash 1.0 Draft 4        March 2009
+
+
+4.  Example
+
+   Sample HTTP request:
+
+     PUT /resource HTTP/1.1
+     Host: www.example.com
+     Content-Type: text/plain
+     Content-Length: 12
+
+     Hello World!
+
+   Base64 encoded SHA-1 hash of the body:
+
+     Lve95gjOVATpfV8EL5X4nxwjKHE=
+
+   Signature Base String (with some line breaks added for readability):
+
+     PUT&http%3A%2F%2Fwww.example.com%2Fresource&oauth_body_hash%3D
+     Lve95gjOVATpfV8EL5X4nxwjKHE%253D%26oauth_consumer_key%3Dconsum
+     er%26oauth_nonce%3D10369470270925%26oauth_signature_method%3DH
+     MAC-SHA1%26oauth_timestamp%3D1236874236%26oauth_version%3D1.0
+
+   Signed request with body hash (with some line breaks added for
+   readability):
+
+     PUT /resource HTTP/1.1
+     Host: www.example.com
+     Authorization: OAuth realm="http%3A%2F%2Fwww.example.com",
+         oauth_body_hash="Lve95gjOVATpfV8EL5X4nxwjKHE%3D",
+         oauth_consumer_key="consumer",
+         oauth_signature_method="HMAC-SHA1",
+         oauth_timestamp="1236874155", oauth_nonce="10288510250934",
+         oauth_version="1.0",
+         oauth_signature="08bUFF%2Fjmp59mWB7cSgCYBUpJ0U%3D"
+     Content-Type: text/plain
+     Content-Length: 12
+
+     Hello World!
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eaton                                                           [Page 7]
+
+                   OAuth Request Body Hash 1.0 Draft 4        March 2009
+
+
+5.  Security Considerations
+
+   Many factors besides the bytes of the request body can influence the
+   interpretation of the body of the HTTP request.  For example, a
+   content-type or content-encoding header can change the way a server
+   handles an HTTP request.  This specification does not include an
+   integrity check on the HTTP request headers.  OAuth deployments whose
+   security could be impacted by an attacker who tampers with HTTP
+   request headers should use other mechanisms (such as HTTPS) to
+   protect the confidentiality and integrity of the entire HTTP request.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eaton                                                           [Page 8]
+
+                   OAuth Request Body Hash 1.0 Draft 4        March 2009
+
+
+Appendix A.  Obtaining the HTTP Entity Body
+
+   Not all programming platforms provide an easy mechanism to obtain the
+   raw octets of the HTTP entity body.  Reading the entity body as raw
+   octets may have side effects, such as inhibiting automatic character
+   set conversion.  Transfer-encodings such as gzip also complicate
+   implementation.  On the other hand, reading the entity body as text
+   may perform lossy conversions that prevent recovery of the original
+   octet stream in some situtations.  Character set conversions are not
+   always one-to-one mappings, so solutions that rely on converting text
+   back to the original octet stream are likely to fail in environments
+   with multibyte characters.
+
+   All of these factors, and others, can make it difficult to drop in a
+   "verify-the-signature" filtering layer prior to other request
+   processing.  The verification layer must consider the assumptions of
+   downstream processing code on the state of the request body.
+
+   Implementers of this specification should be aware of these
+   difficulties and consider the best way to address them in their
+   programming frameworks.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eaton                                                           [Page 9]
+
+                   OAuth Request Body Hash 1.0 Draft 4        March 2009
+
+
+Appendix B.  Unkeyed vs Keyed Hash Algorithms
+
+   This specification deliberately uses an unkeyed hash algorithm
+   (SHA-1) to provide an integrity check on the body instead of a keyed
+   hash algorithm such as HMAC-SHA1.  This decision was made because
+   signing arbitrary octet streams is poor cryptographic hygiene.  It
+   can lead to unexpected problems with cryptographic protocols.
+
+   For example, consider a proxy that uses OAuth to add authentication
+   information to requests sent by an untrusted third-party.  If the
+   proxy signs arbitrary octet streams, the third-party can use the
+   proxy as an oracle to forge authentication messages.
+
+   Including the result of an unkeyed hash in the normal signature base
+   string allows the proxy to add an integrity check on the original
+   message without creating a signing oracle.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eaton                                                          [Page 10]
+
+                   OAuth Request Body Hash 1.0 Draft 4        March 2009
+
+
+6.  References
+
+   [OAuth Core 1.0]
+              OAuth Core Workgroup, "OAuth Core 1.0".
+
+   [RFC2045]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
+              Extensions (MIME) Part One: Format of Internet Message
+              Bodies", RFC 2045.
+
+   [RFC2119]  Bradner, B., "Key words for use in RFCs to Indicate
+              Requirement Levels", RFC 2119.
+
+   [RFC2616]  Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
+              Masinter, L., Leach, P., and T. Berners-Lee, "Hypertext
+              Transfer Protocol -- HTTP/1.1", RFC 2616.
+
+   [RFC3174]  Eastlake, 3rd, D. and P. Jones, "US Secure Hash Algorithm
+              1 (SHA1)", RFC 3174.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eaton                                                          [Page 11]
+
+                   OAuth Request Body Hash 1.0 Draft 4        March 2009
+
+
+Author's Address
+
+   Brian Eaton
+   Google, Inc
+
+   Email: beaton@google.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Eaton                                                          [Page 12]
+

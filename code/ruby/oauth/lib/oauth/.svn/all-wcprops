@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/410/code/ruby/oauth/lib/oauth
+END
+version.rb
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/410/code/ruby/oauth/lib/oauth/version.rb
+END
+server.rb
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/410/code/ruby/oauth/lib/oauth/server.rb
+END
+request_proxy.rb
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/253/code/ruby/oauth/lib/oauth/request_proxy.rb
+END
+consumer.rb
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/404/code/ruby/oauth/lib/oauth/consumer.rb
+END
+client.rb
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/377/code/ruby/oauth/lib/oauth/client.rb
+END
+helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/409/code/ruby/oauth/lib/oauth/helper.rb
+END
+token.rb
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/409/code/ruby/oauth/lib/oauth/token.rb
+END
+signature.rb
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/397/code/ruby/oauth/lib/oauth/signature.rb
+END

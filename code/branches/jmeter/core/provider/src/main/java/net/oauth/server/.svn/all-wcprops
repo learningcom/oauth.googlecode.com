@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/1177/code/branches/jmeter/core/provider/src/main/java/net/oauth/server
+END
+HttpRequestMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/1177/code/branches/jmeter/core/provider/src/main/java/net/oauth/server/HttpRequestMessage.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/1177/code/branches/jmeter/core/provider/src/main/java/net/oauth/server/package-info.java
+END
+OAuthServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/1177/code/branches/jmeter/core/provider/src/main/java/net/oauth/server/OAuthServlet.java
+END

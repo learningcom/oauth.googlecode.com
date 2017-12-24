@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/673/code/coldfusion/examples
+END
+index.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/627/code/coldfusion/examples/index.cfm
+END
+common.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/673/code/coldfusion/examples/common.cfm
+END
+request_token.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/673/code/coldfusion/examples/request_token.cfm
+END
+hashgenerator.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/405/code/coldfusion/examples/hashgenerator.cfm
+END
+authorize.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/405/code/coldfusion/examples/authorize.cfm
+END
+echo.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/673/code/coldfusion/examples/echo.cfm
+END
+client.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/673/code/coldfusion/examples/client.cfm
+END
+access_token.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/627/code/coldfusion/examples/access_token.cfm
+END
+navimenu.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/405/code/coldfusion/examples/navimenu.cfm
+END
+oauth.css
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/405/code/coldfusion/examples/oauth.css
+END
+admin_consumers.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/627/code/coldfusion/examples/admin_consumers.cfm
+END

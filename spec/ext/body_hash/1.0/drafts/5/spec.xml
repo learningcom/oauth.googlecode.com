@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='http://xml.resource.org/authoring/rfc2629.xslt' ?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+
+<rfc category="info" ipr="full3978" docName="oauth-body_hash-1_0.xml">
+
+  <?rfc toc="yes" ?>
+  <?rfc tocdepth="3" ?>
+  <?rfc symrefs="yes" ?>
+  <?rfc sortrefs="yes"?>
+  <?rfc strict="yes" ?>
+  <?rfc iprnotified="no" ?>
+  <?rfc private="Implementers' Draft" ?>
+
+  <front>
+    <title>OAuth Request Body Hash 1.0 Draft 5</title>
+
+    <author initials="B" surname="Eaton" fullname="Brian Eaton">
+      <organization>Google, Inc</organization>
+      <address>
+        <email>beaton@google.com</email>
+      </address>
+    </author>
+
+    <date day="29" month="March" year="2009"/>
+
+    <abstract>
+      <t>
+        This specification extends the OAuth signature to include
+        integrity checks on HTTP request bodies with content types other than
+        <spanx style="verb">application/x-www-form-urlencoded</spanx>.
+      </t>
+    </abstract>
+
+  </front>
+  <middle>
+
+    <section title="Notation and Conventions">
+      <t>
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+        "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+        document are to be interpreted as described in
+        <xref target="RFC2119" />.
+      </t>
+      <t>
+        Unless otherwise noted, this specification is written as a direct
+        continuation of <xref target="OAuth Core 1.0" />, inheriting the
+        definitions and guidelines set by it.
+      </t>
+    </section>
+
+    <section title="Introduction">
+      <t>
+        The OAuth Core specification <xref target="OAuth Core 1.0" /> provides
+        body integrity checking only for
+        <spanx style="verb">application/x-www-form-urlencoded</spanx>
+        request bodies.  Other types of request bodies are left unsigned.
+        An eavesdropper or man-in-the-middle who captures a signed request URL
+        may be able to forward or replay that URL with a different HTTP
+        request body.  Nonce checking and the use of https can mitigate this
+        risk, but may not be available in some environments.  Even when 
+        nonce checking and https are used, signing the request body provides
+        an additional layer of defense.
+      </t>
+      <t>
+        This specification describes a method to provide an integrity check
+        on non-form-encoded request bodies.  The normal OAuth signature
+        base string is used by adding an additional parameter with the hash
+        of the request body.  An unkeyed hash is used for the reasons
+        described in
+        <xref target="unkeyed">Unkeyed vs Keyed Hash Algorithms</xref>.
+      </t>
+      <t>
+        This extension is forward compatible: Service Providers
+        that have not implemented this extension can verify requests
+        sent by Consumers that have implemented this extension.
+        If the Service Provider
+        implements this specification the integrity of the body is guaranteed.
+        If the Service Provider does not check body signatures, the remainder
+        of the request will still validate using the OAuth Core signature
+        algorithm.
+      </t>
+      <t>
+        This specification is only useful when cryptographic signatures
+        are used.  The OAuth PLAINTEXT signature algorithm does not provide
+        integrity checks for any portion of the request and is not supported
+        by this specification.
+      </t>
+    </section>
+
+    <section title="The oauth_body_hash Parameter" anchor="parameter">
+      <t>
+        OAuth Consumers and Service Providers calculate the oauth_body_hash
+        according to the following rules:
+      </t>
+      <section title="Hash Algorithm">
+        <t>
+          The body hash algorithm is determined by the OAuth signature
+          method used.
+        </t>
+        <t>
+          <list style="symbols">
+            <t>
+              If the OAuth signature method is HMAC-SHA1 or RSA-SHA1, SHA1
+              <xref target="RFC3174" /> MUST be used as the body hash
+              algorithm.
+            </t>
+            <t>
+              If the OAuth signature method is PLAINTEXT, use of this
+              specification provides no security benefit and is NOT
+              RECOMMENDED.
+            </t>
+          </list>
+        </t>
+        <t>
+          New OAuth signature method specifications SHOULD specify the hash
+          algorithm used to generate the body hash.
+        </t>
+      </section>
+      <section title="Calculating the oauth_body_hash Parameter">
+        <t>
+          The value of the oauth_body_hash parameter is obtained as follows:
+        </t>
+        <t>
+          <list style="numbers">
+            <t>
+              Calculate the body hash value by executing the selected
+              hash algorithm over the request body.  The request body is
+              the entity body as defined in <xref target="RFC2616" />
+              section 7.2.  If the request does not have an entity body, the
+              hash should be taken over the empty string.
+            </t>
+            <t>
+              Base64 <xref target="RFC2045" /> encode the hash value.
+            </t>
+          </list>
+        </t>
+      </section>
+    </section>
+    <section title="Additions to Request Signing">
+      <t>
+        OAuth Consumers implementing this specification continue to sign
+        requests in the manner described by OAuth Core.  They also
+        include the oauth_body_hash parameter according to the rules
+        described in this section.
+      </t>
+      <section anchor="when_to_include" title="When to Include the Body Hash">
+        <t>
+          Not all requests should contain the oauth_body_hash parameter.
+        </t>
+        <t>
+          OAuth Consumers SHOULD NOT include an oauth_body_hash parameter on 
+          OAuth request token and access token requests.  Some OAuth Service
+          Providers have implemented request token and access token endpoints
+          that reject requests that include unknown parameters.  Sending
+          an oauth_body_hash parameter to such endpoints will cause protocol
+          failures.  The oauth_body_hash parameter does not provide additional
+          security for OAuth request and access token requests since all of 
+          the protocol parameters are signed by the OAuth Core signature
+          mechanism.  Omitting the parameter improves interoperability without
+          reducing security.
+        </t>
+        <t>
+          OAuth Consumers MUST NOT include an oauth_body_hash parameter on
+          requests with form-encoded request bodies.  The presence or absence
+          of the oauth_body_hash parameter is used to indicate to Service
+          Providers how they should check the integrity of the request body.
+          If no oauth_body_hash parameter is present, that indicates that
+          the request body is form-encoded and signed using the OAuth Core
+          signature algorithm.  If the oauth_body_hash parameter is present,
+          the body is signed according to this extension.  Including
+          an oauth_body_hash on form-encoded requests would make it impossible
+          for Service Providers to determine which body signing mechanism
+          was used for the request.  This ambiguity would, in turn, allow
+          the attack described in <xref target="removing_body">
+          Preventing Removal of Request Bodies</xref>.
+        </t>
+        <t>
+          OAuth Consumers SHOULD include the oauth_body_hash parameter on all
+          other requests.
+        </t>
+      </section>
+      <section title="Adding oauth_body_hash to Requests">
+        <t>
+          OAuth Consumers use the following procedure to add
+          oauth_body_hash to requests:
+          <list style="numbers">
+            <t>
+              Determine whether the parameter should be sent at all, using
+              the rules described in <xref target="when_to_include">
+              When to Include the Body Hash</xref>.
+            </t>
+            <t>
+              Calculate the body hash value as described in 
+              <xref target="parameter">The oauth_body_hash Parameter</xref>.
+            </t>
+            <t>
+              Set the oauth_body_hash parameter to the obtained value.
+            </t>
+            <t>
+              Sign the request as per section 9 "Signing Requests" of
+              <xref target="OAuth Core 1.0" />.
+              The oauth_body_hash parameter MUST be
+              included in the Signature Base String together with the
+              other request parameters.
+            </t>
+            <t>
+              Include the oauth_body_hash parameter along with the other
+              OAuth Protocol parameters in the signed OAuth request.
+            </t>
+          </list>
+        </t>
+      </section>
+    </section>
+    <section title="Verifying Requests">
+      <t>
+        Service Providers verify the integrity of request bodies
+        by verifying the OAuth signature as described in
+        <xref target="OAuth Core 1.0" /> and also verifying the value of the
+        oauth_body_hash parameter.
+      </t>
+      <section title="When to Verify the Hash">
+        <t>
+          Service Providers SHOULD decide whether the oauth_body_hash parameter
+          is necessary according to the rules described in
+          <xref target="when_to_include">When to Include the Body Hash</xref>.
+        </t>
+        <t>
+          If the request must not have an oauth_body_hash parameter,
+          Service Providers MUST verify that no oauth_body_hash parameter is
+          present.
+          In particular, any requests with a form-encoded content-type
+          and an oauth_body_hash parameter MUST be rejected because of
+          of the attack described in <xref target="removing_body">
+          Preventing Removal of Request Bodies</xref>.
+        </t>
+        <t>
+          If the request should have an oauth_body_hash parameter
+          but does not contain one, the request was sent by a
+          Consumer that does not support this extension.  The integrity
+          of the request body cannot be checked using this specification.
+          Service Providers MAY accept such requests for interoperability,
+          or they MAY reject such requests in favor of security.
+        </t>
+      </section>
+      <section title="Verifying the Hash">
+        <t>
+          If the Service Provider determines body hash verification is
+          necessary, the Service Provider calculates the expected
+          body hash for the request as described in
+          <xref target="parameter">The oauth_body_hash Parameter</xref>.
+        </t>
+        <t>
+          The Service Provider then compares the expected body hash with
+          the value sent by the Consumer in the oauth_body_hash parameter.
+          If the values match, the body is intact and the request can
+          proceed.
+        </t>
+        <t>
+          If the values do not match, the request MUST be rejected.
+        </t>
+        <t>
+          Rather than comparing text values, Service Providers MAY
+          Base64 decode the oauth_body_hash parameter and perform the
+          comparison on the octets of the hash.  This reduces the risk of
+          minor differences in URL encoding or Base64 encoding causing
+          spurious integrity check failures.
+        </t>
+      </section>
+    </section>
+    <section title="Examples">
+      <section title="Example PUT Request">
+        <t>
+          Sample HTTP request:
+          <figure>
+            <artwork>
+    PUT /resource HTTP/1.1
+    Host: www.example.com
+    Content-Type: text/plain
+    Content-Length: 12
+
+    Hello World!
+            </artwork>
+          </figure>
+        </t>
+        <t>
+          Base64 encoded SHA-1 hash of the body:
+          <figure>
+            <artwork>
+    Lve95gjOVATpfV8EL5X4nxwjKHE=
+            </artwork>
+          </figure>
+        </t>
+        <t>
+          Signature Base String (with some line breaks added for
+          readability):
+          <figure>
+            <artwork>
+    PUT&amp;http%3A%2F%2Fwww.example.com%2Fresource&amp;oauth_body_hash%3D
+    Lve95gjOVATpfV8EL5X4nxwjKHE%253D%26oauth_consumer_key%3Dconsum
+    er%26oauth_nonce%3D10369470270925%26oauth_signature_method%3DH
+    MAC-SHA1%26oauth_timestamp%3D1236874236%26oauth_token%3Dtoken%
+    26oauth_version%3D1.0
+            </artwork>
+          </figure>
+        </t>
+        <t>
+          Signed request with body hash (with some line breaks added for
+          readability):
+          <figure>
+            <artwork>
+    PUT /resource HTTP/1.1
+    Host: www.example.com
+    Authorization: OAuth realm="http%3A%2F%2Fwww.example.com",
+        oauth_body_hash="Lve95gjOVATpfV8EL5X4nxwjKHE%3D",
+        oauth_token="token",
+        oauth_consumer_key="consumer",
+        oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1236874155", oauth_nonce="10288510250934",
+        oauth_version="1.0",
+        oauth_signature="08bUFF%2Fjmp59mWB7cSgCYBUpJ0U%3D"
+    Content-Type: text/plain
+    Content-Length: 12
+
+    Hello World!
+            </artwork>
+          </figure>
+        </t>
+      </section>
+      <section title="Example GET Request">
+        <t>
+          Sample HTTP request:
+          <figure>
+            <artwork>
+    GET /resource HTTP/1.1
+    Host: www.example.com
+
+            </artwork>
+          </figure>
+        </t>
+        <t>
+          Base64 encoded SHA-1 hash of the (non-existent) body:
+          <figure>
+            <artwork>
+    2jmj7l5rSw0yVb/vlWAYkK/YBwk=
+            </artwork>
+          </figure>
+        </t>
+        <t>
+          Signature Base String (with some line breaks added for
+          readability):
+          <figure>
+            <artwork>
+    GET&amp;http%3A%2F%2Fwww.example.com%2Fresource&amp;oauth_body_hash%3D
+    2jmj7l5rSw0yVb%252FvlWAYkK%252FYBwk%253D%26oauth_consumer_key%3Dconsum
+    er%26oauth_nonce%3D8628868109991%26oauth_signature_method%3DHMAC-SHA1%
+    26oauth_timestamp%3D1238395022%26oauth_token%3Dtoken%26oauth_version%3
+    D1.0
+            </artwork>
+          </figure>
+        </t>
+        <t>
+          Signed request with body hash (with some line breaks added for
+          readability):
+          <figure>
+            <artwork>
+    GET /resource HTTP/1.1
+    Host: www.example.com
+    Authorization: OAuth realm="http%3A%2F%2Fwww.example.com",
+        oauth_body_hash="2jmj7l5rSw0yVb/vlWAYkK/YBwk%3D",
+        oauth_token="token",
+        oauth_consumer_key="consumer",
+        oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1236874155", oauth_nonce="10288510250934",
+        oauth_version="1.0",
+        oauth_signature="08bUFF%2Fjmp59mWB7cSgCYBUpJ0U%3D"
+            </artwork>
+          </figure>
+        </t>
+      </section>
+    </section>
+
+    <section title="Security Considerations">
+      <section title="Only trust what is signed">
+        <t>
+          Many factors besides the bytes of the request body can
+          influence the interpretation of the body of the HTTP
+          request.  For example, a content-type or content-encoding
+          header can change the way a server handles an HTTP request.
+          This specification does not include an integrity check
+          on the HTTP request headers.  OAuth deployments whose
+          security could be impacted by an attacker who tampers with
+          HTTP request headers should use other mechanisms (such as HTTPS)
+          to protect the confidentiality and integrity of the entire HTTP
+          request.
+        </t>
+      </section>
+      <section title="Deprecation of SHA-1">
+        <t>
+          The NIST Computer Security Division has recommended that applications
+          <xref target="NIST 800-107">
+          stop using SHA-1 for digital signatures</xref>.  As of the time
+          of this writing, all of the cryptographic signature schemes defined
+          for OAuth are based on SHA-1.  OAuth signature methods based on
+          stronger hash functions need to be developed, and those signature
+          methods will need to specify algorithms for calculating the
+          oauth_body_hash as well.
+        </t>
+      </section>
+    </section>
+
+    <appendix title="Obtaining the HTTP Entity Body">
+      <t>
+        Not all programming platforms provide an easy mechanism to obtain
+        the raw octets of the HTTP entity body.  Reading the entity body
+        as raw octets may have side effects, such as inhibiting automatic
+        character set conversion.  Transfer-encodings such as gzip
+        also complicate implementation.  On the other hand,
+        reading the entity body as text may perform lossy conversions
+        that prevent recovery of the original octet stream in some
+        situtations.  Character set conversions are not always one-to-one
+        mappings, so solutions that rely on converting text back to the
+        original octet stream are likely to fail in environments with
+        multibyte characters.
+      </t>
+      <t>
+        All of these factors, and others, can make it difficult to drop in a
+        "verify-the-signature" filtering layer prior to other request
+        processing.  The verification layer must consider the assumptions
+        of downstream processing code on the state of the request body.
+      </t>
+      <t>
+        Implementers of this specification should be aware of these
+        difficulties and consider the best way to address them in their
+        programming frameworks.
+      </t>
+    </appendix>
+
+    <appendix anchor="unkeyed" title="Unkeyed vs Keyed Hash Algorithms">
+      <t>
+        This specification deliberately uses an unkeyed hash algorithm
+        (SHA-1) to provide an integrity check on the body instead of
+        a keyed hash algorithm such as HMAC-SHA1.  This decision was made
+        because signing arbitrary octet streams is poor cryptographic hygiene.
+        It can lead to unexpected problems with cryptographic protocols.
+      </t>
+      <t>
+        For example, consider a proxy that uses OAuth to add authentication
+        information to requests sent by an untrusted third-party.  If the
+        proxy signs arbitrary octet streams, the third-party can use the
+        proxy as an oracle to forge authentication messages.
+      </t>
+      <t>
+        Including the result of an unkeyed hash in the normal signature 
+        base string allows the proxy to add an integrity check on the
+        original message without creating a signing oracle.
+      </t>
+    </appendix>
+
+    <appendix anchor="removing_body" title="Preventing Removal of Request
+    Bodies">
+      <t>
+        This specification requires that Consumers not send the oauth_body_hash
+        parameter on requests with form-encoded bodies, and requires that
+        Service Providers reject requests that have form-encoded bodies
+        and an oauth_body_hash parameter.  These restrictions are necessary
+        in order to prevent a MITM from removing non-form-encoded request
+        bodies.  The attack would work as follows:
+      </t>
+      <t>
+        <list style="numbers">
+          <t>
+            Consumer signs a request with a non-form-encoded request body
+            and includes a matching content-type header such as
+            "application/json" or "text/plain".  The oauth_body_hash parameter
+            is included as well.
+          </t>
+          <t>
+            MITM intercepts request and modifies the content-type of the
+            request to be "application/x-www-form-urlencoded".  The MITM
+            also removes the request body.  The request is then forwarded
+            to the Service Provider.
+          </t>
+          <t>
+            The Service Provider receives the request and the signature
+            validates according to the OAuth Core signature specification.
+          </t>
+          <t>
+            The Service Provider then needs to decide whether to check
+            the oauth_body_hash value as well.  Since the request content-type
+            is form-encoded, the Service Provider does not check the
+            oauth_body_hash.
+          </t>
+          <t>
+            The removal of the body goes undetected.  
+          </t>
+        </list>
+      </t>
+      <t>
+        The impact of this attack is probably minimal.  The attacker can
+        remove the request body, but cannot replace it with their own.  Stil,
+        the goal of this specification is guaranteeing body integrity
+        when both Consumers and Service Providers use the oauth_body_hash
+        parameter.  Out of an excess of caution, this specification requires
+        that Service Providers reject request that have both a form-encoded
+        request body and an oauth_body_hash parameter.
+      </t>
+      <t>
+        An alternate solution, requiring that Service Providers check the
+        oauth_body_hash parameter even on form-encoded request bodies, was
+        rejected due to implementation challenges.  Some web development
+        frameworks block access to the raw entity body for form-encoded
+        requests.
+      </t>
+    </appendix>
+  </middle>
+
+  <back>
+
+    <references title="References">
+
+      <reference anchor="OAuth Core 1.0">
+        <front>
+          <title>OAuth Core 1.0</title>
+          <author initials="" surname="OAuth Core Workgroup" fullname="OAuth Core Workgroup">
+            <organization />
+          </author>
+        </front>
+        <format type="HTML" target="http://oauth.net/core/1.0" />
+      </reference>
+
+      <reference anchor="NIST 800-107">
+        <front>
+          <title>Special Publication 800-107, Recommendation for Applications Using Approved Hash Algorithms</title>
+          <author initials="Q" surname="Dang" fullname="Quynh Dang">
+            <organization>NIST Computer Security Division</organization>
+          </author>
+        </front>
+        <format type="PDF" target="http://csrc.nist.gov/publications/nistpubs/800-107/NIST-SP-800-107.pdf" />
+      </reference>
+
+      <reference anchor="RFC2119">
+        <front>
+          <title>Key words for use in RFCs to Indicate Requirement Levels</title>
+          <author initials="B.S" surname="Bradner" fullname="Scott Bradner">
+            <organization>Alis Technologies</organization>
+          </author>
+        </front>
+        <seriesInfo name="RFC" value="2119" />
+      </reference>
+
+      <reference anchor="RFC2045">
+        <front>
+          <title>Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies</title>
+          <author initials="N.F" surname="Freed" fullname="N. Freed">
+            <organization>Innosoft</organization>
+          </author>
+          <author initials="N.B" surname="Borenstein" fullname="N. Borenstein">
+            <organization>First Virtual</organization>
+          </author>
+        </front>
+        <seriesInfo name="RFC" value="2045" />
+      </reference>
+
+      <reference anchor="RFC2616">
+        <front>
+          <title>Hypertext Transfer Protocol -- HTTP/1.1</title>
+          <author initials="R.F" surname="Fielding" fullname="R. Fielding">
+            <organization>UC Irvine</organization>
+          </author>
+          <author initials="J.G" surname="Gettys" fullname="J. Gettys">
+            <organization>Compaq/W3C</organization>
+          </author>
+          <author initials="J.M" surname="Mogul" fullname="J. Mogul">
+            <organization>Compaq</organization>
+          </author>
+          <author initials="H.F" surname="Frystyk" fullname="H. Frystyk">
+            <organization>W3C/MIT</organization>
+          </author>
+          <author initials="L.M" surname="Masinter" fullname="L. Masinter">
+            <organization>Xerox</organization>
+          </author>
+          <author initials="P.L" surname="Leach" fullname="P. Leach">
+            <organization>Microsoft</organization>
+          </author>
+          <author initials="T.L" surname="Berners-Lee" fullname="T. Berners-Lee">
+            <organization>W3C/MIT</organization>
+          </author>
+        </front>
+        <seriesInfo name="RFC" value="2616" />
+      </reference>
+
+      <reference anchor="RFC3174">
+        <front>
+          <title>US Secure Hash Algorithm 1 (SHA1)</title>
+          <author initials="D" surname="Eastlake, 3rd" fullname="Donald E. Eastlake, 3rd">
+            <organization>Motorola</organization>
+          </author>
+          <author initials="P" surname="Jones" fullname="Paul E. Jones">
+            <organization>Cisco Systems, Inc.</organization>
+          </author>
+        </front>
+        <seriesInfo name="RFC" value="3174" />
+      </reference>
+    </references>
+  </back>
+
+</rfc>

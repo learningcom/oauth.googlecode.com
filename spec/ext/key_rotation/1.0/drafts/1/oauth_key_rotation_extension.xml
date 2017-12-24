@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='http://xml.resource.org/authoring/rfc2629.xslt' ?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+
+<rfc category="info" ipr="full3978" docName="oauth-discovery-1_0.xml">
+
+<?rfc toc="yes" ?>
+<?rfc tocdepth="3" ?>
+<?rfc symrefs="yes" ?>
+<?rfc sortrefs="yes"?>
+<?rfc strict="yes" ?>
+<?rfc iprnotified="no" ?>
+<?rfc private="Implementers' Draft" ?>
+
+ <front>
+    <title>OAuth Key Rotation Extension Draft 1</title>
+
+    <author initials="" surname="OAuth" fullname="OAuth Extensions Workgroup">
+      <organization />
+      <address>
+        <email>spec@oauth.net</email>
+      </address>
+    </author>
+
+    <date day="22" month="April" year="2008"/>
+
+    <abstract>
+      <t>
+        OAuth Core 1.0 defines a protocol for delegating user access to
+        Consumer applications without sharing the user's private credentials.
+        Some consumer applications use the RSA_SHA1 signature method. To
+        verify RSA_SHA1 signatures, Service Providers need to be in possession
+        of an authentic copy of the consumer application's public key.
+      </t>
+      <t>
+        Whenever a consumer application changes the private key it uses to sign
+        its OAuth requests, Service Providers need to change the public
+        key they use to verify the requests. This draft specifies a mechanism
+        that allows consumers to signal which public key should be used to
+        verify requests they sign.
+      </t>
+    </abstract>
+
+  </front>
+  <middle>
+
+  <section title="Authors">
+      <t>
+        <list style='empty'>
+          <t>Dirk Balfanz (dirk@balfanz.net)</t>
+          <t>Brian Eaton (beaton@google.com)</t>
+        </list>
+      </t>
+    </section>
+
+    <section title="Notation and Conventions">
+      <t>
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+        "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+        document are to be interpreted as described in <xref target="RFC2119" />.
+        Domain name examples use <xref target="RFC2606" />.
+      </t>
+      <t>
+        Unless otherwise noted, this specification is written as a direct
+        continuation of <xref target="OAuth Core 1.0" />, inheriting the
+        definitions and guidelines set by it.
+      </t>
+    </section>
+
+    <section title="Definitions">
+      <t>
+        <list style="hanging">
+          <t hangText="Public Key Identifier:">
+            A value, unique to an OAuth Consumer, that identifies one
+            out of a possible number of public keys, whose corresponding
+            private key is used by the Consumer to sign OAuth requests using
+            the RSA_SHA1 signature method, or perhaps other public-key based
+            signature methods defined in future OAuth extensions. The public
+            key identified by the Public Key Identifier can be used to
+            verify OAuth requests.
+          </t>
+        </list>
+      </t>
+    </section>
+
+    <section title="The Key Rotation Extension Parameter">
+      <t>
+        This extension defines one additional OAuth parameter to be
+        used in OAuth requests originating from an OAuth Consumer:
+        <list style="hanging">
+          <t hangText="xoauth_public_key:">
+            The Public Key Identifier of the public key to be used to verify
+            an OAuth request signed by the OAuth Consumer.
+          </t>
+        </list>
+      </t>
+      <t>
+        If a consumer uses the RSA_SHA1 signature method (or another
+        public-key-based signature method to be defined in future OAuth
+        extensions) to sign requests to the Request Token URL at the Service
+        Provider, then it MUST include the <spanx style="verb">xoauth_public_key</spanx>
+        parameter in those requests (see Section 6.1.1 of
+        <xref target="OAuth Core 1.0" />). If the consumer does not use a
+        public-key-based signature method, then it MUST NOT include the
+        <spanx style="verb">xoauth_public_key</spanx> parameter.
+      </t>
+
+      <t>
+        If a consumer uses the RSA_SHA1 signature method (or another
+        public-key-based signature method to be defined in future OAuth
+        extensions) to sign requests to the Access Token URL at the Service
+        Provider, then it MUST include the <spanx style="verb">xoauth_public_key</spanx>
+        parameter in those requests (see Section 6.3.1 of
+        <xref target="OAuth Core 1.0" />). If the consumer does not use a
+        public-key-based signature method, then it MUST NOT include the
+        <spanx style="verb">xoauth_public_key</spanx> parameter.
+      </t>
+
+      <t>
+        If a consumer uses the RSA_SHA1 signature method (or another
+        public-key-based signature method to be defined in future OAuth
+        extensions) to access protected resources at the Service
+        Provider, then it MUST include the <spanx style="verb">xoauth_public_key</spanx>
+        parameter in those access requests (see Section 7 of
+        <xref target="OAuth Core 1.0" />). If the consumer does not use a
+        public-key-based signature method, then it MUST NOT include the
+        <spanx style="verb">xoauth_public_key</spanx> parameter.
+      </t>
+
+    </section>
+
+    <section title="Signature Verification">
+      <t>
+        It is up to the OAuth Consumer to define how Service Providers can,
+        given a Public Key Identifier, obtain a copy of the public key to which
+        the identifier refers.
+      </t>
+      <t>
+        The Service Provider SHALL obtain a copy of the public key identified
+        by the <spanx style="verb">xoauth_public_key</spanx> parameter included
+        in the OAuth request, and verify the signature according to
+        Section 9.3.2 of <xref target="OAuth Core 1.0" /> (if the signature
+        method is RSA_SHA1) or other suitable mechanisms (if the signature type
+        is a different yet-to-be-defined public-key signature method).
+      </t>
+    </section>
+
+    <section title="Best Practices for Choosing Public Key Identifiers">
+      <t>
+        It is up to the OAuth Consumer to define how Service Providers can,
+        given a Public Key Identifier, obtain a copy of the public key to which
+        the identifier refers.
+      </t>
+      <t>
+        The OAuth Consumer SHOULD NOT use Public Key Identifiers that can
+        by themselves (i.e., without additional information) be used to locate
+        the public key. For example, the OAuth Consumer SHOULD NOT use URLs
+        that point to the public key as Public Key Identifiers.
+      </t>
+      <t>
+        The format of the Public Key Identifier SHOULD be chosen such that
+        service providers can authenticate the public key they obtain.
+        For example, an OAuth Consumer might specify
+        that its public keys are available at
+        <spanx style="verb"> https://www.example.com/pubkeys</spanx>
+        and that the Public Key Identifier sent in OAuth requests can be used
+        as a <spanx style="verb">pub_key_id</spanx> URI query parameter when accessing the
+        <spanx style="verb">https://www.example.com/pubkeys</spanx> URL. When
+        obtaining the public key, the Service Provider SHOULD use TLS to
+        authenticate the Consumer.
+      </t>
+      <t>
+        It is RECOMMENDED that the public key be distributed in form of X.509
+        certificates, either self-signed or issued by a certification authority.
+      </t>
+      <t>
+        The rationale behind these recommended best practices is that it should
+        be hard for an attacker to forge OAuth requests by using his own
+        private key and trick the Service Provider into automatically downloading
+        the attacker's public key. Instead, a Service Provider should always
+        get an authentic copy of the real OAuth Consumer's public key.
+      </t>
+    </section>
+
+
+  </middle>
+
+  <back>
+
+    <references title="References">
+
+      <reference anchor="OAuth Core 1.0">
+        <front>
+          <title>OAuth Core 1.0</title>
+          <author initials="OCW" surname="OAuth" fullname="OAuth Core Workgroup">
+            <organization />
+          </author>
+        </front>
+        <format type="HTML" target="http://oauth.net/core/1.0" />
+      </reference>
+
+      <reference anchor="RFC2606">
+        <front>
+          <title>Reserved Top Level DNS Names</title>
+          <author initials="D.E" surname="Eastlake" fullname="D. Eastlake">
+            <organization></organization>
+          </author>
+          <author initials="A.P" surname="Panitz" fullname="A. Panitz">
+            <organization></organization>
+          </author>
+        </front>
+        <seriesInfo name="RFC" value="2606" />
+      </reference>
+
+      <reference anchor="RFC2119">
+        <front>
+          <title>Key words for use in RFCs to Indicate Requirement Levels</title>
+          <author initials="B.S" surname="Bradner" fullname="Scott Bradner">
+            <organization>Alis Technologies</organization>
+          </author>
+        </front>
+        <seriesInfo name="RFC" value="2119" />
+      </reference>
+
+    </references>
+  </back>
+
+</rfc>

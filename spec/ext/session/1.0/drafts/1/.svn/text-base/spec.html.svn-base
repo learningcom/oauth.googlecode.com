@@ -1,0 +1,700 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en"><head><title>Implementers' Draft: OAuth Session 1.0 Draft 1</title>
+
+<meta http-equiv="Expires" content="Fri, 22 Aug 2008 00:09:34 +0000">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="OAuth Session 1.0 Draft 1">
+<meta name="generator" content="xml2rfc v1.33 (http://xml.resource.org/)">
+<style type="text/css"><!--
+        body {
+                font-family: verdana, charcoal, helvetica, arial, sans-serif;
+                font-size: small; color: #000; background-color: #FFF;
+                margin: 2em;
+        }
+        h1, h2, h3, h4, h5, h6 {
+                font-family: helvetica, monaco, "MS Sans Serif", arial, sans-serif;
+                font-weight: bold; font-style: normal;
+        }
+        h1 { color: #900; background-color: transparent; text-align: right; }
+        h3 { color: #333; background-color: transparent; }
+
+        td.RFCbug {
+                font-size: x-small; text-decoration: none;
+                width: 30px; height: 30px; padding-top: 2px;
+                text-align: justify; vertical-align: middle;
+                background-color: #000;
+        }
+        td.RFCbug span.RFC {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: bold; color: #666;
+        }
+        td.RFCbug span.hotText {
+                font-family: charcoal, monaco, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: normal; text-align: center; color: #FFF;
+        }
+
+        table.TOCbug { width: 30px; height: 15px; }
+        td.TOCbug {
+                text-align: center; width: 30px; height: 15px;
+                color: #FFF; background-color: #900;
+        }
+        td.TOCbug a {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, sans-serif;
+                font-weight: bold; font-size: x-small; text-decoration: none;
+                color: #FFF; background-color: transparent;
+        }
+
+        td.header {
+                font-family: arial, helvetica, sans-serif; font-size: x-small;
+                vertical-align: top; width: 33%;
+                color: #FFF; background-color: #666;
+        }
+        td.author { font-weight: bold; font-size: x-small; margin-left: 4em; }
+        td.author-text { font-size: x-small; }
+
+        /* info code from SantaKlauss at http://www.madaboutstyle.com/tooltip2.html */
+        a.info {
+                /* This is the key. */
+                position: relative;
+                z-index: 24;
+                text-decoration: none;
+        }
+        a.info:hover {
+                z-index: 25;
+                color: #FFF; background-color: #900;
+        }
+        a.info span { display: none; }
+        a.info:hover span.info {
+                /* The span will display just on :hover state. */
+                display: block;
+                position: absolute;
+                font-size: smaller;
+                top: 2em; left: -5em; width: 15em;
+                padding: 2px; border: 1px solid #333;
+                color: #900; background-color: #EEE;
+                text-align: left;
+        }
+
+        a { font-weight: bold; }
+        a:link    { color: #900; background-color: transparent; }
+        a:visited { color: #633; background-color: transparent; }
+        a:active  { color: #633; background-color: transparent; }
+
+        p { margin-left: 2em; margin-right: 2em; }
+        p.copyright { font-size: x-small; }
+        p.toc { font-size: small; font-weight: bold; margin-left: 3em; }
+        table.toc { margin: 0 0 0 3em; padding: 0; border: 0; vertical-align: text-top; }
+        td.toc { font-size: small; font-weight: bold; vertical-align: text-top; }
+
+        ol.text { margin-left: 2em; margin-right: 2em; }
+        ul.text { margin-left: 2em; margin-right: 2em; }
+        li      { margin-left: 3em; }
+
+        /* RFC-2629 <spanx>s and <artwork>s. */
+        em     { font-style: italic; }
+        strong { font-weight: bold; }
+        dfn    { font-weight: bold; font-style: normal; }
+        cite   { font-weight: normal; font-style: normal; }
+        tt     { color: #036; }
+        tt, pre, pre dfn, pre em, pre cite, pre span {
+                font-family: "Courier New", Courier, monospace; font-size: small;
+        }
+        pre {
+                text-align: left; padding: 4px;
+                color: #000; background-color: #CCC;
+        }
+        pre dfn  { color: #900; }
+        pre em   { color: #66F; background-color: #FFC; font-weight: normal; }
+        pre .key { color: #33C; font-weight: bold; }
+        pre .id  { color: #900; }
+        pre .str { color: #000; background-color: #CFF; }
+        pre .val { color: #066; }
+        pre .rep { color: #909; }
+        pre .oth { color: #000; background-color: #FCF; }
+        pre .err { background-color: #FCC; }
+
+        /* RFC-2629 <texttable>s. */
+        table.all, table.full, table.headers, table.none {
+                font-size: small; text-align: center; border-width: 2px;
+                vertical-align: top; border-collapse: collapse;
+        }
+        table.all, table.full { border-style: solid; border-color: black; }
+        table.headers, table.none { border-style: none; }
+        th {
+                font-weight: bold; border-color: black;
+                border-width: 2px 2px 3px 2px;
+        }
+        table.all th, table.full th { border-style: solid; }
+        table.headers th { border-style: none none solid none; }
+        table.none th { border-style: none; }
+        table.all td {
+                border-style: solid; border-color: #333;
+                border-width: 1px 2px;
+        }
+        table.full td, table.headers td, table.none td { border-style: none; }
+
+        hr { height: 1px; }
+        hr.insert {
+                width: 80%; border-style: none; border-width: 0;
+                color: #CCC; background-color: #CCC;
+        }
+--></style></head><body>
+<table summary="layout" class="TOCbug" align="right" cellpadding="0" cellspacing="2"><tbody><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></tbody></table>
+<table summary="layout" border="0" cellpadding="0" cellspacing="0" width="66%"><tbody><tr><td><table summary="layout" border="0" cellpadding="2" cellspacing="1" width="100%">
+<tbody><tr><td class="header">Implementers' Draft</td><td class="header">A. Tom</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">Yahoo!</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">P. Alavilli</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">G. George Fletcher</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">AOL</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">August 21, 2008</td></tr>
+</tbody></table></td></tr></tbody></table>
+<h1><br>OAuth Session 1.0 Draft 1</h1>
+
+<h3>Abstract</h3>
+
+<p>
+	This specification defines the concept of an Authorization Session which 
+	represents the authorization granted to the Consumer to access Protected Resources
+	on behalf of the User. OAuth Core 1.0 assumes that the Authorization Session lifetime
+	and the Access Token lifetime are equal. This specification defines a mechanism for 
+	Service Providers to issue Access Tokens with shorter lifetimes than the Authorization 
+	Session, along with a way for Consumers to refresh their Access Tokens while the 
+	Authorization Session is valid.
+	
+</p>
+<p>
+	This specification also defines a mechanism for Consumers to request additional 
+	privileges  to be added to their Authorization Session after being initially authorized
+	by the User, without having to manage multiple sets of Access Tokens for the 
+	same Service Provider.
+      
+</p>
+<p>
+	Finally, this specification defines an interface for Consumers to terminate their
+	Authorization Session with the Service Provider when the Consumer no longer
+	needs to access Protected Resources.
+      
+</p><a name="toc"></a><br><hr>
+<h3>Table of Contents</h3>
+<p class="toc">
+<a href="#anchor1">1.</a>&nbsp;
+Acknowledgements<br>
+<a href="#anchor2">2.</a>&nbsp;
+Definitions<br>
+<a href="#conv">3.</a>&nbsp;
+Notation and Conventions<br>
+<a href="#anchor3">4.</a>&nbsp;
+Overview<br>
+<a href="#anchor4">5.</a>&nbsp;
+Access Token Renewal<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#request_access_token">5.1.</a>&nbsp;
+Consumer Obtains an Access Token and Session Handle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor5">5.2.</a>&nbsp;
+Accessing Protected Resources<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#update_access_token">5.3.</a>&nbsp;
+Consumer Requests to Update Access Token<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor6">5.4.</a>&nbsp;
+Service Provider Updates Access Token<br>
+<a href="#anchor7">6.</a>&nbsp;
+Multiple Resource Authorization<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor8">6.1.</a>&nbsp;
+Additional Authorization Required<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor9">6.2.</a>&nbsp;
+Consumer Requests User Authorization<br>
+<a href="#anchor10">7.</a>&nbsp;
+Authorization Revocation<br>
+<a href="#anchor11">8.</a>&nbsp;
+Security Considerations<br>
+<a href="#anchor12">Appendix&nbsp;A.</a>&nbsp;
+Workflow Diagram<br>
+<a href="#anchor13">Appendix&nbsp;B.</a>&nbsp;
+Example<br>
+<a href="#rfc.references1">9.</a>&nbsp;
+References<br>
+<a href="#rfc.authors">§</a>&nbsp;
+Authors' Addresses<br>
+</p>
+<br clear="all">
+
+<a name="anchor1"></a><br><hr>
+<table summary="layout" class="TOCbug" align="right" cellpadding="0" cellspacing="2"><tbody><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></tbody></table>
+<a name="rfc.section.1"></a><h3>1.&nbsp;
+Acknowledgements</h3>
+
+<p>
+        Several members of the community contributed valuable feedback and suggestions, including 
+	Naveen Agarwal, 
+	Dirk Balfanz, 
+	Blaine Cook,
+	Shreyas Doshi, 
+	Brian Eaton, 
+	Eran Hammer-Lahav, 
+	Joseph Holsten, 
+	Hugo Haas,
+	John Panzer, 
+	Scott Renfro, 
+	Adam Rosien, 
+	Eric Sachs, 
+	and
+	Gregg Stefancik.
+      
+</p>
+<p>
+      This extension depends on the <a class="info" href="#OAuth%20Problem%20Reporting%20Extension">[OAuth Problem Reporting Extension]<span> (</span><span class="info">Kristian, J., “OAuth Problem Reporting Extension,” .</span><span>)</span></a> by John Kristian. 
+      
+</p>
+<a name="anchor2"></a><br><hr>
+<table summary="layout" class="TOCbug" align="right" cellpadding="0" cellspacing="2"><tbody><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></tbody></table>
+<a name="rfc.section.2"></a><h3>2.&nbsp;
+Definitions</h3>
+
+<p>
+        </p>
+<blockquote class="text"><dl>
+<dt>Authorization Session:</dt>
+<dd>
+	    The period during which a Consumer has authenticated with the Service Provider, and has been authorized to access 
+	    Protected Resources on behalf of the User. 
+          
+</dd>
+<dt>Authorization Session Handle:</dt>
+<dd>
+	    Information used by the Consumer to identify its Authorization Session with the Service Provider.
+          
+</dd>
+<dt>OAuth Enabled Identity Provider:</dt>
+<dd>
+	    A Service Provider's identity and authorization service, which is separate from the other Protected Resources offered 
+	    by a Service Provider.
+	  
+</dd>
+</dl></blockquote><p>
+      
+</p>
+<a name="conv"></a><br><hr>
+<table summary="layout" class="TOCbug" align="right" cellpadding="0" cellspacing="2"><tbody><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></tbody></table>
+<a name="rfc.section.3"></a><h3>3.&nbsp;
+Notation and Conventions</h3>
+
+<p>The keywords MUST, MUST NOT, REQUIRED, SHALL, 
+	    SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, 
+	    and OPTIONAL in this document are to be interpreted as 
+	    described in <a class="info" href="#RFC2119">[RFC2119]<span> (</span><span class="info">Bradner, B., “Key words for use in RFCs to Indicate Requirement Levels,” .</span><span>)</span></a>. Domain name examples use 
+	    <a class="info" href="#RFC2606">[RFC2606]<span> (</span><span class="info">Eastlake, D. and A. Panitz, “Reserved Top Level DNS Names,” .</span><span>)</span></a>.
+           
+</p>
+<p>
+            Unless otherwise noted, this specification is written as a direct
+            continuation of <a class="info" href="#OAuth%20Core%201.0">[OAuth Core 1.0]<span> (</span><span class="info">OAuth Core Workgroup, “OAuth Core 1.0,” .</span><span>)</span></a>, inheriting the definitions and
+            guidelines set by it.
+	  
+</p>
+<a name="anchor3"></a><br><hr>
+<table summary="layout" class="TOCbug" align="right" cellpadding="0" cellspacing="2"><tbody><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></tbody></table>
+<a name="rfc.section.4"></a><h3>4.&nbsp;
+Overview</h3>
+
+<p>
+        The features defined in this extension are:
+	
+	</p>
+<ol class="text">
+<li>A method for Consumers to request the Service Provider to renew its
+Access Token and Secret, provided that the Consumer still has a valid
+Authorization Session with the Service Provider.
+</li>
+<li>A method for Consumers that have already been authorized by the
+User to request additional authorization from the User to access
+additional Protected Resources provided by the same Service Provider
+without requiring Consumers to manage multiple Access Tokens </li>
+<li>A method for consumers to request the Service Provider to invalidate its credentials
+</li>
+<li>A new oauth_expires_in response parameter to describe the lifetime of an Access Token
+</li>
+</ol><p>
+      
+</p>
+<p>
+	Consumers request access to Protected Resources as specified in <a class="info" href="#OAuth%20Core%201.0">[OAuth Core 1.0]<span> (</span><span class="info">OAuth Core Workgroup, “OAuth Core 1.0,” .</span><span>)</span></a> Sections 6.1, 
+	6.2, and 6.3. Consumers obtain an Access Token, as defined in <a class="info" href="#OAuth%20Core%201.0">[OAuth Core 1.0]<span> (</span><span class="info">OAuth Core Workgroup, “OAuth Core 1.0,” .</span><span>)</span></a> Section 6.3.2 and also 
+	an optional Authentication Session Handle that can be used to refresh the Access Token if it expires, 
+	or to update the Access Token if the Consumer needs to request additional priveleges.
+      
+</p>
+<p>
+	Consumers access Protected Resources as defined in <a class="info" href="#OAuth%20Core%201.0">[OAuth Core 1.0]<span> (</span><span class="info">OAuth Core Workgroup, “OAuth Core 1.0,” .</span><span>)</span></a> Section 7. Consumers accessing
+	a Protected Resource using an expired access token are informed using the Problem Reporting Extension that 
+	they should refresh their Access Token, provided that they still have a valid Authorization Session with the 
+	Service Provider.
+      
+</p>
+<a name="anchor4"></a><br><hr>
+<table summary="layout" class="TOCbug" align="right" cellpadding="0" cellspacing="2"><tbody><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></tbody></table>
+<a name="rfc.section.5"></a><h3>5.&nbsp;
+Access Token Renewal</h3>
+
+<p>
+	Service Providers MAY wish to grant Authorization Sessions to Consumers with longer lifetimes than the
+	lifetime of the Access Token. This section defines a workflow for Consumers to update their Access Token
+	without user intervention while the Consumer has a valid Authorization Session with the Service Provider.
+      
+</p>
+<p>
+	Service Providers SHOULD NOT implement the Access Token Renewal 
+	workflow if the lifetime of their Access Tokens is equal to the lifetime of the
+	Authorization Session.
+      
+</p>
+<a name="request_access_token"></a><br><hr>
+<table summary="layout" class="TOCbug" align="right" cellpadding="0" cellspacing="2"><tbody><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></tbody></table>
+<a name="rfc.section.5.1"></a><h3>5.1.&nbsp;
+Consumer Obtains an Access Token and Session Handle</h3>
+
+<p>
+	  Consumers obtain an Access Token and Access Token Secret as defined in 
+	  <a class="info" href="#OAuth%20Core%201.0">[OAuth Core 1.0]<span> (</span><span class="info">OAuth Core Workgroup, “OAuth Core 1.0,” .</span><span>)</span></a>
+Section 6. In addition to the oauth_token and oauth_token_secret
+parameters, the Service Provider MAY return three additional
+parameters: </p>
+<p>
+	  </p>
+<blockquote class="text"><dl>
+<dt>oauth_session_handle:</dt>
+<dd>
+	      REQUIRED. Used to identify the instance of the Consumer after it has been authorized by the User.
+	    
+</dd>
+<dt>oauth_authorization_expires_in:</dt>
+<dd>
+	      OPTIONAL. The duration that the Consumer is authorized to access Protected Resources 
+	      on behalf of the user in seconds. The Service Provider MAY revoke access to the Consumer 
+	      prior to the expected expiration time as deemed necessary for reasons specific to 
+	      the Service Provider. 
+	    
+</dd>
+<dt>oauth_expires_in:</dt>
+<dd>
+	      OPTIONAL. The lifetime of the Access Token in seconds. If the Access Token lifetime
+	      is shorter than the lifetime of the authorization (oauth_authorization_expires_in), 
+	      then the Consumer SHOULD proactively refresh its Access Token before it expires. 
+	      The Access Token could be invalidated before the expected expiration time due to reasons 
+	      specific to the Service Provider.
+	    
+</dd>
+</dl></blockquote><p>
+	
+</p>
+<a name="anchor5"></a><br><hr>
+<table summary="layout" class="TOCbug" align="right" cellpadding="0" cellspacing="2"><tbody><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></tbody></table>
+<a name="rfc.section.5.2"></a><h3>5.2.&nbsp;
+Accessing Protected Resources</h3>
+
+<p>
+	  Consumers access Protected Resources as defined in <a class="info" href="#OAuth%20Core%201.0">[OAuth Core 1.0]<span> (</span><span class="info">OAuth Core Workgroup, “OAuth Core 1.0,” .</span><span>)</span></a> Section 7. If the
+	  Service Provider denies the request because the Access Token has expired the Service Provider MUST respond
+	  with HTTP 401 and use the <a class="info" href="#OAuth%20Problem%20Reporting%20Extension">[OAuth Problem Reporting Extension]<span> (</span><span class="info">Kristian, J., “OAuth Problem Reporting Extension,” .</span><span>)</span></a> to inform the Consumer 
+	  to go through the  Reauthorization workflow.
+	
+</p><div style="display: table; width: 0pt; margin-left: 3em; margin-right: auto;"><pre>	    HTTP/1.1 401 Unauthorized
+	    WWW-Authenticate: OAuth oauth_problem=access_token_expired
+	    Content-type: application/x-www-form-urlencoded
+
+            oauth_problem=access_token_expired
+</pre></div>
+<a name="update_access_token"></a><br><hr>
+<table summary="layout" class="TOCbug" align="right" cellpadding="0" cellspacing="2"><tbody><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></tbody></table>
+<a name="rfc.section.5.3"></a><h3>5.3.&nbsp;
+Consumer Requests to Update Access Token</h3>
+
+<p>
+	Consumers SHOULD attempt to update their Access Token proactively before the token expires, 
+	or when denied a protected resource due to the access_token_expired problem.
+	To update an Access Token, the Consumer makes an HTTP request to the Service Provider's 
+	Access Token URL, with the following parameters:
+	
+</p>
+<p>
+	  </p>
+<blockquote class="text"><dl>
+<dt>oauth_consumer_key:</dt>
+<dd>
+	      The Consumer Key.
+	    
+</dd>
+<dt>oauth_token:</dt>
+<dd>
+	      The Access Token obtained previously.
+	    
+</dd>
+<dt>oauth_signature_method:</dt>
+<dd>
+	      The signature method the Consumer used to sign the request
+	    
+</dd>
+<dt>oauth_signature:</dt>
+<dd>
+	      The signature as defined in <a class="info" href="#OAuth%20Core%201.0">[OAuth Core 1.0]<span> (</span><span class="info">OAuth Core Workgroup, “OAuth Core 1.0,” .</span><span>)</span></a> Section 9: Signing Requests.
+	    
+</dd>
+<dt>oauth_timestamp:</dt>
+<dd>
+	      As defined in <a class="info" href="#OAuth%20Core%201.0">[OAuth Core 1.0]<span> (</span><span class="info">OAuth Core Workgroup, “OAuth Core 1.0,” .</span><span>)</span></a> Section 8: Nonce and Timestamp.
+	    
+</dd>
+<dt>oauth_nonce:</dt>
+<dd>
+	      As defined in <a class="info" href="#OAuth%20Core%201.0">[OAuth Core 1.0]<span> (</span><span class="info">OAuth Core Workgroup, “OAuth Core 1.0,” .</span><span>)</span></a> Section 8: Nonce and Timestamp.
+	    
+</dd>
+<dt>oauth_session_handle:</dt>
+<dd>
+	      REQUIRED. The Authentication Session Handle obtained previously.
+	    
+</dd>
+</dl></blockquote><p>
+	
+</p>
+<a name="anchor6"></a><br><hr>
+<table summary="layout" class="TOCbug" align="right" cellpadding="0" cellspacing="2"><tbody><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></tbody></table>
+<a name="rfc.section.5.4"></a><h3>5.4.&nbsp;
+Service Provider Updates Access Token</h3>
+
+<p>
+	  The Service Provider MUST verify that the the Consumer is still authorized to 
+	  access the Protected Resources, and if so, the format of the response is identical to the
+	  response defined in 
+	  <a class="info" href="#request_access_token">Section&nbsp;5.1<span> (</span><span class="info">Consumer Obtains an Access Token and Session Handle</span><span>)</span></a>.
+	  The Consumer MUST replace its previous copy of the Access Token, Access Token Secret, and 
+	  Authentication Session Handle with the new values. 
+	
+</p>
+<p>
+	  After obtaining the new Access Token, the Consumer can access Protected Resources using 
+	  the new Access Token.
+	
+</p>
+<p>
+	  If the Consumer is no longer authorized to access the Protected Resources, the Service Provider
+	  should return the HTTP 401 and the "permission_denied" problem to the Consumer.
+	  
+	
+</p><div style="display: table; width: 0pt; margin-left: 3em; margin-right: auto;"><pre>	    HTTP/1.1 401 Unauthorized
+	    WWW-Authenticate: OAuth oauth_problem=permission_denied
+	    Content-type: application/x-www-form-urlencoded
+
+            oauth_problem=permission_denied
+</pre></div>
+<a name="anchor7"></a><br><hr>
+<table summary="layout" class="TOCbug" align="right" cellpadding="0" cellspacing="2"><tbody><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></tbody></table>
+<a name="rfc.section.6"></a><h3>6.&nbsp;
+Multiple Resource Authorization</h3>
+
+<p>
+	Service Providers may offer multiple Protected Resources that are protected by the 
+	same OAuth enabled Identity Provider. Over time, Consumers may want to access 
+	additional Protected Resources than what was originally authorized by the User. This 
+	section defines a workflow for Consumers to upgrade their credentials to access 
+	additional Protected Resources without having to manage multiple sets of credentials.
+      
+</p>
+<p>
+	This workflow assumes that the Consumer has obtained an Access Token, Access Token Secret, and
+	an Authentication Session Handle as defined in <a class="info" href="#request_access_token">Section&nbsp;5.1<span> (</span><span class="info">Consumer Obtains an Access Token and Session Handle</span><span>)</span></a>.
+      
+</p>
+<a name="anchor8"></a><br><hr>
+<table summary="layout" class="TOCbug" align="right" cellpadding="0" cellspacing="2"><tbody><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></tbody></table>
+<a name="rfc.section.6.1"></a><h3>6.1.&nbsp;
+Additional Authorization Required</h3>
+
+<p>
+	  Service Providers SHOULD return HTTP 401 with the additional_authorization_required
+	  problem to Consumers that access a Protected Resource using an Access Token without sufficient 
+	  credentials.
+	
+</p><div style="display: table; width: 0pt; margin-left: 3em; margin-right: auto;"><pre>	    HTTP/1.1 401 Unauthorized
+	    WWW-Authenticate: OAuth oauth_problem=additional_authorization_required
+	    Content-type: application/x-www-form-urlencoded
+
+            oauth_problem=additional_authorization_required
+</pre></div>
+<a name="anchor9"></a><br><hr>
+<table summary="layout" class="TOCbug" align="right" cellpadding="0" cellspacing="2"><tbody><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></tbody></table>
+<a name="rfc.section.6.2"></a><h3>6.2.&nbsp;
+Consumer Requests User Authorization</h3>
+
+<p>
+	  The OAuth enabled Identity Provider SHOULD only ask the user for the additional 
+	  authorization required by the Consumer and MAY display the Authorizations that 
+	  have already given by the user to the same Consumer.
+	
+</p>
+<p>
+	  It is out of scope of this specification to define how the Service Provider passes the required
+	  Authorization (oauth_scope) to it's OAuth enabled IDP. 
+	
+</p>
+<p>
+	  In order for the Consumer to obtain additional authorization, the Consumer repeats
+	  <a class="info" href="#OAuth%20Core%201.0">[OAuth Core 1.0]<span> (</span><span class="info">OAuth Core Workgroup, “OAuth Core 1.0,” .</span><span>)</span></a> Sections 6.1  and 6.2. The Consumer obtains an unauthorized
+	  Request Token and directs the User to the Service Provider to authorize the Request Token. However, 
+	  when exchanging the Request Token for the Access Token, the Consumer submits the 
+	  Authentication Session Handle that was obtained previously in addition to the Request Token. The Service
+	  Provider responds with an Access Token that is authorized for the new set of privileges, as well as 
+	  the Access Token Secret, and Authentication Session Handle. The previously issued Access Token, Access Token
+	  Secret, and Authentication Session Handle MUST be discarded.
+	
+</p>
+<p>
+	  Service Providers MAY choose to re-issue the same Access Token, Access Token Secret, and 
+	  Authentication Session Handle	as long as the new set of credentials are authorized to access the new 
+	  set of protected resources that were authorized by the User.
+	
+</p>
+<a name="anchor10"></a><br><hr>
+<table summary="layout" class="TOCbug" align="right" cellpadding="0" cellspacing="2"><tbody><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></tbody></table>
+<a name="rfc.section.7"></a><h3>7.&nbsp;
+Authorization Revocation</h3>
+
+<p>
+	Consumers MAY provide a session termination or Sign Out functionality in which the 
+	Consumer requests the OAuth enabled IDP to terminate the Consumer's Authentication Session, and to invalidate
+	the Access Token and Secret. Service Providers MUST invalidate the 
+	Consumer's Access Token after receiving this request. The Access Token Invalidation end point is 
+	defined in the OAuth Discovery Information as "http://oauth.net/oauth_token_invalidation_request" 
+	(TODO - correct the namespace).
+	The request contains the following parameters:
+      
+</p>
+<p>
+	  </p>
+<blockquote class="text"><dl>
+<dt>oauth_consumer_key:</dt>
+<dd>
+	      The Consumer Key.
+	    
+</dd>
+<dt>oauth_token:</dt>
+<dd>
+	      The Access Token obtained previously.
+	    
+</dd>
+<dt>oauth_signature_method:</dt>
+<dd>
+	      The signature method the Consumer used to sign the request
+	    
+</dd>
+<dt>oauth_signature:</dt>
+<dd>
+	      The signature as defined in <a class="info" href="#OAuth%20Core%201.0">[OAuth Core 1.0]<span> (</span><span class="info">OAuth Core Workgroup, “OAuth Core 1.0,” .</span><span>)</span></a> Section 9: Signing Requests.
+	    
+</dd>
+<dt>oauth_timestamp:</dt>
+<dd>
+	      As defined in <a class="info" href="#OAuth%20Core%201.0">[OAuth Core 1.0]<span> (</span><span class="info">OAuth Core Workgroup, “OAuth Core 1.0,” .</span><span>)</span></a> Section 8: Nonce and Timestamp.
+	    
+</dd>
+<dt>oauth_nonce:</dt>
+<dd>
+	      As defined in <a class="info" href="#OAuth%20Core%201.0">[OAuth Core 1.0]<span> (</span><span class="info">OAuth Core Workgroup, “OAuth Core 1.0,” .</span><span>)</span></a> Section 8: Nonce and Timestamp.
+	    
+</dd>
+<dt>oauth_session_handle:</dt>
+<dd>
+	      REQUIRED IF the Service Provider returned an oauth_session_handle value with the previous Access Token.
+	    
+</dd>
+</dl></blockquote><p>
+	
+</p>
+<a name="anchor11"></a><br><hr>
+<table summary="layout" class="TOCbug" align="right" cellpadding="0" cellspacing="2"><tbody><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></tbody></table>
+<a name="rfc.section.8"></a><h3>8.&nbsp;
+Security Considerations</h3>
+
+<p>
+	Service Providers may want to issue Access Tokens with relatively short lifetimes
+	for a variety of reasons. Issuing permanent credentials can be risky if the credentials 
+	are stolen due to a compromised Protected Resource or Consumer. The Authentication Session 
+	Handle that is shared by the Consumer and the Service Provider's Identity Provider,
+	but not with the Protected Resource helps defend against the scenario where 
+	the Protected Resource is compromised. 
+      
+</p>
+<p>
+	Allowing Access Tokens to be revoked before they expire requires Service Providers to 
+	perform a database lookup before serving a Protected Resource. For performance reasons, Service
+	Providers may want to issue Access Tokens that can be validated without a database lookup, 
+	provided that the Access Token lifetime is less than then the Service Provider's allowable 
+	latency for Access Token revocation.
+      
+</p>
+<p>
+	Over time, new versions of Consumers may be released which require additional privileges than
+	what their users originally granted. Users SHOULD have the opportunity to either approve or deny 
+	additional privileges for a Consumer after the initial authorization.
+      
+</p>
+<p>
+	All secrets and the Authentication Session Handle SHOULD only be transmitted using HTTPS.
+      
+</p>
+<a name="anchor12"></a><br><hr>
+<table summary="layout" class="TOCbug" align="right" cellpadding="0" cellspacing="2"><tbody><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></tbody></table>
+<a name="rfc.section.A"></a><h3>Appendix A.&nbsp;
+Workflow Diagram</h3>
+
+<p>
+	  Workflow Diagram
+	
+</p>
+<a name="anchor13"></a><br><hr>
+<table summary="layout" class="TOCbug" align="right" cellpadding="0" cellspacing="2"><tbody><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></tbody></table>
+<a name="rfc.section.B"></a><h3>Appendix B.&nbsp;
+Example</h3>
+
+<p>
+	  Example goes here
+	
+</p>
+<a name="rfc.references1"></a><br><hr>
+<table summary="layout" class="TOCbug" align="right" cellpadding="0" cellspacing="2"><tbody><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></tbody></table>
+<h3>9.&nbsp;References</h3>
+<table border="0" width="99%">
+<tbody><tr><td class="author-text" valign="top"><a name="OAuth Core 1.0">[OAuth Core 1.0]</a></td>
+<td class="author-text">OAuth Core Workgroup, “<a href="http://oauth.net/core/1.0">OAuth Core 1.0</a>.”</td></tr>
+<tr><td class="author-text" valign="top"><a name="OAuth Problem Reporting Extension">[OAuth Problem Reporting Extension]</a></td>
+<td class="author-text">Kristian, J., “<a href="http://oauth.pbwiki.com/ProblemReporting">OAuth Problem Reporting Extension</a>.”</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2119">[RFC2119]</a></td>
+<td class="author-text">Bradner, B., “<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>,” RFC&nbsp;2119.</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2606">[RFC2606]</a></td>
+<td class="author-text">Eastlake, D. and A. Panitz, “<a href="http://tools.ietf.org/html/rfc2606">Reserved Top Level DNS Names</a>,” RFC&nbsp;2606.</td></tr>
+</tbody></table>
+
+<a name="rfc.authors"></a><br><hr>
+<table summary="layout" class="TOCbug" align="right" cellpadding="0" cellspacing="2"><tbody><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></tbody></table>
+<h3>Authors' Addresses</h3>
+<table border="0" cellpadding="0" cellspacing="0" width="99%">
+<tbody><tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Allen Tom</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Yahoo!</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:atom@yahoo-inc.com">atom@yahoo-inc.com</a></td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Praveen Alavilli</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">AOL</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:AlavilliPraveen@aol.com">AlavilliPraveen@aol.com</a></td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">George Fletcher</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">AOL</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:gffletch@aol.com">gffletch@aol.com</a></td></tr>
+</tbody></table>
+
+</body></html>

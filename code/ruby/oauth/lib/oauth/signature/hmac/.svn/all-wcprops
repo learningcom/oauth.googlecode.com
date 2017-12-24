@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/278/code/ruby/oauth/lib/oauth/signature/hmac
+END
+md5.rb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/265/code/ruby/oauth/lib/oauth/signature/hmac/md5.rb
+END
+rmd160.rb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/265/code/ruby/oauth/lib/oauth/signature/hmac/rmd160.rb
+END
+base.rb
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/278/code/ruby/oauth/lib/oauth/signature/hmac/base.rb
+END
+sha1.rb
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/265/code/ruby/oauth/lib/oauth/signature/hmac/sha1.rb
+END
+sha2.rb
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/265/code/ruby/oauth/lib/oauth/signature/hmac/sha2.rb
+END

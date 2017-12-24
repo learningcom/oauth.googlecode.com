@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><metadata>
+  <groupId>net.oauth.example</groupId>
+  <artifactId>oauth-consumer</artifactId>
+  <version>20081113</version>
+  <versioning>
+    <release>20090105</release>
+    <versions>
+      <version>20081113</version>
+      <version>20081126</version>
+      <version>20081218</version>
+      <version>20090105</version>
+    </versions>
+    <lastUpdated>20090108171121</lastUpdated>
+  </versioning>
+</metadata>

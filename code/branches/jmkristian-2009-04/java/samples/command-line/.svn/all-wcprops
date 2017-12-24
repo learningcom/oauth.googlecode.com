@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/command-line
+END
+manpage.txt
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/command-line/manpage.txt
+END
+build.properties
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/command-line/build.properties
+END
+readme.txt
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/command-line/readme.txt
+END
+build.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/command-line/build.xml
+END
+cmdline.properties.template
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/command-line/cmdline.properties.template
+END

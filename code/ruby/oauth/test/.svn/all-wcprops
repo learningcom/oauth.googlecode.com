@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/404/code/ruby/oauth/test
+END
+test_action_controller_request_proxy.rb
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/377/code/ruby/oauth/test/test_action_controller_request_proxy.rb
+END
+test_consumer.rb
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/404/code/ruby/oauth/test/test_consumer.rb
+END
+test_signature_base.rb
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/384/code/ruby/oauth/test/test_signature_base.rb
+END
+test_net_http_request_proxy.rb
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/253/code/ruby/oauth/test/test_net_http_request_proxy.rb
+END
+test_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/253/code/ruby/oauth/test/test_helper.rb
+END
+test_token.rb
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/253/code/ruby/oauth/test/test_token.rb
+END
+test_signature.rb
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/253/code/ruby/oauth/test/test_signature.rb
+END
+test_net_http_client.rb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/403/code/ruby/oauth/test/test_net_http_client.rb
+END
+test_hmac_sha1.rb
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/377/code/ruby/oauth/test/test_hmac_sha1.rb
+END

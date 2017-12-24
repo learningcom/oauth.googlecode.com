@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='http://xml.resource.org/authoring/rfc2629.xslt' ?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+
+<rfc category="info" ipr="full3978" docName="oauth-discovery-1_0.xml">
+
+<?rfc toc="yes" ?>
+<?rfc tocdepth="3" ?>
+<?rfc symrefs="yes" ?>
+<?rfc sortrefs="yes"?>
+<?rfc strict="yes" ?>
+<?rfc iprnotified="no" ?>
+<?rfc private="Implementers' Draft" ?>
+
+ <front>
+    <title>OAuth Gadgets Extension Draft 1</title>
+
+    <author initials="" surname="OAuth" fullname="OAuth Extensions Workgroup">
+      <organization />
+      <address>
+        <email>spec@oauth.net</email>
+      </address>
+    </author>
+
+    <date day="22" month="April" year="2008"/>
+
+    <abstract>
+      <t>
+        OAuth Core 1.0 defines a protocol for delegating user access to
+        Consumer applications without sharing the user's private credentials.
+        Sometimes, the consumer application plays host to a large number
+        of smaller applications ("gadgets"). In that case, the consumer
+        application may make OAuth requests on behalf of one of its hosted
+        gadgets.
+      </t>
+      <t>
+        This draft specifies a mechanism in which a consumer can express
+        on behalf of which of its hosted gadgets OAuth requests are being
+        made to a service provider.
+      </t>
+    </abstract>
+
+  </front>
+  <middle>
+
+  <section title="Authors">
+      <t>
+        <list style='empty'>
+          <t>Dirk Balfanz (dirk@balfanz.net)</t>
+        </list>
+      </t>
+    </section>
+
+    <section title="Notation and Conventions">
+      <t>
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+        "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+        document are to be interpreted as described in <xref target="RFC2119" />.
+        Domain name examples use <xref target="RFC2606" />.
+      </t>
+      <t>
+        Unless otherwise noted, this specification is written as a direct
+        continuation of <xref target="OAuth Core 1.0" />, inheriting the
+        definitions and guidelines set by it.
+      </t>
+    </section>
+
+    <section title="Definitions">
+      <t>
+        <list style="hanging">
+          <t hangText="Consumer Identity:">
+            The Consumer Key, Consumer Secret, and any other information used
+            to establish an identity for the Consumer such as public key.
+          </t>
+          <t hangText="Gadget Server:">
+            An OAuth consumer, with its own consumer identity, that hosts a
+            number of smaller applications ("gadgets"), which don't have their
+            own consumer identity.
+          </t>
+          <t hangText="Gadget:">
+            An application hosted by a gadget server wishing to make OAuth
+            requests to a service provider. Every gadget is located at a
+            specific URL, from which the gadget server obtains the gadget.
+            A gadget doesn't have its own consumer identity. Instead, the
+            gadget server's consumer identity will be used when making the
+            OAuth requests on behalf of the gadget.
+          </t>
+        </list>
+      </t>
+    </section>
+
+    <section title="The Gadgets Extension Parameter">
+      <t>
+        This extension defines one additional OAuth parameter to be
+        used in OAuth requests originating from an OAuth consumer:
+        <list style="hanging">
+          <t hangText="xoauth_app_url:">
+            The URL of the gadget originating the OAuth request.
+          </t>
+        </list>
+      </t>
+      <t>
+        A consumer MUST include the <spanx style="verb">xoauth_app_url</spanx>
+        parameter in requests to the the Request Token URL and Access Token
+        URL at the Service Provider (see Sections 6.1.1 and 6.3.1 of
+        <xref target="OAuth Core 1.0" />). The consumer MUST also include
+        the <spanx style="verb">xoauth_app_url</spanx> parameter when accessing
+        protected resources (see Section 7 of <xref target="OAuth Core 1.0" />).
+      </t>
+    </section>
+  </middle>
+
+  <back>
+
+    <references title="References">
+
+      <reference anchor="OAuth Core 1.0">
+        <front>
+          <title>OAuth Core 1.0</title>
+          <author initials="OCW" surname="OAuth" fullname="OAuth Core Workgroup">
+            <organization />
+          </author>
+        </front>
+        <format type="HTML" target="http://oauth.net/core/1.0" />
+      </reference>
+
+      <reference anchor="RFC2606">
+        <front>
+          <title>Reserved Top Level DNS Names</title>
+          <author initials="D.E" surname="Eastlake" fullname="D. Eastlake">
+            <organization></organization>
+          </author>
+          <author initials="A.P" surname="Panitz" fullname="A. Panitz">
+            <organization></organization>
+          </author>
+        </front>
+        <seriesInfo name="RFC" value="2606" />
+      </reference>
+
+      <reference anchor="RFC2119">
+        <front>
+          <title>Key words for use in RFCs to Indicate Requirement Levels</title>
+          <author initials="B.S" surname="Bradner" fullname="Scott Bradner">
+            <organization>Alis Technologies</organization>
+          </author>
+        </front>
+        <seriesInfo name="RFC" value="2119" />
+      </reference>
+
+    </references>
+  </back>
+
+</rfc>

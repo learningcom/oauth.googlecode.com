@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/webapp/src/main/java/net/oauth/example/consumer/webapp
+END
+TwitterConsumer.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/webapp/src/main/java/net/oauth/example/consumer/webapp/TwitterConsumer.java
+END
+consumer.properties.template
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/webapp/src/main/java/net/oauth/example/consumer/webapp/consumer.properties.template
+END
+RedirectException.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/webapp/src/main/java/net/oauth/example/consumer/webapp/RedirectException.java
+END
+TermieConsumer.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/webapp/src/main/java/net/oauth/example/consumer/webapp/TermieConsumer.java
+END
+Reset.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/webapp/src/main/java/net/oauth/example/consumer/webapp/Reset.java
+END
+MagnoliaConsumer.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/webapp/src/main/java/net/oauth/example/consumer/webapp/MagnoliaConsumer.java
+END
+CookieConsumer.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/webapp/src/main/java/net/oauth/example/consumer/webapp/CookieConsumer.java
+END
+consumer.properties
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/webapp/src/main/java/net/oauth/example/consumer/webapp/consumer.properties
+END
+CookieMap.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/webapp/src/main/java/net/oauth/example/consumer/webapp/CookieMap.java
+END
+HttpClientPool.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/webapp/src/main/java/net/oauth/example/consumer/webapp/HttpClientPool.java
+END
+SampleProviderConsumer.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/webapp/src/main/java/net/oauth/example/consumer/webapp/SampleProviderConsumer.java
+END
+MediamaticConsumer.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/webapp/src/main/java/net/oauth/example/consumer/webapp/MediamaticConsumer.java
+END
+Callback.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/webapp/src/main/java/net/oauth/example/consumer/webapp/Callback.java
+END
+UserAuthorizationStub.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/webapp/src/main/java/net/oauth/example/consumer/webapp/UserAuthorizationStub.java
+END

@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/653/code/branches/itmightbedave/perl/lib/Net/OAuth
+END
+Message.pm
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/637/code/branches/itmightbedave/perl/lib/Net/OAuth/Message.pm
+END
+RequestTokenResponse.pm
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/637/code/branches/itmightbedave/perl/lib/Net/OAuth/RequestTokenResponse.pm
+END
+Request.pm
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/651/code/branches/itmightbedave/perl/lib/Net/OAuth/Request.pm
+END
+UserAuthRequest.pm
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/637/code/branches/itmightbedave/perl/lib/Net/OAuth/UserAuthRequest.pm
+END
+ProtectedResourceRequest.pm
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/637/code/branches/itmightbedave/perl/lib/Net/OAuth/ProtectedResourceRequest.pm
+END
+AccessTokenRequest.pm
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/637/code/branches/itmightbedave/perl/lib/Net/OAuth/AccessTokenRequest.pm
+END
+RenewAccessTokenRequest.pm
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/653/code/branches/itmightbedave/perl/lib/Net/OAuth/RenewAccessTokenRequest.pm
+END
+Response.pm
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/651/code/branches/itmightbedave/perl/lib/Net/OAuth/Response.pm
+END
+UserAuthResponse.pm
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/637/code/branches/itmightbedave/perl/lib/Net/OAuth/UserAuthResponse.pm
+END
+AccessTokenResponse.pm
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/637/code/branches/itmightbedave/perl/lib/Net/OAuth/AccessTokenResponse.pm
+END
+RenewAccessTokenResponse.pm
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/652/code/branches/itmightbedave/perl/lib/Net/OAuth/RenewAccessTokenResponse.pm
+END
+RequestTokenRequest.pm
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/637/code/branches/itmightbedave/perl/lib/Net/OAuth/RequestTokenRequest.pm
+END

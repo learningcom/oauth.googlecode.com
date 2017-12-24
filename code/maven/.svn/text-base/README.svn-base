@@ -1,0 +1,17 @@
+This is a Maven repository, containing Java libraries that implement OAuth.
+To build a new release, see http://wiki.oauth.net/MavenReleaseProcess
+In brief:
+
+svn co https://oauth.googlecode.com/svn/code/java java
+svn co https://oauth.googlecode.com/svn/code/maven maven
+
+Edit all of the pom.xml files in the java directories (there are several)
+and change tags to the source date in YYYYMMDD format.
+
+In the java directory:
+mvn deploy -DupdateReleaseInfo=true
+svn commit -m "version YYYYMMDD" # the pom.xml changes
+
+In the maven directory:
+find . -name YYYYMMDD | xargs svn add
+svn commit -m "version YYYYMMDD" # the build products

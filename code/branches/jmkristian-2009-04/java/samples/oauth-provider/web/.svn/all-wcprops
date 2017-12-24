@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/1027/code/branches/jmkristian-2009-04/java/samples/oauth-provider/web
+END
+index.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/oauth-provider/web/index.jsp
+END
+authorize.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/oauth-provider/web/authorize.jsp
+END
+OAuthProblemException.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/oauth-provider/web/OAuthProblemException.jsp
+END
+banner.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/oauth-provider/web/banner.jsp
+END

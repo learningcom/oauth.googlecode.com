@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/1031/code/branches/jmkristian-2009-04/java/core/consumer/src/main/java/net/oauth/client
+END
+OAuthResponseMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/!svn/ver/972/code/branches/jmkristian-2009-04/java/core/consumer/src/main/java/net/oauth/client/OAuthResponseMessage.java
+END
+OAuthClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/1031/code/branches/jmkristian-2009-04/java/core/consumer/src/main/java/net/oauth/client/OAuthClient.java
+END
+URLConnectionClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/!svn/ver/972/code/branches/jmkristian-2009-04/java/core/consumer/src/main/java/net/oauth/client/URLConnectionClient.java
+END
+URLConnectionResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/!svn/ver/972/code/branches/jmkristian-2009-04/java/core/consumer/src/main/java/net/oauth/client/URLConnectionResponse.java
+END

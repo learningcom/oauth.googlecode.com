@@ -1,0 +1,1 @@
+POST /request_token | Status: 200 | Params: {:format=>"html"}

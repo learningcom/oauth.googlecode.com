@@ -1,0 +1,114 @@
+/*
+$HeadURL$
+$Id$
+Description:
+============
+	auth testsuite css
+
+License:
+============
+Copyright 2008 CONTENS Software GmbH
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+body {
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+}
+
+input[type="submit"] {
+	background-color: #ABCDEF;
+	vertical-align: middle;
+}
+
+.missing {
+	border-bottom-style: dotted;
+	border-color: #FF0000;
+	border-width: 1px;
+}
+
+#consumerkey {
+	background-color: #AABBCC;
+}
+
+#consumersecret {
+	background-color: #AABBCC;
+}
+
+#errormessage {
+	display: block;
+	text-align: left;
+}
+
+#menu a{
+	background-color: #FAFAFA;
+	border: 1px solid #D5E7EC;
+	border-left: 4px solid #D5E7EC;
+	color: #006595;
+	font: normal 12px arial,sans-serif;
+	padding: 3px 15px 3px 15px;
+	text-align: center;
+	text-decoration: none;
+}
+
+#menu a:hover{
+	background-color: #FAFAFA;
+	border: 1px solid #008996;
+	border-left: 4px solid #008996;
+	color: #006595;
+	text-align: right;
+}
+
+#menu li{
+	display: inline;
+}
+
+#menu ul{
+	list-style: none;
+	margin: 0;
+	padding: 5px;
+	white-space: nowrap;
+}
+
+#oauth {
+	background-color: #FAFAFA;
+	border: 1px #000000 solid;
+	border-collapse: collapse;
+	border-spacing: 0px;
+	width: 580px;
+}
+
+#oauth td {
+	background-color: #FAFAFA;
+	border-bottom: 1px #6699CC dotted;
+	color: #404040;
+	font-family: Verdana, sans-serif, Arial;
+	font-size: .7em;
+	font-weight: normal;
+	padding-bottom: 4px;
+	padding-left: 8px;
+	padding-right: 0px;
+	padding-top: 4px;
+	text-align: left;
+}
+
+#oauth th {
+	background-color: #99CCCC;
+	border: 1px #000000 solid;
+	color: #404040;
+	font-family: Verdana;
+	font-size: 12px;
+	font-weight: bold;
+}

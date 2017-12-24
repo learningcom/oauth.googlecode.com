@@ -1,0 +1,178 @@
+10
+
+dir
+1276
+http://oauth.googlecode.com/svn/code/maven/net/oauth/core
+http://oauth.googlecode.com/svn
+
+
+
+2010-05-28T15:34:59.832010Z
+1215
+jmkristian@gmail.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+f7ae4463-c52f-0410-a7dc-93bad6e629e8
+
+20080130
+dir
+
+oauth-test
+dir
+
+oauth-core-parent
+dir
+
+20081022
+dir
+
+20080131
+dir
+
+20080621
+dir
+
+20081027
+dir
+
+20080524
+dir
+
+20080327
+dir
+
+20080328
+dir
+
+20080229
+dir
+
+maven-metadata.xml.md5
+file
+
+
+
+
+2016-03-15T10:40:17.404771Z
+cef830b115860cfcdd4e1545d6e33222
+2008-10-28T18:28:33.854858Z
+718
+jkristian@netflix.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+32
+
+oauth-provider
+dir
+
+oauth-consumer
+dir
+
+maven-metadata.xml.sha1
+file
+
+
+
+
+2016-03-15T10:40:17.404771Z
+6e4cbf75e44766f268ed64e6ceac7364
+2008-10-28T18:28:33.854858Z
+718
+jkristian@netflix.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+40
+
+oauth-httpclient3
+dir
+
+oauth
+dir
+
+oauth-httpclient4
+dir
+
+maven-metadata.xml
+file
+
+
+
+
+2016-03-15T10:40:17.404771Z
+82d0b3844aaa880385e92e80cc283a0a
+2008-10-28T18:28:33.854858Z
+718
+jkristian@netflix.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+567
+

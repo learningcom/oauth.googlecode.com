@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/1276/code/c/liboauth/src
+END
+hash.c
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/1276/code/c/liboauth/src/hash.c
+END
+xmalloc.h
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/1274/code/c/liboauth/src/xmalloc.h
+END
+oauth.h
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/1276/code/c/liboauth/src/oauth.h
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/1275/code/c/liboauth/src/Makefile.am
+END
+sha1.c
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/1276/code/c/liboauth/src/sha1.c
+END
+xmalloc.c
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/1276/code/c/liboauth/src/xmalloc.c
+END
+oauth_http.c
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/1276/code/c/liboauth/src/oauth_http.c
+END
+oauth.c
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/1276/code/c/liboauth/src/oauth.c
+END

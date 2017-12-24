@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/test/java/net/oauth/signature
+END
+Echo.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/test/java/net/oauth/signature/Echo.java
+END
+RSA_SHA1SignatureTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/test/java/net/oauth/signature/RSA_SHA1SignatureTest.java
+END
+OAuthSignatureMethodTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/test/java/net/oauth/signature/OAuthSignatureMethodTest.java
+END

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/oauth-provider/src/net/oauth/example/provider/servlets
+END
+AccessTokenServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/oauth-provider/src/net/oauth/example/provider/servlets/AccessTokenServlet.java
+END
+RequestTokenServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/oauth-provider/src/net/oauth/example/provider/servlets/RequestTokenServlet.java
+END
+EchoServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/oauth-provider/src/net/oauth/example/provider/servlets/EchoServlet.java
+END
+AuthorizationServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/oauth-provider/src/net/oauth/example/provider/servlets/AuthorizationServlet.java
+END

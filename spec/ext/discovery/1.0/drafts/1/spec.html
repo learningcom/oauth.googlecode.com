@@ -1,0 +1,1507 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en"><head><title>Implementers' Draft: OAuth Discovery 1.0 Draft 1</title>
+<meta http-equiv="Expires" content="Wed, 12 Dec 2007 05:04:05 +0000">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="OAuth Discovery 1.0 Draft 1">
+<meta name="generator" content="xml2rfc v1.32 (http://xml.resource.org/)">
+<style type='text/css'><!--
+        body {
+                font-family: verdana, charcoal, helvetica, arial, sans-serif;
+                font-size: small; color: #000; background-color: #FFF;
+                margin: 2em;
+        }
+        h1, h2, h3, h4, h5, h6 {
+                font-family: helvetica, monaco, "MS Sans Serif", arial, sans-serif;
+                font-weight: bold; font-style: normal;
+        }
+        h1 { color: #900; background-color: transparent; text-align: right; }
+        h3 { color: #333; background-color: transparent; }
+
+        td.RFCbug {
+                font-size: x-small; text-decoration: none;
+                width: 30px; height: 30px; padding-top: 2px;
+                text-align: justify; vertical-align: middle;
+                background-color: #000;
+        }
+        td.RFCbug span.RFC {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: bold; color: #666;
+        }
+        td.RFCbug span.hotText {
+                font-family: charcoal, monaco, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: normal; text-align: center; color: #FFF;
+        }
+
+        table.TOCbug { width: 30px; height: 15px; }
+        td.TOCbug {
+                text-align: center; width: 30px; height: 15px;
+                color: #FFF; background-color: #900;
+        }
+        td.TOCbug a {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, sans-serif;
+                font-weight: bold; font-size: x-small; text-decoration: none;
+                color: #FFF; background-color: transparent;
+        }
+
+        td.header {
+                font-family: arial, helvetica, sans-serif; font-size: x-small;
+                vertical-align: top; width: 33%;
+                color: #FFF; background-color: #666;
+        }
+        td.author { font-weight: bold; font-size: x-small; margin-left: 4em; }
+        td.author-text { font-size: x-small; }
+
+        /* info code from SantaKlauss at http://www.madaboutstyle.com/tooltip2.html */
+        a.info {
+                /* This is the key. */
+                position: relative;
+                z-index: 24;
+                text-decoration: none;
+        }
+        a.info:hover {
+                z-index: 25;
+                color: #FFF; background-color: #900;
+        }
+        a.info span { display: none; }
+        a.info:hover span.info {
+                /* The span will display just on :hover state. */
+                display: block;
+                position: absolute;
+                font-size: smaller;
+                top: 2em; left: -5em; width: 15em;
+                padding: 2px; border: 1px solid #333;
+                color: #900; background-color: #EEE;
+                text-align: left;
+        }
+
+        a { font-weight: bold; }
+        a:link    { color: #900; background-color: transparent; }
+        a:visited { color: #633; background-color: transparent; }
+        a:active  { color: #633; background-color: transparent; }
+
+        p { margin-left: 2em; margin-right: 2em; }
+        p.copyright { font-size: x-small; }
+        p.toc { font-size: small; font-weight: bold; margin-left: 3em; }
+        table.toc { margin: 0 0 0 3em; padding: 0; border: 0; vertical-align: text-top; }
+        td.toc { font-size: small; font-weight: bold; vertical-align: text-top; }
+
+        ol.text { margin-left: 2em; margin-right: 2em; }
+        ul.text { margin-left: 2em; margin-right: 2em; }
+        li      { margin-left: 3em; }
+
+        /* RFC-2629 <spanx>s and <artwork>s. */
+        em     { font-style: italic; }
+        strong { font-weight: bold; }
+        dfn    { font-weight: bold; font-style: normal; }
+        cite   { font-weight: normal; font-style: normal; }
+        tt     { color: #036; }
+        tt, pre, pre dfn, pre em, pre cite, pre span {
+                font-family: "Courier New", Courier, monospace; font-size: small;
+        }
+        pre {
+                text-align: left; padding: 4px;
+                color: #000; background-color: #CCC;
+        }
+        pre dfn  { color: #900; }
+        pre em   { color: #66F; background-color: #FFC; font-weight: normal; }
+        pre .key { color: #33C; font-weight: bold; }
+        pre .id  { color: #900; }
+        pre .str { color: #000; background-color: #CFF; }
+        pre .val { color: #066; }
+        pre .rep { color: #909; }
+        pre .oth { color: #000; background-color: #FCF; }
+        pre .err { background-color: #FCC; }
+
+        /* RFC-2629 <texttable>s. */
+        table.all, table.full, table.headers, table.none {
+                font-size: small; text-align: center; border-width: 2px;
+                vertical-align: top; border-collapse: collapse;
+        }
+        table.all, table.full { border-style: solid; border-color: black; }
+        table.headers, table.none { border-style: none; }
+        th {
+                font-weight: bold; border-color: black;
+                border-width: 2px 2px 3px 2px;
+        }
+        table.all th, table.full th { border-style: solid; }
+        table.headers th { border-style: none none solid none; }
+        table.none th { border-style: none; }
+        table.all td {
+                border-style: solid; border-color: #333;
+                border-width: 1px 2px;
+        }
+        table.full td, table.headers td, table.none td { border-style: none; }
+
+        hr { height: 1px; }
+        hr.insert {
+                width: 80%; border-style: none; border-width: 0;
+                color: #CCC; background-color: #CCC;
+        }
+--></style>
+</head>
+<body>
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<table summary="layout" width="66%" border="0" cellpadding="0" cellspacing="0"><tr><td><table summary="layout" width="100%" border="0" cellpadding="2" cellspacing="1">
+<tr><td class="header">Implementers' Draft</td><td class="header">E. Hammer-Lahav</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">Hueniverse, LLC</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">December 12, 2007</td></tr>
+</table></td></tr></table>
+<h1><br />OAuth Discovery 1.0 Draft 1</h1>
+
+<h3>Abstract</h3>
+
+<p>
+        OAuth Core 1.0 defines a protocol for delegating user access to
+        Consumer applications without sharing the user's private credentials.
+        The protocol specifies a set of configuration values that enable
+        Consumers to find and communicate with the Service Provider. However,
+        OAuth Core leaves the process of communicating that information undefined.
+      
+</p>
+<p>
+        The discovery protocol provides a way to for Consumers to receive
+        the required configuration data from the Service Provider in a
+        machine-readable format. It creates an extendable framework for
+        communicating current and future services and extensions.
+      
+</p>
+<p>
+        The protocol has been designed to keep the workflow as simple as
+        possible, use existing discovery practices, and maintain strong
+        flexibility allowing Service Providers to structure their configuration
+        as needed.
+      
+</p><a name="toc"></a><br /><hr />
+<h3>Table of Contents</h3>
+<p class="toc">
+<a href="#anchor1">1.</a>&nbsp;
+Notation and Conventions<br />
+<a href="#anchor2">2.</a>&nbsp;
+Definitions<br />
+<a href="#anchor3">3.</a>&nbsp;
+Scope and Limitations<br />
+<a href="#anchor4">4.</a>&nbsp;
+Realms<br />
+<a href="#anchor5">5.</a>&nbsp;
+Discovery Workflow<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor6">5.1.</a>&nbsp;
+Identify the Resource Realm<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#realm_container">5.1.1.</a>&nbsp;
+Service Providers<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor7">5.1.2.</a>&nbsp;
+Consumers<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#yadis">5.2.</a>&nbsp;
+Retrieve the Discovery Definition Document<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor8">5.3.</a>&nbsp;
+Parse the Discovery Definition Document<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor9">5.3.1.</a>&nbsp;
+Document Structure<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor10">5.3.2.</a>&nbsp;
+Realm Definition Element<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#service_types">5.3.3.</a>&nbsp;
+Service Types<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#service_element">5.3.4.</a>&nbsp;
+Service Element<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#custom_param_element">5.3.5.</a>&nbsp;
+oauth:CustomParameters Element<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#request_param_element">5.3.6.</a>&nbsp;
+oauth:RequestParameterMethods Element<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#req_sig_element">5.3.7.</a>&nbsp;
+oauth:RequestSignature Element<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#append_attribute">5.3.8.</a>&nbsp;
+Append Attribute<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#extensions">5.3.9.</a>&nbsp;
+Service Extensions<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor11">5.3.10.</a>&nbsp;
+Parsing Process<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor12">5.4.</a>&nbsp;
+Establish Consumer Identity<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor13">5.4.1.</a>&nbsp;
+Static Allocation<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor14">5.4.2.</a>&nbsp;
+Dynamic Allocation<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor15">5.4.3.</a>&nbsp;
+Manual Allocation<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor16">5.4.4.</a>&nbsp;
+Complex Consumer Realm<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor17">5.5.</a>&nbsp;
+Establish User Access<br />
+<a href="#anchor18">Appendix&nbsp;A.</a>&nbsp;
+Appendix A - Examples<br />
+<a href="#anchor19">Appendix&nbsp;A.1.</a>&nbsp;
+Simple Discovery Definition Document<br />
+<a href="#rfc.references1">6.</a>&nbsp;
+References<br />
+<a href="#rfc.authors">&#167;</a>&nbsp;
+Author's Address<br />
+</p>
+<br clear="all" />
+
+<a name="anchor1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1"></a><h3>1.&nbsp;
+Notation and Conventions</h3>
+
+<p>
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+        "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+        document are to be interpreted as described in <a class='info' href='#RFC2119'>[RFC2119]<span> (</span><span class='info'>Bradner, B., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; .</span><span>)</span></a>.
+        Domain name examples use <a class='info' href='#RFC2606'>[RFC2606]<span> (</span><span class='info'>Eastlake, D. and A. Panitz, &ldquo;Reserved Top Level DNS Names,&rdquo; .</span><span>)</span></a> and OAuth extension
+        examples use the URI prefix <tt>http://oauth.net/example/</tt>.
+      
+</p>
+<p>
+        Unless otherwise noted, this specification is written as a direct
+        continuation of <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a>, inheriting the definitions and
+        guidelines set by it.
+      
+</p>
+<a name="anchor2"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2"></a><h3>2.&nbsp;
+Definitions</h3>
+
+<p>
+        </p>
+<blockquote class="text"><dl>
+<dt>OAuth Discovery:</dt>
+<dd>
+            A general name for the workflow described in this specification.
+          
+</dd>
+<dt>Consumer Identity:</dt>
+<dd>
+            The Consumer Key, Consumer Secret, and any other information used
+            to establish an identity for the Consumer such as public key.
+          
+</dd>
+<dt>Realm:</dt>
+<dd>
+            An absolute HTTP(S) URL used to group Protected Resources together
+            by associating them to the URL. Realms allow sharing information
+            across multiple Protected Resources.
+          
+</dd>
+<dt>Resource Realm:</dt>
+<dd>
+            Realm for sharing OAuth configuration across multiple Protected
+            Resources.
+          
+</dd>
+<dt>User Realm:</dt>
+<dd>
+            Realm for sharing an Access Token across multiple Protected
+            Resources.
+          
+</dd>
+<dt>Consumer Realm:</dt>
+<dd>
+            Realm for sharing a Consumer Identity across multiple Protected
+            Resources.
+          
+</dd>
+<dt>Realm Definition:</dt>
+<dd>
+            An <tt>XRD</tt> element containing the Service
+            Provider OAuth configuration, in a machine-readable format.
+          
+</dd>
+<dt>Discovery Definition Document:</dt>
+<dd>
+            An XRDS document which binds together Realm Definitions and other
+            services, in a machine-readable format.
+          
+</dd>
+<dt>OAuth Endpoints:</dt>
+<dd>
+            The group of four request endpoints defined by <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a>
+            (Request Token, User authorization, Access Token, and Protected
+            Resource).
+          
+</dd>
+</dl></blockquote><p>
+      
+</p>
+<a name="anchor3"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3"></a><h3>3.&nbsp;
+Scope and Limitations</h3>
+
+<p>
+        While a fully automated discovery process of authentication,
+        authorization, and services is a highly desired objective, OAuth
+        Discovery is inheritably limited. In many cases, Consumer Key
+        allocation requires human interaction. This is done for legal,
+        compliance, or other reasons, which hinder automated discovery
+        without prior manual registration.
+      
+</p>
+<p>
+        OAuth Discovery does not address the methods in which Protected
+        Resources are accessed. Without clear standards of the Protected
+        Resources space, any discovery protocol will eventually require some
+        form of external handling of the Protected Resources. However, combines
+        with other specifications, the entire process can be fully automated
+        from authentication, through authorization, to services.
+      
+</p>
+<p>
+        OAuth Discovery is designed to accommodate two scenarios:
+
+        </p>
+<ul class="text">
+<li>
+            Automated Initiation - If the requested Protected Resource endpoint
+            is known, the Consumer attempts accessing it without the any
+            authorization credentials, causing the request to fail. The failure
+            reply contains the information needed to perform discovery. This
+            scenario is similar to the <a class='info' href='#RFC2617'>HTTP Basic
+            Authentication<span> (</span><span class='info'>Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S., Leach, P., Luotonen, A., and L. Stewart, &ldquo;HTTP Authentication: Basic and Digest Access Authentication,&rdquo; .</span><span>)</span></a> [RFC2617] flow.
+          
+</li>
+<li>
+            Manual Initiation - The information needed to perform discovery is
+            provided by the Service Provider in ways not specified by this
+            specification. This information allows the Consumer to configure
+            its OAuth resources automatically instead of hard-coding the OAuth
+            endpoints and properties.
+          
+</li>
+</ul><p>
+      
+</p>
+<p>
+        Service Providers MUST support Automated Initiation, and MAY support
+        Manual Initiation by providing the information needed in documentation
+        or other means.
+      
+</p>
+<a name="anchor4"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4"></a><h3>4.&nbsp;
+Realms</h3>
+
+<p>
+        OAuth Discovery uses Realms to associate Protected Resources to a
+        common configuration used for OAuth authentication. A Realm MUST be a
+        valid endpoint URL pointing to an accessible resource using HTTP
+        requests. Service Providers MAY put access restrictions on the Realm
+        URL. In order for the Consumer to perform the OAuth Discovery workflow,
+        the Consumer requests the resource at the Realm URL.
+      
+</p>
+<p>
+        Each Protected Resource MUST be associated with a Resource Realm, which
+        in turn identifies the resource's User Realm and a Consumer Realm.
+        In order to enable complex configuration of Realms without complicating
+        the workflow, a Protected Resource may omit an explicit User Realm or
+        Consumer Realm association, allowing them to implicitly default to the
+        value of the Resource Realm.
+      
+</p>
+<p>
+        The User Realm and Consumer Realm inform the Consumer when established
+        credentials MAY be reused between Protected Resources. Realms are valid
+        values of the <tt>realm</tt> parameter as defined in
+        <a class='info' href='#RFC2617'>[RFC2617]<span> (</span><span class='info'>Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S., Leach, P., Luotonen, A., and L. Stewart, &ldquo;HTTP Authentication: Basic and Digest Access Authentication,&rdquo; .</span><span>)</span></a> section 1.2, but are more restrictive in
+        their requirements and syntax.
+      
+</p>
+<a name="anchor5"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5"></a><h3>5.&nbsp;
+Discovery Workflow</h3>
+
+<p>
+        The OAuth Discovery workflow centers around the retrieval and parsing
+        of the Discovery Definition Document which is the machine-readable
+        format of the <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> configuration. While both the
+        Service Provider and Consumer play a role in the workflow, it is
+        focused on actions performed by the Consumer. The workflow includes the
+        following steps:
+
+        </p>
+<ol class="text">
+<li>Identify the Resource Realm.
+</li>
+<li>Retrieve the Discovery Definition Document.
+</li>
+<li>Parse the Discovery Definition Document.
+</li>
+<li>Establish Consumer Identity.
+</li>
+<li>Establish User Access.
+</li>
+</ol><p>
+      
+</p>
+<p>
+        Once all steps have been performed, the Consumer has the required OAuth
+        credentials to access the Protected Resource following the
+        <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> section 7 workflow.
+      
+</p>
+<a name="anchor6"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.1"></a><h3>5.1.&nbsp;
+Identify the Resource Realm</h3>
+
+<p>
+          Service Providers are likely to offer multiple Protected Resources,
+          and MAY choose to partition access to them. Partitioning is done by
+          associating Protected Resources to a Resource Realm, a common unique
+          URL. Each Resource Realm has its own Realm Definition contained within
+          a Discovery Definition Document.
+        
+</p>
+<p>
+          Service Providers identify the Resource Realm of each Protected
+          Resource, which is used by the Consumers locate the Discovery
+          Definition  Document for that Realm.
+        
+</p>
+<a name="realm_container"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.1.1"></a><h3>5.1.1.&nbsp;
+Service Providers</h3>
+
+<p>
+            Service Providers MUST identify the Resource Realm of each Protected
+            Resource when denying Consumer access due to lack of OAuth
+            credentials. Service Providers MAY document Realm information via
+            other means to enable Manual Initiation.
+          
+</p>
+<p>
+            The Resource Realm is provided by at least one of the following
+            methods in decreasing preference:
+
+            </p>
+<ol class="text">
+<li>
+                In the OAuth HTTP <tt>WWW-Authenticate</tt>
+                header as defined in <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> section
+                5.4.2, using the <tt>xoauth_realm</tt>
+                parameter.
+              
+</li>
+<li>
+                In the OAuth HTTP <tt>WWW-Authenticate</tt>
+                header <tt>realm</tt> parameter as defined
+                in <a class='info' href='#RFC2617'>[RFC2617]<span> (</span><span class='info'>Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S., Leach, P., Luotonen, A., and L. Stewart, &ldquo;HTTP Authentication: Basic and Digest Access Authentication,&rdquo; .</span><span>)</span></a>.
+              
+</li>
+<li>
+                In the <tt>xoauth_realm</tt> parameter sent
+                as part of the HTTP response body as defined in
+                <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> section 5.3.
+               
+</li>
+<li>
+                In the HTTP response body contained within a
+                <tt>&lt;link&gt;</tt> element as follow:
+                <tt>&lt;link rel="auth" type="application/xrds+xml" href="http://sp.example.com/" /&gt;</tt>,
+                where the <tt>href</tt> attributes is the Resource Realm.
+              
+</li>
+</ol><p>
+          
+</p>
+<p>
+            In case the Service Provider supports the OAuth HTTP Authorization
+            Scheme, but does not support OAuth Discovery, the Consumer will
+            fail to locate a valid Discovery Definition Document by requesting
+            the resource at the Resource Realm URL.
+          
+</p>
+<a name="anchor7"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.1.2"></a><h3>5.1.2.&nbsp;
+Consumers</h3>
+
+<p>
+            When attempting to access a Protected Resource using OAuth, the
+            Consumer MUST first identify the Resource Realm. This allows the
+            Consumer to check if it has already performed OAuth Discovery on
+            that Realm and can reused that configuration. Consumers MUST NOT
+            use configuration obtained for one Resource Realm with another.
+          
+</p>
+<p>
+            To obtain the Resource Realm, if it has not been provided as part
+            of a Manual Initiation process, the Consumer attempts to access the
+            Protected Resource by making a request to the Protected Resource
+            endpoint without any OAuth credentials. The request will fail with
+            the Service Provider indicating the Resource Realm in its response.
+          
+</p>
+<p>
+            To identify the Realm, the Consumer MUST analyze the Service
+            Provider response by searching in order the
+            <a class='info' href='#realm_container'>list of supported Realm containers<span> (</span><span class='info'>Service Providers</span><span>)</span></a>
+            for a Realm value, and MUST stop as soon as the first Resource
+            Realm is found.
+          
+</p>
+<a name="yadis"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.2"></a><h3>5.2.&nbsp;
+Retrieve the Discovery Definition Document</h3>
+
+<p>
+          The Consumer retrieves the Discovery Definition Document from the
+          Realm using the Yadis protocol as defined in <a class='info' href='#XRI Resolution 2.0'>[XRI Resolution 2.0]<span> (</span><span class='info'>Wachob, G., Reed, D., Chasen, L., Tan, W., and S. Churchill, &ldquo;Extensible Resource Identifier (XRI) Resolution V2.0 - Committee Draft 02,&rdquo; .</span><span>)</span></a>
+          section 6. If the Yadis protocol is successful, the Consumer obtains
+          the Discovery Definition Document. If the Yadis protocol fails, it
+          SHALL be assumed that the Service Provider does not support OAuth
+          Discovery.
+        
+</p>
+<a name="anchor8"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.3"></a><h3>5.3.&nbsp;
+Parse the Discovery Definition Document</h3>
+
+<p>
+          The Discovery Definition Document is an XRDS-formatted document
+          providing a machine-readable representation of the OAuth
+          configuration needed to allow Consumers access using <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a>.
+          The XRDS format provides a simple and extendable framework and is
+          defined in <a class='info' href='#XRI Resolution 2.0'>[XRI Resolution 2.0]<span> (</span><span class='info'>Wachob, G., Reed, D., Chasen, L., Tan, W., and S. Churchill, &ldquo;Extensible Resource Identifier (XRI) Resolution V2.0 - Committee Draft 02,&rdquo; .</span><span>)</span></a> section 4.
+        
+</p>
+<p>
+          OAuth Discovery uses a subset of the elements defined in
+          <a class='info' href='#XRI Resolution 2.0'>[XRI Resolution 2.0]<span> (</span><span class='info'>Wachob, G., Reed, D., Chasen, L., Tan, W., and S. Churchill, &ldquo;Extensible Resource Identifier (XRI) Resolution V2.0 - Committee Draft 02,&rdquo; .</span><span>)</span></a>. Service Providers MAY use XRDS
+          tags and attributes not listed in this specification but such
+          elements MUST NOT change the meaning or behavior of the Discovery
+          Definition Document from an OAuth Discovery standpoint. Consumers MAY
+          ignore XRDS tags and attributes not listed in this specification. All
+          elements not beginning with "oauth:" are defined in
+          <a class='info' href='#XRI Resolution 2.0'>[XRI Resolution 2.0]<span> (</span><span class='info'>Wachob, G., Reed, D., Chasen, L., Tan, W., and S. Churchill, &ldquo;Extensible Resource Identifier (XRI) Resolution V2.0 - Committee Draft 02,&rdquo; .</span><span>)</span></a> section 4. If a conflict exists
+          between this specification and <a class='info' href='#XRI Resolution 2.0'>[XRI Resolution 2.0]<span> (</span><span class='info'>Wachob, G., Reed, D., Chasen, L., Tan, W., and S. Churchill, &ldquo;Extensible Resource Identifier (XRI) Resolution V2.0 - Committee Draft 02,&rdquo; .</span><span>)</span></a>,
+          the definitions in this specification are to be used.
+        
+</p>
+<p>
+          Unless otherwise noted, all tags, attributes, values, and XML
+          namespaces are case sensitive.
+        
+</p>
+<a name="anchor9"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.3.1"></a><h3>5.3.1.&nbsp;
+Document Structure</h3>
+
+<p>
+            The Discovery Definition Document is a valid XRDS document. It
+            contains a single <tt>XRDS</tt> root element.
+            For example:
+
+            </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+                &lt;XRDS xmlns="xri://$xrds"&gt;
+</pre></div><p>
+
+          
+</p>
+<p>
+            The XRDS element MUST include at least one Realm Definition and MAY
+            include any number of other <tt>XRD</tt>
+            elements which are ignored in OAuth Discovery. Realm Definitions
+            MUST include the <tt>xmlns:oauth</tt> attribute
+            with a value of <tt>http://oauth.net/discovery/1.0</tt>.
+            For example:
+
+            </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+                &lt;XRD xmlns:oauth="http://oauth.net/discovery/1.0" xmlns="xri://$XRD*($v*2.0)"&gt;
+</pre></div><p>
+
+          
+</p>
+<p>
+            Each Realm Definition describes a Resource Realm, a User Realm, a
+            Consumer Realm, or any combination, and contains
+            <tt>Service</tt> elements describing OAuth
+            endpoints or other services. The document MUST NOT include more
+            than one Realm Definition per Realm, and MAY include one and only
+            one Realm Definition unbound to a specific Realm, which serves as a
+            catch-all element. The order in which
+            <tt>XRD</tt> elements appear in the document
+            MUST NOT affect its meaning.
+          
+</p>
+<a name="anchor10"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.3.2"></a><h3>5.3.2.&nbsp;
+Realm Definition Element</h3>
+
+<p>
+            The Realm Definition is an <tt>XRD</tt> element
+            which contains the <tt>xmlns:oauth</tt>
+            attribute and the following elements:
+            
+            </p>
+<blockquote class="text"><dl>
+<dt>&lt;Query&gt;</dt>
+<dd>
+                0 or 1 per Realm Definition with type
+                <tt>xs:anyURI</tt>. Value identifies which
+                Realm the definition covers, MUST contain a valid Realm, and
+                MUST NOT be empty. A Discovery Definition Document MUST NOT
+                contain more than one Realm Definition with a missing
+                <tt>Query</tt> element.
+              
+</dd>
+<dt>&lt;Expires&gt;</dt>
+<dd>
+                0 or 1 per Realm Definition with type
+                <tt>xs:dateTime</tt>. Consumers MUST NOT use
+                the Realm Definition after the given expiration. If a newly
+                retrieved document contains expired Realm Definitions, they
+                MUST be ignore. If a cached document contains expired
+                Realm Definitions, the Consumer MUST discard the document and
+                obtain a newer copy. If the HTTP transport caching semantics
+                specify a different expiration time, the Consumer MUST use the
+                earlier of the two.
+              
+</dd>
+<dt>&lt;Service&gt;</dt>
+<dd>
+                0 or more per Realm Definition as defined in
+                <a class='info' href='#service_element'>Section&nbsp;5.3.4<span> (</span><span class='info'>Service Element</span><span>)</span></a>.
+              
+</dd>
+<dt>&lt;oauth:Realm&gt;</dt>
+<dd>
+                0 or more per Realm Definition with type
+                <tt>xs:anyURI</tt>. Value MUST contain a
+                valid Realm and MUST NOT be empty. Element MUST contain a
+                <tt>type</tt> attribute set to either
+                <tt>user</tt> or
+                <tt>consumer</tt> based on the Realm type.
+                The element supports an OPTIONAL
+                <tt>priority</tt> attribute as defined in
+                <a class='info' href='#XRI Resolution 2.0'>[XRI Resolution 2.0]<span> (</span><span class='info'>Wachob, G., Reed, D., Chasen, L., Tan, W., and S. Churchill, &ldquo;Extensible Resource Identifier (XRI) Resolution V2.0 - Committee Draft 02,&rdquo; .</span><span>)</span></a> section 4.3.3.
+              
+</dd>
+<dt>&lt;oauth:RequestParameterMethods&gt;</dt>
+<dd>
+                0 or 1 per Realm Definition as defined
+                in <a class='info' href='#request_param_element'>Section&nbsp;5.3.6<span> (</span><span class='info'>oauth:RequestParameterMethods Element</span><span>)</span></a>.
+              
+</dd>
+<dt>&lt;oauth:RequestSignature&gt;</dt>
+<dd>
+                0 or 1 per Realm Definition as defined
+                in <a class='info' href='#req_sig_element'>Section&nbsp;5.3.7<span> (</span><span class='info'>oauth:RequestSignature Element</span><span>)</span></a>.
+              
+</dd>
+<dt>&lt;oauth:Reference&gt;</dt>
+<dd>
+                0 or 1 per Realm Definition with type
+                <tt>xs:anyURI</tt>. Value MUST be a valid
+                discoverable Realm. The element is used to reference another
+                Realm while retaining the Protected Resource Realm association.
+                When a <tt>oauth:Reference</tt> element is
+                used, is MUST be the only element contained in the Realm
+                Definition with the exception of <tt>Expires</tt>
+                and <tt>Query</tt>. The referenced
+                Realm MUST NOT contain another
+                <tt>oauth:Reference</tt> element.
+              
+</dd>
+</dl></blockquote><p>
+          
+</p>
+<a name="service_types"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.3.3"></a><h3>5.3.3.&nbsp;
+Service Types</h3>
+
+<p>
+            Realm Definitions use <tt>Service</tt>
+            elements to document the endpoints and services associated with
+            the OAuth workflow. The <tt>Service</tt> element
+            contains a child element <tt>Type</tt> which is
+            used to indicate the type of service described.
+          
+</p>
+<p>
+            To identify the OAuth Endpoints, each is given a unique URI,
+            listed with their <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> section
+            reference:
+
+            </p>
+<blockquote class="text"><dl>
+<dt>Request Token:</dt>
+<dd>
+                <tt>http://oauth.net/core/1.0/endpoint/request</tt> - section 6.1.1.
+              
+</dd>
+<dt>User Authorization:</dt>
+<dd>
+                <tt>http://oauth.net/core/1.0/endpoint/authorize</tt> - section 6.2.1.
+              
+</dd>
+<dt>Access Token:</dt>
+<dd>
+                <tt>http://oauth.net/core/1.0/endpoint/access</tt> - section 6.3.1.
+              
+</dd>
+<dt>Protected Resource:</dt>
+<dd>
+                <tt>http://oauth.net/core/1.0/endpoint/resource</tt> - section 7.
+              
+</dd>
+</dl></blockquote><p>
+          
+</p>
+<p>
+            <tt>Service</tt> elements MAY contain
+            multiple <tt>Type</tt> elements and as follows:
+
+            </p>
+<ul class="text">
+<li>
+                Each <tt>Service</tt> element MAY
+                contain one, but MUST NOT contain more than one 
+                <tt>Type</tt> element with an OAuth
+                Endpoint URI.
+              
+</li>
+<li>
+                Realm Definitions used for User Realms MUST contain a
+                <tt>Service</tt> element for each of the
+                OAuth Endpoints with the exception of
+                <tt>http://oauth.net/core/1.0/endpoint/resource</tt>,
+                which MAY be omitted if the Realm Definition contains both
+                <tt>oauth:RequestParameterMethods</tt> and
+                <tt>oauth:RequestSignature</tt> elements.
+              
+</li>
+<li>
+                If multiple <tt>Service</tt> elements are
+                present for the same endpoint type, they SHOULD contain the
+                OPTIONAL <tt>priority</tt> attribute and
+                differ in their priority value.
+              
+</li>
+<li>
+                To speed up discovery, if more than one
+                <tt>Type</tt> element is defined for that
+                service, Service Providers SHOULD list the
+                <tt>Type</tt> element for the OAuth
+                Endpoints URI first.
+              
+</li>
+</ul><p>
+          
+</p>
+<a name="service_element"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.3.4"></a><h3>5.3.4.&nbsp;
+Service Element</h3>
+
+<p>
+            The Service element contains the OPTIONAL 
+            <tt>priority</tt> attribute and the following
+            elements:
+            
+            </p>
+<blockquote class="text"><dl>
+<dt>&lt;Type&gt;</dt>
+<dd>
+                1 or more per <tt>Service</tt> element with
+                type <tt>xs:anyURI</tt> as defined in
+                <a class='info' href='#service_types'>Section&nbsp;5.3.3<span> (</span><span class='info'>Service Types</span><span>)</span></a>. The
+                <tt>Type</tt> element supports an OPTIONAL
+                <tt>oauth:required</tt> attribute with type
+                <tt>xs:boolean</tt> and default value
+                <tt>false</tt> if omitted. The
+                <tt>oauth:required</tt> attribute MUST NOT
+                be used with service types defined in this specification and is
+                provided for <a class='info' href='#extensions'>discovery extensions<span> (</span><span class='info'>Service Extensions</span><span>)</span></a>.
+            
+</dd>
+<dt>&lt;URI&gt;</dt>
+<dd>
+                0 or 1 per <tt>Service</tt> element with
+                type <tt>xs:anyURI</tt>. The value is the
+                URL the Consumer uses in the <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> protocol.
+                <tt>Service</tt> elements for the OAuth
+                Endpoints MUST include a <tt>URI</tt>
+                element expect for <tt>http://oauth.net/core/1.0/endpoint/resource</tt>
+                which MUST NOT.
+              
+</dd>
+<dt>&lt;oauth:HttpMethod&gt;</dt>
+<dd>
+                0 or 1 per <tt>Service</tt> element with
+                type <tt>xs:string</tt>.
+                <tt>oauth:HttpMethod</tt> elements MUST
+                be present and have a non-empty value when, and only when, the
+                <tt>URI</tt> element is non-empty, except
+                for <tt>http://oauth.net/core/1.0/endpoint/authorize</tt>
+                which MUST NOT have an <tt>oauth:HttpMethod</tt>
+                element. The value is the HTTP method used to request the URL
+                provided in the <tt>URI</tt> element. The
+                <tt>oauth:HttpMethod</tt> element supports an
+                OPTIONAL <tt>source</tt> attribute with type
+                <tt>xs:anyURI</tt> which indicates the source of
+                the HTTP method definition. If omitted, the
+                <tt>source</tt> attribute defaults to
+                <tt>http://www.ietf.org/rfc/rfc2616</tt>
+                which enables using the methods defined in <a class='info' href='#RFC2616'>[RFC2616]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L., Leach, P., and T. Berners-Lee, &ldquo;Hypertext Transfer Protocol -- HTTP/1.1,&rdquo; .</span><span>)</span></a>
+                as values for the <tt>oauth:HttpMethod</tt>
+                element: OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, and CONNECT.
+              
+</dd>
+<dt>&lt;oauth:CustomParameters&gt;</dt>
+<dd>
+                0 or 1 per <tt>Service</tt> element as
+                defined in <a class='info' href='#custom_param_element'>Section&nbsp;5.3.5<span> (</span><span class='info'>oauth:CustomParameters Element</span><span>)</span></a>. MUST NOT
+                appear with services of type
+                <tt>http://oauth.net/core/1.0/endpoint/access</tt>.
+              
+</dd>
+<dt>&lt;oauth:RequestParameterMethods&gt;</dt>
+<dd>
+                0 or 1 per <tt>Service</tt> element as
+                defined in <a class='info' href='#request_param_element'>Section&nbsp;5.3.6<span> (</span><span class='info'>oauth:RequestParameterMethods Element</span><span>)</span></a>.
+                MUST be included in <tt>Service</tt>
+                elements for the OAuth Endpoints, if the parent Realm
+                Definition does not contain an
+                <tt>oauth:RequestParameterMethods</tt> element.
+              
+</dd>
+<dt>&lt;oauth:RequestSignature&gt;</dt>
+<dd>
+                0 or 1 per <tt>Service</tt> element as
+                defined in <a class='info' href='#req_sig_element'>Section&nbsp;5.3.7<span> (</span><span class='info'>oauth:RequestSignature Element</span><span>)</span></a>. REQUIRED if
+                the parent Realm Definition does not contain an
+                <tt>oauth:RequestSignature</tt>
+                element and the service type is
+                <tt>http://oauth.net/core/1.0/endpoint/request</tt>,
+                <tt>http://oauth.net/core/1.0/endpoint/access</tt>,
+                or <tt>http://oauth.net/core/1.0/endpoint/resource</tt>.
+              
+</dd>
+</dl></blockquote><p>
+          
+</p>
+<a name="custom_param_element"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.3.5"></a><h3>5.3.5.&nbsp;
+oauth:CustomParameters Element</h3>
+
+<p>
+            The <tt>oauth:CustomParameters</tt> element is
+            used to document Service Provider specific request parameters.
+            Since <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> allows Service Providers to
+            extent the list of parameters, the element provides the ability to
+            list the parameters added. The element MUST NOT include OAuth
+            Protocol Parameters or parameters implicitly defined by the
+            inclusion of a service extension via a <tt>Type</tt>
+            element as defined in <a class='info' href='#extensions'>Section&nbsp;5.3.9<span> (</span><span class='info'>Service Extensions</span><span>)</span></a>.
+          
+</p>
+<p>
+            The <tt>oauth:CustomParameters</tt> element
+            contains 1 or more <tt>oauth:Parameter</tt>
+            elements with type <tt>xs:string</tt>. The
+            element MUST contain a <tt>source</tt> attribute
+            with type <tt>xs:anyURI</tt> which indicates the
+            source of the parameter definition.
+        
+</p>
+<a name="request_param_element"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.3.6"></a><h3>5.3.6.&nbsp;
+oauth:RequestParameterMethods Element</h3>
+
+<p>
+            The <tt>oauth:RequestParameterMethods</tt> element is
+            used to document the request parameters methods supported by the
+            Service Provider as defined in <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> section 5.2.
+            Since <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> allows Service Providers to extent the
+            list of supported methods, the element provides the ability to add
+            methods that were not listed in the specification.
+          
+</p>
+<p>
+            The <tt>oauth:RequestParameterMethods</tt> element
+            contains 1 or more <tt>oauth:Method</tt>
+            elements with type <tt>xs:string</tt> listed in
+            decreasing preference. While <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> declares an
+            order of preference, Service Providers MAY choose to override it,
+            for example when adding new methods.
+          
+</p>
+<p>
+            The <tt>oauth:Method</tt> element supports an
+            OPTIONAL <tt>source</tt> attribute with type
+            <tt>xs:anyURI</tt> which indicates the source of
+            the method definition. If omitted, the
+            <tt>source</tt> attribute defaults to
+            <tt>http://oauth.net/core/1.0</tt> which enables
+            using the methods defined in <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> as values for
+            the <tt>oauth:Method</tt> element: AUTH-HEADER,
+            POST-BODY, and URL-QUERY.
+          
+</p>
+<p>
+            The <tt>oauth:RequestParameterMethods</tt> element MAY
+            be used in both the Realm Definition and
+            <tt>Service</tt> elements. If present in both,
+            the values of the child element are applied to the values of the
+            parent element based on the OPTIONAL
+            <tt>append</tt> attribute of the child's
+            <tt>oauth:RequestParameterMethods</tt> element as
+            defined in <a class='info' href='#append_attribute'>Section&nbsp;5.3.8<span> (</span><span class='info'>Append Attribute</span><span>)</span></a>.
+          
+</p>
+<a name="req_sig_element"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.3.7"></a><h3>5.3.7.&nbsp;
+oauth:RequestSignature Element</h3>
+
+<p>
+            The <tt>oauth:RequestSignature</tt> element is
+            used to document the signature methods supported by the Service
+            Provider as defined in <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> section 9. Since
+            <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> allows Service Providers to extent the
+            list of supported methods, the element provides the ability to add
+            methods that were not listed in the specification.
+          
+</p>
+<p>
+            The <tt>oauth:RequestSignature</tt> element
+            contains 1 or more <tt>oauth:Method</tt>
+            elements with type <tt>xs:string</tt> listed in
+            decreasing preference.
+          
+</p>
+<p>
+            The <tt>oauth:Method</tt> element supports an
+            OPTIONAL <tt>source</tt> attribute with type
+            <tt>xs:anyURI</tt> which indicates the source of
+            the signature method definition. If omitted, the
+            <tt>source</tt> attribute defaults to
+            <tt>http://oauth.net/core/1.0</tt> which enables
+            using the methods defined in <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> as values for
+            the <tt>oauth:Method</tt> element: HMAC-SHA1,
+            RSA-SHA1, and PLAINTEXT.
+          
+</p>
+<p>
+            The <tt>oauth:RequestSignature</tt> element MAY
+            be used in both the Realm Definition and
+            <tt>Service</tt> elements. If present in both,
+            the values of the child element are applied to the values of the
+            parent element based on the OPTIONAL
+            <tt>append</tt> attribute of the child's
+            <tt>oauth:RequestSignature</tt> element as
+            defined in <a class='info' href='#append_attribute'>Section&nbsp;5.3.8<span> (</span><span class='info'>Append Attribute</span><span>)</span></a>.
+          
+</p>
+<a name="append_attribute"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.3.8"></a><h3>5.3.8.&nbsp;
+Append Attribute</h3>
+
+<p>
+            The <tt>append</tt> attribute with type
+            <tt>xs:string</tt> defines how two configuration
+            lists are merged together into a single list in decreasing
+            preference order. If the attribute is supported but omitted, it
+            defaults to <tt>override</tt>. The attribute
+            values are:
+
+            </p>
+<blockquote class="text"><dl>
+<dt>override</dt>
+<dd>
+                Only the child's values are used. The parent's values are
+                ignored.
+              
+</dd>
+<dt>head</dt>
+<dd>
+                The values of the child and parent are merged with any
+                duplicates removed from the parent's list. Preference is
+                given to the child's values in their order and then to the
+                remaining parent's values in their order. Child's values MAY be
+                prefixed with an '!' character (ASCII code 33) indicating the
+                value MUST be removed from both parent and child lists.
+              
+</dd>
+<dt>tail</dt>
+<dd>
+                The values of the child and parent are merged with any
+                duplicates removed from the child's list. Preference is
+                given to the parent's values in their order and then to the
+                remaining child's values in their order. Child's values MAY be
+                prefixed with an '!' character (ASCII code 33) indicating the
+                value MUST be removed from both parent and child lists.
+              
+</dd>
+</dl></blockquote><p>
+          
+</p>
+<a name="extensions"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.3.9"></a><h3>5.3.9.&nbsp;
+Service Extensions</h3>
+
+<p>
+            OAuth extensions MAY define additional service type URIs used to
+            indicate support or property of an existing service type, or as
+            a standalone service. The following example demonstrate using the
+            <tt>http://oauth.net/example/language/1.0</tt>
+            URI to indicate the authorization endpoint supports a language
+            parameter extension:
+
+            </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+      &lt;Service&gt;
+        &lt;Type&gt;http://oauth.net/core/1.0/endpoint/authorize&lt;/Type&gt;
+        &lt;Type&gt;http://oauth.net/example/language/1.0&lt;/Type&gt;
+        &lt;URI&gt;https://api.example.com/session/login&lt;/URI&gt;
+      &lt;/Service&gt;
+</pre></div><p>
+
+          
+</p>
+<p>
+            Extensions to an OAuth Endpoint are OPTIONAL and MAY be used
+            by the Consumer if supported. If an extension to an OAuth Endpoint
+            is REQUIRED by the Service Provider, it MUST be identified using the
+            <tt>oauth:required</tt> attribute. for example:
+
+            </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+      &lt;Service&gt;
+        &lt;Type&gt;http://oauth.net/core/1.0/endpoint/authorize&lt;/Type&gt;
+        &lt;Type oauth:required="true"&gt;http://oauth.net/example/language/1.0&lt;/Type&gt;
+        &lt;URI&gt;https://api.example.com/session/login&lt;/URI&gt;
+      &lt;/Service&gt;
+</pre></div><p>
+
+          
+</p>
+<p>
+            In the following example, a new service is defined which provides
+            the Service Provider's terms of service:
+
+            </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+      &lt;Service&gt;
+        &lt;Type&gt;http://oauth.net/example/tos/1.0&lt;/Type&gt;
+        &lt;URI&gt;https://api.example.com/tos&lt;/URI&gt;
+        &lt;oauth:HttpMethod&gt;GET&lt;/oauth:HttpMethod&gt;
+      &lt;/Service&gt;
+</pre></div><p>
+
+          
+</p>
+<p>
+            The <tt>oauth:Method</tt> and
+            <tt>oauth:HttpMethod</tt> elements provide
+            extendibility through the <tt>source</tt>
+            attribute which also uses URIs to identify the type of extension
+            used. If the Consumer is unfamiliar with the value of the
+            <tt>source</tt> attribute, it SHOULD look for
+            other familiar methods listed. In order to use existing
+            specifications that do not define a namespace URI, the official
+            specification URL SHOULD be used when possible. For RFCs, the URI
+            is the RFC number prefixed by 
+            <tt>http://www.ietf.org/rfc/rfc</tt>.
+          
+</p>
+<p>
+            In this example, the Service Provider's terms of service
+            are available using the WebDAV HTTP method
+            <tt>PROPFIND</tt>:
+
+            </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+      &lt;Service&gt;
+        &lt;Type&gt;http://oauth.net/example/tos/1.0&lt;/Type&gt;
+        &lt;URI&gt;https://api.example.com/tos&lt;/URI&gt;
+        &lt;oauth:HttpMethod source="http://www.ietf.org/rfc/rfc4918"&gt;PROPFIND&lt;/oauth:HttpMethod&gt;
+      &lt;/Service&gt;
+</pre></div><p>
+
+          
+</p>
+<a name="anchor11"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.3.10"></a><h3>5.3.10.&nbsp;
+Parsing Process</h3>
+
+<p>
+            Parsing the Discovery Definition Document includes the following
+            steps:
+            
+            </p>
+<ol class="text">
+<li>
+                Find the Realm Definition for the Resource Realm - 
+                When parsing a Discovery Definition Document, the Consumer MUST
+                find a Realm Definition with an exact match to the Resource Realm
+                by comparing it to the value of the
+                <tt>Query</tt> element. If no match is
+                found, the Consumer looks for a Realm Definition without a
+                <tt>Query</tt> element. If none found, or
+                if the Realm Definition is incomplete, invalid, or expired,
+                discovery fails.
+              
+</li>
+<li>
+                Follow one level of references - If the Realm Definition contains an
+                <tt>oauth:Reference</tt> element, the Consumer
+                MUST perform discovery on the referenced Realm value per
+                <a class='info' href='#yadis'>Section&nbsp;5.2<span> (</span><span class='info'>Retrieve the Discovery Definition Document</span><span>)</span></a>, retrieve the Discovery Definition Document,
+                and locate the referenced Realm by looking for an exact match. The
+                referenced Realm MUST NOT contain another
+                <tt>oauth:Reference</tt> element, and if it
+                does, the Consumer MUST NOT retrieve it and discovery fails.
+                Catch-all Realm Definitions do not match against a referenced Realm.
+                Using a reference does not change the Protected Resource Realm
+                association.
+              
+</li>
+<li>
+                Identify the User Realm and Consumer Realm - If the Realm
+                Definition does not include <tt>oauth:Realm</tt>
+                elements for User Realm or Consumer Realm, they default to the
+                value of the Resource Realm. Otherwise, the Consumer MUST use
+                the <tt>oauth:Realm</tt> element with highest
+                priority for each Realm type. If using the highest priority Realm
+                ends in failed discovery, the Consumer SHOULD attempt to use
+                the next Realm in priority order, and repeat until successful or
+                tried all Realms.
+              
+</li>
+<li>
+                Retrieve the Realm Definition for the User Realm and Consumer
+                Realm - If the Realms are not identical to the Resource Realm,
+                the Consumer MUST perform discovery on the identified Realms
+                following the same workflow as the Resource Realm discovery.
+                If the Realm Definition referenced contains other
+                <tt>oauth:Realm</tt> elements, they MUST be
+                ignored.
+              
+</li>
+<li>
+                Find the endpoints configuration - Using the Realm Definition
+                the Consumer locates the <tt>Service</tt>
+                element with the highest priority for each endpoint. If for any
+                reason the Consumer cannot use the discovered configuration
+                (for example in case of an unknown signature method) or fails
+                to use it, it SHOULD look for the
+                <tt>Service</tt> element with the next
+                highest priority for that service type. Consumers SHOULD
+                repeat this process until successful or all
+                <tt>Service</tt> elements have been tried.
+              
+</li>
+</ol><p>
+          
+</p>
+<a name="anchor12"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.4"></a><h3>5.4.&nbsp;
+Establish Consumer Identity</h3>
+
+<p>
+          The Consumer SHOULD check to see if it already has a valid Consumer
+          Identity for the discovered Consumer Realm of the Protected Resource.
+          If true, the Consumer MAY use that identity. In this case, the
+          Consumer does not need to discover or parse the Realm Definition of
+          the Consumer Realm.
+        
+</p>
+<p>
+          If the Consumer does not have a valid Consumer Identity, it MUST use
+          the discovered information contained in the Realm Definition of the
+          Consumer Realm to obtain an identity.
+        
+</p>
+<p>
+          <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> requires Consumers to establish an
+          Consumer Identity prior to making OAuth requests, and leaves the
+          methods of establishing the Consumer Identity unspecified. The process
+          of establishing a Consumer Key and Consumer Secret can be complex
+          and can also require manual human interaction for legal, compliance,
+          and other reasons. However, there are some cases in which a simple
+          Consumer Identity is sufficient or not needed at all.
+        
+</p>
+<p>
+          OAuth Discovery defines three Consumer Identity allocation scenarios:
+          static, dynamic, and manual.
+        
+</p>
+<a name="anchor13"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.4.1"></a><h3>5.4.1.&nbsp;
+Static Allocation</h3>
+
+<p>
+            Static Consumer Identity allocation is used when no Consumer Identity is
+            needed. In this case the Service Provider does not desire
+            tracking individual Consumers, or might provide limited
+            accessibility to unidentified Consumers. In this scenario, the
+            Service Provider assigns a default Consumer Identity in the
+            Realm Definition of the Consumer Realm.
+          
+</p>
+<p>
+            Static allocation is identified using the service type URI:
+            <tt>http://oauth.net/discovery/1.0/consumer-identity/static</tt>.
+            The Realm Definition MUST include a <tt>Service</tt>
+            element with the type URI and an <tt>oauth:ConsumerKey</tt>
+            element with the Consumer Key encoded per <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a>
+            section 5.1. Static allocation does not include a Consumer Secret
+            which is an empty string. For example:
+            
+            </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+      &lt;Service&gt;
+        &lt;Type&gt;http://oauth.net/discovery/1.0/consumer-identity/static&lt;/Type&gt;
+        &lt;oauth:ConsumerKey&gt;0685bd9184jfhq22&lt;/oauth:ConsumerKey&gt;
+      &lt;/Service&gt;
+</pre></div><p>
+
+          
+</p>
+<a name="anchor14"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.4.2"></a><h3>5.4.2.&nbsp;
+Dynamic Allocation</h3>
+
+<p>
+            Dynamic Consumer Identity allocation is used when a basic Consumer profile is
+            needed. The Service Provider allows Consumer to automatically apply
+            and receive a Consumer Identity by providing some information. In
+            this scenario, the Service Provider provides an endpoint the
+            Consumer uses to request a Consumer Identity with a simple set of
+            parameters to establish identity.
+          
+</p>
+<p>
+            
+          
+</p>
+<p>
+            Dynamic allocation is identified using the service type URI:
+            <tt>http://oauth.net/discovery/1.0/consumer-identity/dynamic</tt>.
+            The Realm Definition MUST include a <tt>Service</tt>
+            element with the type URI, <tt>URI</tt> element, and
+            <tt>oauth:HttpMethod</tt> element. The
+            <tt>Service</tt> element MAY include the OPTIONAL
+            <tt>oauth:RequestParameterMethods</tt> and
+            <tt>oauth:CustomParameters</tt> elements. The
+            HTTP response of the request uses <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a>
+            section 5.3 and include the <tt>oauth_consumer_key</tt>
+            and <tt>xoauth_consumer_secret</tt> parameters.
+            For example:
+
+            </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+      &lt;Service&gt;
+        &lt;Type&gt;http://oauth.net/discovery/1.0/consumer-identity/dynamic&lt;/Type&gt;
+        &lt;URI&gt;http://sp.example.com/register&lt;/Type&gt;
+        &lt;oauth:HttpMethod&gt;GET&lt;/oauth:HttpMethod&gt;
+        &lt;oauth:RequestParameter&gt;
+          &lt;oauth:Method&gt;URL-QUERY&lt;/oauth:Method&gt;
+        &lt;/oauth:RequestParameter&gt;
+        &lt;oauth:CustomParameters&gt;
+          &lt;oauth:Parameter source="http://oauth.net/example/consumer_identity&gt;name&lt;/oauth:Parameter&gt;
+          &lt;oauth:Parameter source="http://oauth.net/example/consumer_identity&gt;description&lt;/oauth:Parameter&gt;
+          &lt;oauth:Parameter source="http://oauth.net/example/consumer_identity&gt;url&lt;/oauth:Parameter&gt;
+        &lt;/oauth:CustomParameters&gt;
+      &lt;/Service&gt;
+</pre></div><p>
+
+          
+</p>
+<a name="anchor15"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.4.3"></a><h3>5.4.3.&nbsp;
+Manual Allocation</h3>
+
+<p>
+            Manual Consumer Identity allocation is used when the Service Provider requires
+            a Consumer registration process that cannot be performed
+            automatically or has unique requirements the Consumer Developer needs
+            to address. OAuth Discovery does not address this scenario expect
+            for enabling the Service Provider to provide a human-readable
+            endpoint, and associating Consumer Identities obtained via that
+            endpoint to a Consumer Realm. This allows Consumer to use OAuth
+            Discovery with manually pre-established Consumer Identities.
+            Type:
+          
+</p>
+<p>
+            Manual allocation is identified using the service type URI:
+            <tt>http://oauth.net/discovery/1.0/consumer-identity/manual</tt>.
+            The Realm Definition MUST include a <tt>Service</tt>
+            element with the type URI, <tt>URI</tt> element, and
+            <tt>oauth:HttpMethod</tt> element. The result value
+            of the request is undefined. For example:
+            
+            </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+      &lt;Service&gt;
+        &lt;Type&gt;http://oauth.net/discovery/1.0/consumer-identity/manual&lt;/Type&gt;
+        &lt;URI&gt;http://sp.example.com/consumer_apply&lt;/Type&gt;
+        &lt;oauth:HttpMethod&gt;GET&lt;/oauth:HttpMethod&gt;
+      &lt;/Service&gt;
+</pre></div><p>
+
+          
+</p>
+<a name="anchor16"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.4.4"></a><h3>5.4.4.&nbsp;
+Complex Consumer Realm</h3>
+
+<p>
+            In cases where a Service Provider offers multiple Consumer Realms,
+            and allows access to its Protected Resources using different
+            combinations of those Realms, the Service Provider MAY include
+            multiple Consumer Realms per Resource Realm. The Service Provider
+            MAY also include multiple Consumer Identity services for a single
+            Consumer Realm, allowing Consumers to use one of multiple methods
+            to obtain a Consumer Identity.
+          
+</p>
+<a name="anchor17"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.5"></a><h3>5.5.&nbsp;
+Establish User Access</h3>
+
+<p>
+          The Consumer SHOULD check to see if it already has a valid Access
+          Token for the discovered User Realm of the Protected Resource. If
+          true, the Consumer MAY use that Token together with the Consumer
+          Identity established in the previous step to access the Protected
+          Resource. In this case, the Consumer does not need to discover or
+          parse the Realm Definition of the User Realm.
+        
+</p>
+<p>
+          If the Consumer does not have a valid Access Token, it MUST use the
+          discovered information contained in the Realm Definition of the User
+          Realm to perform the OAuth protocol and obtain access. The Realm
+          Definition contains all the documentation required to successfully
+          complete the Oauth workflow.
+        
+</p>
+<a name="anchor18"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.A"></a><h3>Appendix A.&nbsp;
+Appendix A - Examples</h3>
+
+<p>
+        The examples in this section demonstrate some of the capabilities of
+        the OAuth Discovery and try to provide a usable template for both
+        simple and complex scenarios.
+      
+</p>
+<a name="anchor19"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.A.1"></a><h3>Appendix A.1.&nbsp;
+Simple Discovery Definition Document</h3>
+
+<p>
+          This example demonstrate a Discovery Definition Document where
+          the Resource Realm contains the services configuration for both
+          the User Realm and Consumer Realm. The Service Provider also
+          support static Consumer Identity allocation.
+
+          </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+  &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+  &lt;XRDS xmlns="xri://$xrds"&gt;
+    &lt;XRD xmlns:oauth="http://oauth.net/discovery/1.0" xmlns="xri://$xrd*($v*2.0)"&gt;
+      &lt;Query&gt;http://api.example.com/&lt;/Query&gt;
+      &lt;Expires&gt;2007-12-31T23:59:59Z&lt;/Expires&gt;
+      &lt;oauth:RequestParameterMethods&gt;
+        &lt;oauth:Method&gt;AUTH-HEADER&lt;/oauth:Method&gt;
+        &lt;oauth:Method&gt;POST-BODY&lt;/oauth:Method&gt;
+        &lt;oauth:Method&gt;URL-QUERY&lt;/oauth:Method&gt;
+      &lt;/oauth:RequestParameterMethods&gt;
+      &lt;oauth:RequestSignature&gt;
+        &lt;oauth:Method&gt;HMAC-SHA1&lt;/oauth:Method&gt;
+      &lt;/oauth:RequestSignature&gt;
+      &lt;Service&gt;
+        &lt;Type&gt;http://oauth.net/core/1.0/endpoint/request&lt;/Type&gt;
+        &lt;URI&gt;https://api.example.com/session/request&lt;/URI&gt;
+        &lt;oauth:HttpMethod&gt;POST&lt;/oauth:HttpMethod&gt;
+        &lt;oauth:RequestSignature append="head"&gt;
+          &lt;oauth:Method&gt;PLAINTEXT&lt;/oauth:Method&gt;
+        &lt;/oauth:RequestSignature&gt;
+      &lt;/Service&gt;
+      &lt;Service&gt;
+        &lt;Type&gt;http://oauth.net/core/1.0/endpoint/authorize&lt;/Type&gt;
+        &lt;URI&gt;https://api.example.com/session/login&lt;/URI&gt;
+        &lt;oauth:RequestParameterMethods append="override"&gt;
+          &lt;oauth:Method&gt;URL-QUERY&lt;/oauth:Method&gt;
+        &lt;/oauth:RequestParameterMethods&gt;
+      &lt;/Service&gt;
+      &lt;Service&gt;
+        &lt;Type&gt;http://oauth.net/core/1.0/endpoint/access&lt;/Type&gt;
+        &lt;oauth:HttpMethod&gt;POST&lt;/oauth:HttpMethod&gt;
+        &lt;URI&gt;https://api.example.com/session/activate&lt;/URI&gt;
+        &lt;oauth:RequestSignature append="head"&gt;
+          &lt;oauth:Method&gt;PLAINTEXT&lt;/oauth:Method&gt;
+        &lt;/oauth:RequestSignature&gt;
+      &lt;/Service&gt;
+      &lt;Service&gt;
+        &lt;Type&gt;http://oauth.net/discovery/1.0/consumer-identity/static&lt;/Type&gt;
+        &lt;oauth:ConsumerKey&gt;0685bd9184jfhq22&lt;/oauth:ConsumerKey&gt;
+      &lt;/Service&gt;
+    &lt;/XRD&gt;
+  &lt;/XRDS&gt;
+</pre></div><p>
+
+        
+</p>
+<a name="rfc.references1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>6.&nbsp;References</h3>
+<table width="99%" border="0">
+<tr><td class="author-text" valign="top"><a name="OAuth Core 1.0">[OAuth Core 1.0]</a></td>
+<td class="author-text">OAuth, OCW., &ldquo;<a href="http://oauth.net/core/1.0">OAuth Core 1.0</a>.&rdquo;</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2119">[RFC2119]</a></td>
+<td class="author-text">Bradner, B., &ldquo;<a href="ftp://ftp.isi.edu/in-notes/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a>,&rdquo; RFC&nbsp;2119.</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2606">[RFC2606]</a></td>
+<td class="author-text">Eastlake, D. and A. Panitz, &ldquo;<a href="ftp://ftp.isi.edu/in-notes/rfc2606.txt">Reserved Top Level DNS Names</a>,&rdquo; RFC&nbsp;2606.</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2616">[RFC2616]</a></td>
+<td class="author-text">Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L., Leach, P., and T. Berners-Lee, &ldquo;<a href="ftp://ftp.isi.edu/in-notes/rfc2616.txt">Hypertext Transfer Protocol -- HTTP/1.1</a>,&rdquo; RFC&nbsp;2616.</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2617">[RFC2617]</a></td>
+<td class="author-text">Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S., Leach, P., Luotonen, A., and L. Stewart, &ldquo;<a href="ftp://ftp.isi.edu/in-notes/rfc2617.txt">HTTP Authentication: Basic and Digest Access Authentication</a>,&rdquo; RFC&nbsp;2617.</td></tr>
+<tr><td class="author-text" valign="top"><a name="SHA1">[SHA1]</a></td>
+<td class="author-text">De Canniere, C. and C. Rechberger, &ldquo;<a href="http://dx.doi.org/10.1007/11935230_1">Finding SHA-1 Characteristics: General Results and Applications</a>.&rdquo;</td></tr>
+<tr><td class="author-text" valign="top"><a name="XRI Resolution 2.0">[XRI Resolution 2.0]</a></td>
+<td class="author-text">Wachob, G., Reed, D., Chasen, L., Tan, W., and S. Churchill, &ldquo;<a href="http://www.oasis-open.org/committees/download.php/17293">Extensible Resource Identifier (XRI) Resolution V2.0 - Committee Draft 02</a>&rdquo; (<a href="http://docs.oasis-open.org/xri/2.0/specs/cd02/xri-resolution-V2.0-cd-02.html">HTML</a>, <a href="http://docs.oasis-open.org/xri/2.0/specs/cd02/xri-resolution-V2.0-cd-02.pdf">PDF</a>).</td></tr>
+</table>
+
+<a name="rfc.authors"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>Author's Address</h3>
+<table width="99%" border="0" cellpadding="0" cellspacing="0">
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Eran Hammer-Lahav</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Hueniverse, LLC</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:eran@hueniverse.com">eran@hueniverse.com</a></td></tr>
+</table>
+</body></html>
+

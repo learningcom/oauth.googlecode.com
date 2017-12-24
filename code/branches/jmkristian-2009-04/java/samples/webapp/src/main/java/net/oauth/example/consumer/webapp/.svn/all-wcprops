@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/webapp/src/main/java/net/oauth/example/consumer/webapp
+END
+YahooConsumer.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/webapp/src/main/java/net/oauth/example/consumer/webapp/YahooConsumer.java
+END
+Callback.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/webapp/src/main/java/net/oauth/example/consumer/webapp/Callback.java
+END
+UserAuthorizationStub.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/webapp/src/main/java/net/oauth/example/consumer/webapp/UserAuthorizationStub.java
+END
+TermieConsumer.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/webapp/src/main/java/net/oauth/example/consumer/webapp/TermieConsumer.java
+END
+MagnoliaConsumer.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/webapp/src/main/java/net/oauth/example/consumer/webapp/MagnoliaConsumer.java
+END
+consumer.properties
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/webapp/src/main/java/net/oauth/example/consumer/webapp/consumer.properties
+END
+CookieMap.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/webapp/src/main/java/net/oauth/example/consumer/webapp/CookieMap.java
+END
+SampleProviderConsumer.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/webapp/src/main/java/net/oauth/example/consumer/webapp/SampleProviderConsumer.java
+END
+HttpClientPool.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/webapp/src/main/java/net/oauth/example/consumer/webapp/HttpClientPool.java
+END
+MediamaticConsumer.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/webapp/src/main/java/net/oauth/example/consumer/webapp/MediamaticConsumer.java
+END
+TwitterConsumer.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/webapp/src/main/java/net/oauth/example/consumer/webapp/TwitterConsumer.java
+END
+RedirectException.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/webapp/src/main/java/net/oauth/example/consumer/webapp/RedirectException.java
+END
+consumer.properties.template
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/webapp/src/main/java/net/oauth/example/consumer/webapp/consumer.properties.template
+END
+Reset.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/webapp/src/main/java/net/oauth/example/consumer/webapp/Reset.java
+END
+CookieConsumer.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/webapp/src/main/java/net/oauth/example/consumer/webapp/CookieConsumer.java
+END

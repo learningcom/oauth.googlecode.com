@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/1177/code/branches/jmeter/core/consumer/src/main/java/net/oauth/client
+END
+URLConnectionClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/1177/code/branches/jmeter/core/consumer/src/main/java/net/oauth/client/URLConnectionClient.java
+END
+URLConnectionResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/!svn/ver/1177/code/branches/jmeter/core/consumer/src/main/java/net/oauth/client/URLConnectionResponse.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/1177/code/branches/jmeter/core/consumer/src/main/java/net/oauth/client/package-info.java
+END

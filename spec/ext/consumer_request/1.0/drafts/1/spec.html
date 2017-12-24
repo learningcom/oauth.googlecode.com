@@ -1,0 +1,589 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en"><head><title>Implementers' Draft: OAuth Consumer Request 1.0 Draft 1</title>
+<meta http-equiv="Expires" content="Fri, 14 Dec 2007 22:43:13 +0000">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="OAuth Consumer Request 1.0 Draft 1">
+<meta name="generator" content="xml2rfc v1.32 (http://xml.resource.org/)">
+<style type='text/css'><!--
+        body {
+                font-family: verdana, charcoal, helvetica, arial, sans-serif;
+                font-size: small; color: #000; background-color: #FFF;
+                margin: 2em;
+        }
+        h1, h2, h3, h4, h5, h6 {
+                font-family: helvetica, monaco, "MS Sans Serif", arial, sans-serif;
+                font-weight: bold; font-style: normal;
+        }
+        h1 { color: #900; background-color: transparent; text-align: right; }
+        h3 { color: #333; background-color: transparent; }
+
+        td.RFCbug {
+                font-size: x-small; text-decoration: none;
+                width: 30px; height: 30px; padding-top: 2px;
+                text-align: justify; vertical-align: middle;
+                background-color: #000;
+        }
+        td.RFCbug span.RFC {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: bold; color: #666;
+        }
+        td.RFCbug span.hotText {
+                font-family: charcoal, monaco, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: normal; text-align: center; color: #FFF;
+        }
+
+        table.TOCbug { width: 30px; height: 15px; }
+        td.TOCbug {
+                text-align: center; width: 30px; height: 15px;
+                color: #FFF; background-color: #900;
+        }
+        td.TOCbug a {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, sans-serif;
+                font-weight: bold; font-size: x-small; text-decoration: none;
+                color: #FFF; background-color: transparent;
+        }
+
+        td.header {
+                font-family: arial, helvetica, sans-serif; font-size: x-small;
+                vertical-align: top; width: 33%;
+                color: #FFF; background-color: #666;
+        }
+        td.author { font-weight: bold; font-size: x-small; margin-left: 4em; }
+        td.author-text { font-size: x-small; }
+
+        /* info code from SantaKlauss at http://www.madaboutstyle.com/tooltip2.html */
+        a.info {
+                /* This is the key. */
+                position: relative;
+                z-index: 24;
+                text-decoration: none;
+        }
+        a.info:hover {
+                z-index: 25;
+                color: #FFF; background-color: #900;
+        }
+        a.info span { display: none; }
+        a.info:hover span.info {
+                /* The span will display just on :hover state. */
+                display: block;
+                position: absolute;
+                font-size: smaller;
+                top: 2em; left: -5em; width: 15em;
+                padding: 2px; border: 1px solid #333;
+                color: #900; background-color: #EEE;
+                text-align: left;
+        }
+
+        a { font-weight: bold; }
+        a:link    { color: #900; background-color: transparent; }
+        a:visited { color: #633; background-color: transparent; }
+        a:active  { color: #633; background-color: transparent; }
+
+        p { margin-left: 2em; margin-right: 2em; }
+        p.copyright { font-size: x-small; }
+        p.toc { font-size: small; font-weight: bold; margin-left: 3em; }
+        table.toc { margin: 0 0 0 3em; padding: 0; border: 0; vertical-align: text-top; }
+        td.toc { font-size: small; font-weight: bold; vertical-align: text-top; }
+
+        ol.text { margin-left: 2em; margin-right: 2em; }
+        ul.text { margin-left: 2em; margin-right: 2em; }
+        li      { margin-left: 3em; }
+
+        /* RFC-2629 <spanx>s and <artwork>s. */
+        em     { font-style: italic; }
+        strong { font-weight: bold; }
+        dfn    { font-weight: bold; font-style: normal; }
+        cite   { font-weight: normal; font-style: normal; }
+        tt     { color: #036; }
+        tt, pre, pre dfn, pre em, pre cite, pre span {
+                font-family: "Courier New", Courier, monospace; font-size: small;
+        }
+        pre {
+                text-align: left; padding: 4px;
+                color: #000; background-color: #CCC;
+        }
+        pre dfn  { color: #900; }
+        pre em   { color: #66F; background-color: #FFC; font-weight: normal; }
+        pre .key { color: #33C; font-weight: bold; }
+        pre .id  { color: #900; }
+        pre .str { color: #000; background-color: #CFF; }
+        pre .val { color: #066; }
+        pre .rep { color: #909; }
+        pre .oth { color: #000; background-color: #FCF; }
+        pre .err { background-color: #FCC; }
+
+        /* RFC-2629 <texttable>s. */
+        table.all, table.full, table.headers, table.none {
+                font-size: small; text-align: center; border-width: 2px;
+                vertical-align: top; border-collapse: collapse;
+        }
+        table.all, table.full { border-style: solid; border-color: black; }
+        table.headers, table.none { border-style: none; }
+        th {
+                font-weight: bold; border-color: black;
+                border-width: 2px 2px 3px 2px;
+        }
+        table.all th, table.full th { border-style: solid; }
+        table.headers th { border-style: none none solid none; }
+        table.none th { border-style: none; }
+        table.all td {
+                border-style: solid; border-color: #333;
+                border-width: 1px 2px;
+        }
+        table.full td, table.headers td, table.none td { border-style: none; }
+
+        hr { height: 1px; }
+        hr.insert {
+                width: 80%; border-style: none; border-width: 0;
+                color: #CCC; background-color: #CCC;
+        }
+--></style>
+</head>
+<body>
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<table summary="layout" width="66%" border="0" cellpadding="0" cellspacing="0"><tr><td><table summary="layout" width="100%" border="0" cellpadding="2" cellspacing="1">
+<tr><td class="header">Implementers' Draft</td><td class="header">E. Hammer-Lahav</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">Hueniverse, LLC</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">December 14, 2007</td></tr>
+</table></td></tr></table>
+<h1><br />OAuth Consumer Request 1.0 Draft 1</h1>
+
+<h3>Abstract</h3>
+
+<p>
+        This memo describes a method for using the OAuth flow to sign
+        a request made between a Consumer and Service Provider where no User
+        is involved. This enables OAuth to be used as a replacement to HTTP
+        Basic authentication, which is not as complex as HTTP Digest
+        authentication, and extends the capabilities of the OAuth Consumer
+        credentials.
+      
+</p>
+<p>
+        OAuth Core 1.0 defines a protocol for delegating user access to
+        Consumer applications without sharing the user's private credentials.
+        The protocol centers on a three-legged scenario, delegating User
+        access to a Consumer for resources held by a Service Provider. In
+        some cases, a two-legged scenario is needed, in which the Consumer
+        is acting on behalf of itself, without a User involvement.
+      
+</p>
+<p>
+        OAuth was created to solve the problem of sharing two-legged credentials
+        in three-legged situations. However, within the OAuth context, Consumers
+        might still need to communicate with the Service Provider using requests
+        that are Consumer-specific. Since the Consumers already established a
+        Consumer Key and Consumer Secret, there is value in being able to use
+        them for requests where the Consumer identity is verified.
+      
+</p><a name="toc"></a><br /><hr />
+<h3>Table of Contents</h3>
+<p class="toc">
+<a href="#anchor1">1.</a>&nbsp;
+Notation and Conventions<br />
+<a href="#anchor2">2.</a>&nbsp;
+Definitions<br />
+<a href="#anchor3">3.</a>&nbsp;
+Consumer Identity<br />
+<a href="#anchor4">4.</a>&nbsp;
+Consumer Request<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor5">4.1.</a>&nbsp;
+Consumer Sends Request<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor6">4.2.</a>&nbsp;
+Service Provider Replies<br />
+<a href="#anchor7">5.</a>&nbsp;
+Security Considerations<br />
+<a href="#anchor8">Appendix&nbsp;A.</a>&nbsp;
+Appendix A - Example<br />
+<a href="#anchor9">Appendix&nbsp;B.</a>&nbsp;
+Appendix B - Discovery<br />
+<a href="#rfc.references1">6.</a>&nbsp;
+References<br />
+<a href="#rfc.authors">&#167;</a>&nbsp;
+Author's Address<br />
+</p>
+<br clear="all" />
+
+<a name="anchor1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1"></a><h3>1.&nbsp;
+Notation and Conventions</h3>
+
+<p>
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+        "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+        document are to be interpreted as described in <a class='info' href='#RFC2119'>[RFC2119]<span> (</span><span class='info'>Bradner, B., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; .</span><span>)</span></a>.
+        Domain name examples use <a class='info' href='#RFC2606'>[RFC2606]<span> (</span><span class='info'>Eastlake, D. and A. Panitz, &ldquo;Reserved Top Level DNS Names,&rdquo; .</span><span>)</span></a>.
+      
+</p>
+<p>
+        Unless otherwise noted, this specification is written as a direct
+        continuation of <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth Core Workgroup, &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a>, inheriting the definitions and
+        guidelines set by it.
+      
+</p>
+<a name="anchor2"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2"></a><h3>2.&nbsp;
+Definitions</h3>
+
+<p>
+        </p>
+<blockquote class="text"><dl>
+<dt>Service Provider:</dt>
+<dd>
+            A web application that allows access via OAuth.
+          
+</dd>
+<dt>Consumer:</dt>
+<dd>
+            A website or application that uses OAuth to access resources
+            controlled by the Service Provider.
+          
+</dd>
+<dt>Protected Resource(s):</dt>
+<dd>
+            Data controlled by the Service Provider, which the Consumer can
+            access through authentication.
+          
+</dd>
+<dt>Consumer Key:</dt>
+<dd>
+            A value used by the Consumer to identify itself to the Service
+            Provider.
+          
+</dd>
+<dt>Consumer Secret:</dt>
+<dd>
+            A secret used by the Consumer to establish ownership of the
+            Consumer Key.
+          
+</dd>
+</dl></blockquote><p>
+      
+</p>
+<a name="anchor3"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3"></a><h3>3.&nbsp;
+Consumer Identity</h3>
+
+<p>
+        This memo defines a method in which the Consumer Key and Consumer
+        Secret, established by means left unspecified, are used to authenticate
+        a Consumer against credentials stored by the Service Provider. For the
+        purpose of this memo, it is assumed the Consumer already established
+        a Consumer Key and Consumer Secret with the Service Provider.
+      
+</p>
+<p>
+        While the method described in this memo can be used with an empty
+        Consumer Secret, it does not provide any security or protection in such
+        a scenario, unless other means of identification are used, such as a
+        Public Key.
+      
+</p>
+<a name="anchor4"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4"></a><h3>4.&nbsp;
+Consumer Request</h3>
+
+<p>
+        The Consumer requests the Protected Resource by making an HTTP request
+        to the Service Provider. The request HTTP method and URL are provided by
+        the Service Provider by means not specified in this memo. This workflow
+        has been designed to imitate the flow used to obtain a Request Token in
+        a three-legged OAuth flow as defined in <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth Core Workgroup, &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a>
+        section 6.1.
+      
+</p>
+<a name="anchor5"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.1"></a><h3>4.1.&nbsp;
+Consumer Sends Request</h3>
+
+<p>
+          To access a Protected Resource, the Consumer sends an HTTP request to
+          the Service Provider's resource endpoint URL. The request MUST be
+          signed as defined in <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth Core Workgroup, &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> section 9 with an
+          empty Token Secret. The request contains the following REQUIRED
+          parameters, unless otherwise noted:
+
+          </p>
+<blockquote class="text"><dl>
+<dt>oauth_consumer_key:</dt>
+<dd>
+              The Consumer Key.
+            
+</dd>
+<dt>oauth_signature_method:</dt>
+<dd>
+              The signature method the Consumer used to sign the request.
+            
+</dd>
+<dt>oauth_signature:</dt>
+<dd>
+              The signature as defined in
+              <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth Core Workgroup, &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> section 9: Signing Requests.
+            
+</dd>
+<dt>oauth_timestamp:</dt>
+<dd>
+              As defined in <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth Core Workgroup, &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> section 8: Nonce
+              and Timestamp.
+            
+</dd>
+<dt>oauth_nonce:</dt>
+<dd>
+              As defined in <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth Core Workgroup, &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> section 8: Nonce
+              and Timestamp.
+            
+</dd>
+<dt>oauth_version:</dt>
+<dd>
+              OPTIONAL. If present, value MUST be <tt>1.0</tt>. Service Providers
+              MUST assume the protocol version to be <tt>1.0</tt> if this parameter
+              is not present. Service Providers' response to non-<tt>1.0</tt> value
+              is left undefined.
+            
+</dd>
+<dt>Additional parameters:</dt>
+<dd>
+              OPTIONAL. Any additional parameters, as defined by the Service Provider.
+            
+</dd>
+</dl></blockquote><p>
+        
+</p>
+<a name="anchor6"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.2"></a><h3>4.2.&nbsp;
+Service Provider Replies</h3>
+
+<p>
+          The Service Provider verifies the signature and Consumer identity as
+          defined in <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth Core Workgroup, &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> section 9. If successful,
+          it replies with the appropriate response to the Consumer request. The
+          format of the reply is left unspecified by this memo.
+      
+</p>
+<p>
+          If the request fails verification or is rejected for other reasons,
+          the Service Provider SHOULD respond with the appropriate response
+          code as defined in <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth Core Workgroup, &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> section 10: HTTP
+          Response Codes. The Service Provider MAY include some further details
+          about why the request was rejected in the HTTP response body as
+          defined in  <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth Core Workgroup, &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> section 5.3: Service
+          Provider Response Parameters.
+        
+</p>
+<a name="anchor7"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5"></a><h3>5.&nbsp;
+Security Considerations</h3>
+
+<p>
+        This memo abides by the security considerations specified in
+        <a class='info' href='#OAuth Core 1.0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth Core Workgroup, &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a>.
+      
+</p>
+<a name="anchor8"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.A"></a><h3>Appendix A.&nbsp;
+Appendix A - Example</h3>
+
+<p>
+        In this example, the Service Provider <tt>provider.example.net</tt> is an
+        OAuth-enabled website, and the Consumer <tt>consumer.example.com</tt> uses
+        resource offered by the Service Provider on behalf of its Users.
+        The Service Provider allows Consumers to manage their Consumer profile
+        which includes their name and description using an API call, in
+        addition to a manual HTML page. The Consumer profile is used by the
+        Service Provider when asking Users to grant Consumer access.
+      
+</p>
+<p>
+        The Service Provider allows Consumers to see their profile at the
+        following endpoint URL:
+
+        </p>
+<blockquote class="text"><dl>
+<dt>Profile Request URL:</dt>
+<dd>
+            <tt>http://provider.example.net/profile</tt>, using HTTP <tt>GET</tt>
+          
+</dd>
+</dl></blockquote><p>
+      
+</p>
+<p>
+        The Service Provider supports the <tt>HMAC-SHA1</tt>
+        signature method and the OAuth Authorization Header. No additional
+        parameters are defined for the profile request.
+      
+</p>
+<p>
+        The Consumer already has an established identity with the Service
+        Provider:
+
+        </p>
+<blockquote class="text"><dl>
+<dt>Consumer Key:</dt>
+<dd>
+            <tt>dpf43f3p2l4k3l03</tt>
+          
+</dd>
+<dt>Consumer Secret:</dt>
+<dd>
+            <tt>kd94hf93k423kf44</tt>
+          
+</dd>
+</dl></blockquote><p>
+      
+</p>
+<p>
+        The consumer needs to sign the request before sending it to the Service
+        Provider. To generate the signature, it first needs to generate the
+        Signature Base String. The request contains the following parameters
+        (<tt>oauth_signature</tt> excluded) which are
+        ordered and concatenated into a normalized string:
+
+        </p>
+<blockquote class="text"><dl>
+<dt>oauth_consumer_key:</dt>
+<dd>
+            <tt>dpf43f3p2l4k3l03</tt>
+          
+</dd>
+<dt>oauth_signature_method:</dt>
+<dd>
+            <tt>HMAC-SHA1</tt>
+          
+</dd>
+<dt>oauth_timestamp:</dt>
+<dd>
+            <tt>1191242096</tt>
+          
+</dd>
+<dt>oauth_nonce:</dt>
+<dd>
+            <tt>kllo9940pd9333jh</tt>
+          
+</dd>
+<dt>oauth_version:</dt>
+<dd>
+            <tt>1.0</tt>
+          
+</dd>
+</dl></blockquote><p>
+      
+</p>
+<p>
+        The following inputs are used to generate the Signature Base String:
+
+        </p>
+<ol class="text">
+<li>
+            <tt>GET</tt>
+          
+</li>
+<li>
+            <tt>http://provider.example.net/profile</tt>
+          
+</li>
+<li>
+            <tt>oauth_consumer_key=dpf43f3p2l4k3l03&amp;oauth_nonce=kllo9940pd9333jh&amp;oauth_signature_method=HMAC-SHA1&amp;oauth_timestamp=1191242096&amp;oauth_version=1.0</tt>
+          
+</li>
+</ol><p>
+      
+</p>
+<p>
+        The Signature Base String is:
+
+        </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+    GET&amp;http%3A%2F%2Fprovider.example.net%2Fprofile&amp;oauth_consumer_key%3Ddpf43f3p2l4k3l03%26oauth_nonce%3Dkllo9940pd9333jh%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1191242096%26oauth_version%3D1.0
+</pre></div><p>
+
+      
+</p>
+<p>
+        <tt>HMAC-SHA1</tt> produces the following <tt>digest</tt> value as a base64-encoded
+        string, using the Signature Base String as <tt>text</tt> and
+        <tt>kd94hf93k423kf44&amp;</tt> as <tt>key</tt> (empty
+        Token Secret):
+
+        </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+    SGtGiOrgTGF5Dd4RUMguopweOSU=
+</pre></div><p>
+
+      
+</p>
+<p>
+        All together, the Consumer request for its profile is:
+
+        </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+    http://provider.example.net/profile
+
+    Authorization: OAuth realm="http://provider.example.net/",
+                    oauth_consumer_key="dpf43f3p2l4k3l03",
+                    oauth_signature_method="HMAC-SHA1",
+                    oauth_signature="SGtGiOrgTGF5Dd4RUMguopweOSU%3D",
+                    oauth_timestamp="1191242096",
+                    oauth_nonce="kllo9940pd9333jh",
+                    oauth_version="1.0"
+</pre></div><p>
+
+      
+</p>
+<p>
+        <tt>provider.example.net</tt> checks the signature and responds with the
+        requested profile.
+      
+</p>
+<a name="anchor9"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.B"></a><h3>Appendix B.&nbsp;
+Appendix B - Discovery</h3>
+
+<p>
+        When using OAuth Discovery as defined in <a class='info' href='#OAuth Discovery 1.0'>[OAuth Discovery 1.0]<span> (</span><span class='info'>Hammer-Lahav, E., &ldquo;OAuth Discovery 1.0,&rdquo; .</span><span>)</span></a>,
+        the Consumer Request 1.0 extension service type URI is:
+        <tt>http://oauth.net/ext/consumer_request/1.0</tt>.
+        It follows the same rules and workflow as the
+        <tt>http://oauth.net/core/1.0/endpoint/resource</tt> service type.
+      
+</p>
+<a name="rfc.references1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>6.&nbsp;References</h3>
+<table width="99%" border="0">
+<tr><td class="author-text" valign="top"><a name="OAuth Core 1.0">[OAuth Core 1.0]</a></td>
+<td class="author-text">OAuth Core Workgroup, &ldquo;<a href="http://oauth.net/core/1.0">OAuth Core 1.0</a>.&rdquo;</td></tr>
+<tr><td class="author-text" valign="top"><a name="OAuth Discovery 1.0">[OAuth Discovery 1.0]</a></td>
+<td class="author-text">Hammer-Lahav, E., &ldquo;<a href="http://oauth.net/core/1.0">OAuth Discovery 1.0</a>.&rdquo;</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2119">[RFC2119]</a></td>
+<td class="author-text">Bradner, B., &ldquo;<a href="ftp://ftp.isi.edu/in-notes/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a>,&rdquo; RFC&nbsp;2119.</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2606">[RFC2606]</a></td>
+<td class="author-text">Eastlake, D. and A. Panitz, &ldquo;<a href="ftp://ftp.isi.edu/in-notes/rfc2606.txt">Reserved Top Level DNS Names</a>,&rdquo; RFC&nbsp;2606.</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2617">[RFC2617]</a></td>
+<td class="author-text">Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S., Leach, P., Luotonen, A., and L. Stewart, &ldquo;<a href="ftp://ftp.isi.edu/in-notes/rfc2617.txt">HTTP Authentication: Basic and Digest Access Authentication</a>,&rdquo; RFC&nbsp;2617.</td></tr>
+<tr><td class="author-text" valign="top"><a name="SHA1">[SHA1]</a></td>
+<td class="author-text">De Canniere, C. and C. Rechberger, &ldquo;<a href="http://dx.doi.org/10.1007/11935230_1">Finding SHA-1 Characteristics: General Results and Applications</a>.&rdquo;</td></tr>
+</table>
+
+<a name="rfc.authors"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>Author's Address</h3>
+<table width="99%" border="0" cellpadding="0" cellspacing="0">
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Eran Hammer-Lahav</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Hueniverse, LLC</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:eran@hueniverse.com">eran@hueniverse.com</a></td></tr>
+</table>
+</body></html>
+

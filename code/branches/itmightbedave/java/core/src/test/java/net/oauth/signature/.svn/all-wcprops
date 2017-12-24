@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/658/code/branches/itmightbedave/java/core/src/test/java/net/oauth/signature
+END
+RSA_SHA1SignatureTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/658/code/branches/itmightbedave/java/core/src/test/java/net/oauth/signature/RSA_SHA1SignatureTest.java
+END
+OAuthSignatureMethodTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/!svn/ver/658/code/branches/itmightbedave/java/core/src/test/java/net/oauth/signature/OAuthSignatureMethodTest.java
+END

@@ -1,0 +1,446 @@
+// !$*UTF8*$!
+{
+	0867D690FE84028FC02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeTarget = E96FC32C0CFB46F200189282 /* OAuthConsumerTestSuite */;
+		addToTargets = (
+			8DC2EF4F0486A6940098B216 /* OAuthConsumer */,
+		);
+		breakpointsGroup = E9854ED90CFB091800DB9D82 /* XCBreakpointsBucket */;
+		codeSenseManager = E9086AE80CFB06DD009B7FEB /* Code sense */;
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXExecutablesDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXExecutablesDataSource_NameID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					22,
+					300,
+					251.5835,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXExecutablesDataSource_ActiveFlagID,
+					PBXExecutablesDataSource_NameID,
+					PBXExecutablesDataSource_CommentsID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					523,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					200,
+					343,
+					20,
+					48,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 217804749;
+			PBXWorkspaceStateSaveDate = 217804749;
+		};
+		sourceControlManager = E9086AE70CFB06DD009B7FEB /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	8DC2EF4F0486A6940098B216 /* OAuthConsumer */ = {
+		activeExec = 0;
+	};
+	E9086AE70CFB06DD009B7FEB /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			SubversionToolPath = /opt/local/bin/svn;
+		};
+		scmType = scm.subversion;
+	};
+	E9086AE80CFB06DD009B7FEB /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	E96FC2AD0CFB44B900189282 /* OADataFetcher.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {956, 644}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{38, 232}, {889, 620}}";
+		};
+	};
+	E96FC2AE0CFB44B900189282 /* OADataFetcher.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {962, 854}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 351}, {850, 491}}";
+			sepNavWindowFrame = "{{61, 211}, {889, 620}}";
+		};
+	};
+	E96FC2AF0CFB44B900189282 /* OAHMAC_SHA1SignatureProvider.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 518}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 27}, {850, 491}}";
+			sepNavWindowFrame = "{{84, 190}, {889, 620}}";
+		};
+	};
+	E96FC2B00CFB44B900189282 /* OAHMAC_SHA1SignatureProvider.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 994}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{107, 169}, {889, 620}}";
+		};
+	};
+	E96FC2B10CFB44B900189282 /* OAMutableURLRequest.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 1050}}";
+			sepNavSelRange = "{2276, 0}";
+			sepNavVisRect = "{{0, 559}, {850, 491}}";
+			sepNavWindowFrame = "{{130, 148}, {889, 620}}";
+		};
+	};
+	E96FC2B20CFB44B900189282 /* OAMutableURLRequest.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1388, 2800}}";
+			sepNavSelRange = "{4545, 0}";
+			sepNavVisRect = "{{0, 1474}, {850, 491}}";
+			sepNavWindowFrame = "{{74, 257}, {889, 620}}";
+		};
+	};
+	E96FC2B30CFB44B900189282 /* OAPlaintextSignatureProvider.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 491}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{176, 106}, {889, 620}}";
+		};
+	};
+	E96FC2B40CFB44B900189282 /* OAPlaintextSignatureProvider.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 574}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 83}, {850, 491}}";
+			sepNavWindowFrame = "{{199, 85}, {889, 620}}";
+		};
+	};
+	E96FC2B50CFB44B900189282 /* OARequestParameter.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 756}}";
+			sepNavSelRange = "{1286, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{222, 64}, {889, 620}}";
+		};
+	};
+	E96FC2B60CFB44B900189282 /* OARequestParameter.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 1106}}";
+			sepNavSelRange = "{1286, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{15, 253}, {889, 620}}";
+		};
+	};
+	E96FC2B70CFB44B900189282 /* OAServiceTicket.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 728}}";
+			sepNavSelRange = "{1282, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{38, 232}, {889, 620}}";
+		};
+	};
+	E96FC2B80CFB44B900189282 /* OAServiceTicket.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 854}}";
+			sepNavSelRange = "{1282, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{61, 211}, {889, 620}}";
+		};
+	};
+	E96FC2B90CFB44B900189282 /* OAuthConsumer.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 532}}";
+			sepNavSelRange = "{1229, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{15, 253}, {889, 620}}";
+		};
+	};
+	E96FC2EC0CFB45D700189282 /* NSMutableURLRequest+Parameters.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 504}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{153, 127}, {889, 620}}";
+		};
+	};
+	E96FC2ED0CFB45D700189282 /* NSMutableURLRequest+Parameters.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1148, 1288}}";
+			sepNavSelRange = "{1280, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{176, 106}, {889, 620}}";
+		};
+	};
+	E96FC2EE0CFB45D700189282 /* NSString+URLEncoding.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 491}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{199, 85}, {889, 620}}";
+		};
+	};
+	E96FC2EF0CFB45D700189282 /* NSString+URLEncoding.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1094, 700}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 209}, {850, 491}}";
+			sepNavWindowFrame = "{{222, 64}, {889, 620}}";
+		};
+	};
+	E96FC2F00CFB45D700189282 /* NSURL+Base.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 491}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{15, 253}, {889, 620}}";
+		};
+	};
+	E96FC2F10CFB45D700189282 /* NSURL+Base.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 532}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 41}, {850, 491}}";
+			sepNavWindowFrame = "{{38, 232}, {889, 620}}";
+		};
+	};
+	E96FC2F80CFB463000189282 /* NSMutableURLRequest+ParametersTest.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 756}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{61, 211}, {889, 620}}";
+		};
+	};
+	E96FC2F90CFB463000189282 /* NSMutableURLRequest+ParametersTest.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {944, 2604}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 2113}, {850, 491}}";
+			sepNavWindowFrame = "{{84, 190}, {889, 620}}";
+		};
+	};
+	E96FC2FA0CFB463000189282 /* NSString+URLEncodingTest.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 491}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{107, 169}, {889, 620}}";
+		};
+	};
+	E96FC2FB0CFB463000189282 /* NSString+URLEncodingTest.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1034, 546}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 55}, {850, 491}}";
+			sepNavWindowFrame = "{{130, 148}, {889, 620}}";
+		};
+	};
+	E96FC2FC0CFB463000189282 /* NSURL+BaseTest.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 504}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{153, 127}, {889, 620}}";
+		};
+	};
+	E96FC2FD0CFB463000189282 /* NSURL+BaseTest.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {908, 560}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 69}, {850, 491}}";
+			sepNavWindowFrame = "{{176, 106}, {889, 620}}";
+		};
+	};
+	E96FC2FE0CFB463000189282 /* OAConsumerTest.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 504}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{199, 85}, {889, 620}}";
+		};
+	};
+	E96FC2FF0CFB463000189282 /* OAConsumerTest.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 546}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 55}, {850, 491}}";
+			sepNavWindowFrame = "{{222, 64}, {889, 620}}";
+		};
+	};
+	E96FC3000CFB463000189282 /* OADataFetcherTest.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 546}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 42}, {850, 491}}";
+			sepNavWindowFrame = "{{15, 253}, {889, 620}}";
+		};
+	};
+	E96FC3010CFB463000189282 /* OADataFetcherTest.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 1106}}";
+			sepNavSelRange = "{1673, 0}";
+			sepNavVisRect = "{{0, 615}, {850, 491}}";
+			sepNavWindowFrame = "{{84, 190}, {889, 620}}";
+		};
+	};
+	E96FC3020CFB463000189282 /* OAHMAC_SHA1SignatureProviderTest.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 491}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{38, 232}, {889, 620}}";
+		};
+	};
+	E96FC3030CFB463000189282 /* OAHMAC_SHA1SignatureProviderTest.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {2204, 602}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 111}, {850, 491}}";
+			sepNavWindowFrame = "{{61, 211}, {889, 620}}";
+		};
+	};
+	E96FC3040CFB463000189282 /* OAMutableURLRequestTest.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 686}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 195}, {850, 491}}";
+			sepNavWindowFrame = "{{84, 190}, {889, 620}}";
+		};
+	};
+	E96FC3050CFB463000189282 /* OAMutableURLRequestTest.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1862, 1442}}";
+			sepNavSelRange = "{1291, 0}";
+			sepNavVisRect = "{{0, 778}, {850, 491}}";
+			sepNavWindowFrame = "{{107, 169}, {889, 620}}";
+		};
+	};
+	E96FC3060CFB463000189282 /* OAPlaintextSignatureProviderTest.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 491}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{130, 148}, {889, 620}}";
+		};
+	};
+	E96FC3070CFB463000189282 /* OAPlaintextSignatureProviderTest.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 532}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 41}, {850, 491}}";
+			sepNavWindowFrame = "{{153, 127}, {889, 620}}";
+		};
+	};
+	E96FC3080CFB463000189282 /* OARequestParameterTest.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 560}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 69}, {850, 491}}";
+			sepNavWindowFrame = "{{176, 106}, {889, 620}}";
+		};
+	};
+	E96FC3090CFB463000189282 /* OARequestParameterTest.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1058, 742}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 251}, {850, 491}}";
+			sepNavWindowFrame = "{{199, 85}, {889, 620}}";
+		};
+	};
+	E96FC30B0CFB463000189282 /* OATokenTest.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 644}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 153}, {850, 491}}";
+			sepNavWindowFrame = "{{222, 64}, {889, 620}}";
+		};
+	};
+	E96FC30C0CFB463000189282 /* OATokenTest.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {896, 1260}}";
+			sepNavSelRange = "{1279, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{15, 253}, {889, 620}}";
+		};
+	};
+	E96FC3220CFB469E00189282 /* OAToken.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 756}}";
+			sepNavSelRange = "{1275, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{107, 169}, {889, 620}}";
+		};
+	};
+	E96FC3230CFB469E00189282 /* OAToken.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 2492}}";
+			sepNavSelRange = "{1275, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{130, 148}, {889, 620}}";
+		};
+	};
+	E96FC32C0CFB46F200189282 /* OAuthConsumerTestSuite */ = {
+		activeExec = 0;
+	};
+	E9854EC80CFB086A00DB9D82 /* OAConsumer.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 672}}";
+			sepNavSelRange = "{1227, 51}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{15, 253}, {889, 620}}";
+		};
+	};
+	E9854EC90CFB086A00DB9D82 /* OAConsumer.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {850, 952}}";
+			sepNavSelRange = "{1278, 0}";
+			sepNavVisRect = "{{0, 0}, {850, 491}}";
+			sepNavWindowFrame = "{{38, 232}, {889, 620}}";
+		};
+	};
+	E9854ED90CFB091800DB9D82 /* XCBreakpointsBucket */ = {
+		isa = XCBreakpointsBucket;
+		name = OAuthConsumer;
+		objects = (
+		);
+	};
+}

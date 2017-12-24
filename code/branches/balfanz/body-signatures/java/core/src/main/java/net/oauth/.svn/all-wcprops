@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/534/code/branches/balfanz/body-signatures/java/core/src/main/java/net/oauth
+END
+SimpleOAuthValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/534/code/branches/balfanz/body-signatures/java/core/src/main/java/net/oauth/SimpleOAuthValidator.java
+END
+OAuth.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/534/code/branches/balfanz/body-signatures/java/core/src/main/java/net/oauth/OAuth.java
+END
+OAuthProblemException.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/core/src/main/java/net/oauth/OAuthProblemException.java
+END
+OAuthAccessor.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/core/src/main/java/net/oauth/OAuthAccessor.java
+END
+OAuthMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/534/code/branches/balfanz/body-signatures/java/core/src/main/java/net/oauth/OAuthMessage.java
+END
+consumer.properties.sample
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/core/src/main/java/net/oauth/consumer.properties.sample
+END
+OAuthValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/534/code/branches/balfanz/body-signatures/java/core/src/main/java/net/oauth/OAuthValidator.java
+END
+ConsumerProperties.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/core/src/main/java/net/oauth/ConsumerProperties.java
+END
+OAuthServiceProvider.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/core/src/main/java/net/oauth/OAuthServiceProvider.java
+END
+OAuthConsumer.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/core/src/main/java/net/oauth/OAuthConsumer.java
+END

@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/971/code/branches/jmkristian-2009-04/java/core/httpclient4/src/main/java/net/oauth/client/httpclient4
+END
+OAuthCredentials.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/!svn/ver/971/code/branches/jmkristian-2009-04/java/core/httpclient4/src/main/java/net/oauth/client/httpclient4/OAuthCredentials.java
+END
+HttpMethodResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/!svn/ver/971/code/branches/jmkristian-2009-04/java/core/httpclient4/src/main/java/net/oauth/client/httpclient4/HttpMethodResponse.java
+END
+HttpClient4.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/!svn/ver/971/code/branches/jmkristian-2009-04/java/core/httpclient4/src/main/java/net/oauth/client/httpclient4/HttpClient4.java
+END
+OAuthScheme.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/!svn/ver/971/code/branches/jmkristian-2009-04/java/core/httpclient4/src/main/java/net/oauth/client/httpclient4/OAuthScheme.java
+END
+HttpClientPool.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/!svn/ver/971/code/branches/jmkristian-2009-04/java/core/httpclient4/src/main/java/net/oauth/client/httpclient4/HttpClientPool.java
+END
+PreemptiveAuthorizer.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/!svn/ver/971/code/branches/jmkristian-2009-04/java/core/httpclient4/src/main/java/net/oauth/client/httpclient4/PreemptiveAuthorizer.java
+END
+OAuthSchemeFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/!svn/ver/971/code/branches/jmkristian-2009-04/java/core/httpclient4/src/main/java/net/oauth/client/httpclient4/OAuthSchemeFactory.java
+END

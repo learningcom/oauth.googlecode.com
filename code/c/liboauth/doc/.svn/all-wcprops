@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/1275/code/c/liboauth/doc
+END
+mainpage.dox.in
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/1275/code/c/liboauth/doc/mainpage.dox.in
+END
+oauth.3
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/1275/code/c/liboauth/doc/oauth.3
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/1201/code/c/liboauth/doc/Makefile.am
+END
+libOAuth.png
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/1201/code/c/liboauth/doc/libOAuth.png
+END

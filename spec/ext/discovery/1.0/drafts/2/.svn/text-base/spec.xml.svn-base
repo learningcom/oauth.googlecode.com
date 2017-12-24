@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='http://xml.resource.org/authoring/rfc2629.xslt' ?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+
+<rfc category="info" ipr="full3978" docName="oauth-discovery-1_0.xml">
+
+  <?rfc toc="yes" ?>
+  <?rfc tocdepth="3" ?>
+  <?rfc symrefs="yes" ?>
+  <?rfc sortrefs="yes"?>
+  <?rfc strict="yes" ?>
+  <?rfc iprnotified="no" ?>
+  <?rfc private="Implementers' Draft" ?>
+
+  <front>
+    <title>OAuth Discovery 1.0 Draft 2</title>
+
+    <author initials="E.HL" surname="Hammer-Lahav" fullname="Eran Hammer-Lahav">
+      <organization>Hueniverse</organization>
+      <address>
+        <email>eran@hueniverse.com</email>
+      </address>
+    </author>
+
+    <date day="31" month="March" year="2008"/>
+
+    <abstract>
+      <t>
+        OAuth Core 1.0 defines a protocol for delegating user access to
+        Consumer applications without sharing the user's private credentials.
+        The protocol specifies a set of configuration values that enable
+        Consumers to find and communicate with Service Providers. However,
+        OAuth Core leaves the process of communicating that information
+        undefined.
+      </t>
+      <t>
+        The discovery protocol provides a way for Consumers to receive
+        the required configuration data from Service Providers in a
+        machine-readable format. It creates an extendable framework for
+        communicating current and future services.
+      </t>
+      <t>
+        The protocol has been designed to keep the workflow as simple as
+        possible, use existing discovery practices, and maintaining strong
+        flexibility, allowing Service Providers to structure their
+        configuration as needed.
+      </t>
+    </abstract>
+
+  </front>
+  <middle>
+
+    <section title="Notation and Conventions">
+      <t>
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+        "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+        document are to be interpreted as described in <xref target="RFC2119" />.
+        Domain name examples use <xref target="RFC2606" />.
+      </t>
+      <t>
+        Unless otherwise noted, this specification is written as a direct
+        continuation of <xref target="OAuth Core 1.0" />, inheriting the
+        definitions and guidelines set by it.
+      </t>
+    </section>
+
+    <section title="Definitions">
+      <t>
+        <list style="hanging">
+          <t hangText="OAuth Discovery:">
+            A general name for the workflow described in this specification.
+          </t>
+          <t hangText="OAuth Configuration:">
+            The information needed by Consumers to perform the workflow defined in  
+            <xref target="OAuth Core 1.0" /> successfully and access Protected Resources.
+          </t>
+          <t hangText="OAuth Descriptor">
+            The XRDS-Simple <spanx style="verb">XRD</spanx> element containing the
+            OAuth Configuration, located by performing discovery on the Protected Resource URI.
+          </t>
+          <t hangText="Consumer Identity:">
+            The Consumer Key, Consumer Secret, and any other information used
+            to establish an identity for the Consumer such as public key.
+          </t>
+        </list>
+      </t>
+    </section>
+
+    <section title="Scope and Limitations">
+      <t>
+        While a fully automated discovery process of authentication,
+        authorization, and service utilization is a highly desirable, OAuth
+        Discovery is inheritably limited. OAuth does not address the methods in
+        which Protected Resources are accessed. Without clear standards of the
+        Protected Resources methods, any discovery protocol will eventually
+        require some form of manual interaction.
+      </t>
+      <t>
+        In many cases, Consumer Key allocation requires human interaction. This
+        is done for legal, compliance, or other reasons, which hinder automated
+        discovery without prior manual registration.
+      </t>
+      <t>
+        However, combined with other specifications, the entire process can be
+        fully automated from authentication, through authorization, to service utilization.
+        While OAuth Discovery alone cannot provide a fully automated workflow, it
+        strongly enables it.
+      </t>
+      <t>
+        OAuth Discovery is designed to address two workflows:
+
+        <list style="symbols">
+          <t>
+            Automatic initiation - When the Protected Resource endpoint is
+            known, the Consumer attempts accessing it without any authorization
+            credentials, causing the request to fail. The failure reply
+            contains the information needed to perform discovery.
+          </t>
+          <t>
+            Out-of-band initiation - The information needed to perform discovery is
+            provided by the Service Provider in ways not specified by this
+            specification. This information allows the Consumer to configure
+            its resources automatically instead of hard-coding the OAuth
+            endpoints and properties.
+          </t>
+        </list>
+      </t>
+      <t>
+        Service Providers MUST support automatic initiation, and MAY support
+        out-of-band initiation by providing the information needed through
+        documentation or other means.
+      </t>
+    </section>
+
+    <section title="Discovery Workflow">
+      <t>
+        The OAuth Discovery workflow follows the process defined in <xref target="XRDS-Simple 1.0" />
+        to locate and parse the machine-readable information containing the necessary OAuth Configuration.
+        Each Protected Resource supporting OAuth Discovery MUST identify the location of its
+        OAuth Configuration contained within a <xref target="XRDS-Simple 1.0">Resource Description Document</xref>.
+      </t>
+      <t>
+        Unless provided by the Service Provider out-of-band, the Consumer uses the Protected Resource URI to retrieve the resource's description which in turn
+        points to the location of the associated OAuth Configuration. The OAuth Configuration MAY reside in
+        the same document or in a separate document. While both Service Providers and Consumers play a role
+        in the workflow, it is focused on actions performed by Consumers. The workflow includes the following steps:
+
+        <list style="numbers">
+          <t>Retrieve OAuth Configuration.</t>
+          <t>Parse OAuth Descriptor.</t>
+          <t>Establish Consumer Identity.</t>
+        </list>
+      </t>
+      <t>
+        Once all steps have been performed, the Consumers have the required
+        information needed to obtain an Access Token as defined in <xref target="OAuth Core 1.0" /> sections 6
+        and access the Protected Resource following the workflow defined in <xref target="OAuth Core 1.0" /> sections 7.
+    </t>
+    </section>
+
+    <section title="Configuration Retrieval">
+      <t>
+        The Consumer retrieves the Resource Description Document using the
+        Protected Resource URI by following the retrieval protocol defined in <xref target="XRDS-Simple 1.0" />
+        section 5. If the retrieval protocol is successful, the Consumer retrieves
+        the Resource Description Document. If the retrieval protocol fails, it
+        SHALL be assumed that the Service Provider does not support OAuth Discovery.
+      </t>
+      <t>
+        Using the selection protocol defined in <xref target="XRDS-Simple 1.0" />
+        section 7.2, the Consumer finds the location of the OAuth Configuration, identified by the
+        service type <spanx style="verb">http://oauth.net/discovery/1.0</spanx>, and specified by
+        the <spanx style="verb">URI</spanx> element. The <spanx style="verb">URI</spanx> element MUST
+        include an absolute HTTP(S) URI or a URI fragment only. If the URI includes only a fragment,
+        it indicated an internal reference to an <spanx style="verb">XRD</spanx> element within the same document.
+      </t>
+      <t>
+        If the OAuth Configuration location is in another document, the Consumer retrieves the OAuth Configuration XRDS-Simple document following
+        the workflow defined in <xref target="XRDS-Simple 1.0" /> section 5.2. Once the OAuth Configuration document has been obtained, the Consumer
+        locates the referenced <spanx style="verb">XRD</spanx> element using the workflow defined in <xref target="XRDS-Simple 1.0" /> section 7.1.
+        The selected <spanx style="verb">XRD</spanx> element is referred to as the OAuth Descriptor.
+      </t>
+    </section>
+    
+    <section title="Descriptor Structure">
+      <t>
+        The OAuth Descriptor - a valid XRDS-Simple <spanx style="verb">XRD</spanx> element - contains the OAuth Configuration
+        indentifying the OAuth endpoints and their attributes. The OAuth Descriptor define services which provide the
+        necessary information needed to interact with an OAuth-enabled Service Provider. 
+      </t>
+      <t>
+        Each OAuth endpoint and property is assigned a type identifier used by Service Providers to document their OAuth implementation, and
+        by Consumers to lookup endpoints and their properties. XRDS-Simple provide a simple mechanism for
+        specifying the type and characteristics of resources, which in this case are the OAuth endpoints.
+      </t>
+      <t>
+        The OAuth Descriptor MUST include at least one <spanx style="verb">Service</spanx> element for each of the
+        <xref target="oauth_endpoints_types">OAuth Endpoints</xref>. The OAuth Descriptor MUST include at least one of the two types
+        defined in <xref target="consumer_identity_types" />, unless another method of obtaining a Consumer Identity is specified using
+        and extension type. The types defined in <xref target="oauth_endpoints_types" /> and
+        <xref target="consumer_identity_types" /> are all mutually exclusive, and <spanx style="verb">Service</spanx> elements MUST NOT
+        include more than one of these types. Other types MAY be combined with the types defined in the two sections.
+      </t>
+      <t>
+        <spanx style="verb">Service</spanx> elements for each of the <xref target="oauth_endpoints_types">OAuth Endpoints</xref> MUST include
+        at least one type from <xref target="request_parameter_types" /> and one type from <xref target="request_signature_types" />, unless
+        otherwise specific, or other request parameter methods and request signature methods are specified using an extension type.
+      </t>
+
+      <section title="OAuth Endpoints" anchor="oauth_endpoints_types">
+        <t>
+          To identify the OAuth endpoints, each is given a unique type identifier:
+
+          <list style="hanging">
+            <t hangText="Request Token:">
+              <spanx style="verb">http://oauth.net/core/1.0/endpoint/request</spanx> - <xref target="OAuth Core 1.0" /> section 6.1.1.
+              <spanx style="verb">Service</spanx> elements of this type MUST include at least one <spanx style="verb">URI</spanx> child element,
+              and their HTTP method defaults to <spanx style="verb">POST</spanx> unless a <spanx style="verb">simple:httpMethod</spanx> attribute provided.
+            </t>
+            <t hangText="User Authorization:">
+              <spanx style="verb">http://oauth.net/core/1.0/endpoint/authorize</spanx> - <xref target="OAuth Core 1.0" /> section 6.2.1.
+              <spanx style="verb">Service</spanx> elements of this type MUST include at least one <spanx style="verb">URI</spanx> child element,
+              and use HTTP <spanx style="verb">GET</spanx> even if no <spanx style="verb">simple:httpMethod</spanx> attribute provided. MUST NOT
+              specify other HTTP methods. The User Authorization endpoint does not support signature methods and types from <xref target="request_signature_types" />
+              SHOULD be omitted or ignored.
+            </t>
+            <t hangText="Access Token:">
+              <spanx style="verb">http://oauth.net/core/1.0/endpoint/access</spanx> - <xref target="OAuth Core 1.0" /> section 6.3.1.
+              <spanx style="verb">Service</spanx> elements of this type MUST include at least one <spanx style="verb">URI</spanx> child element,
+              and their HTTP method defaults to <spanx style="verb">POST</spanx> unless a <spanx style="verb">simple:httpMethod</spanx> attribute provided.
+            </t>
+            <t hangText="Protected Resource:">
+              <spanx style="verb">http://oauth.net/core/1.0/endpoint/resource</spanx> - <xref target="OAuth Core 1.0" /> section 7. If
+              a <spanx style="verb">Service</spanx> element of this type contains any <spanx style="verb">URI</spanx> child elements,
+              they SHALL be ignored for the purpose of OAuth Discovery.
+            </t>
+          </list>
+        </t>
+      </section>
+
+      <section title="Consumer Identity" anchor="consumer_identity_types">
+        <t>
+          OAuth requires a pre-arranged Consumer Identity in order to obtain
+          access. OAuth Discovery defines two service types for documenting
+          the methods in which Consumer Identity can be obtained:
+
+          <list style="hanging">
+            <t hangText="Static allocation:">
+              <spanx style="verb">http://oauth.net/discovery/1.0/consumer-identity/static</spanx>
+              - Includes the Consumer Identity within the OAuth Descriptor,
+              as defined in <xref target="static_alloc" />.
+            </t>
+            <t hangText="Out-of-band allocation:">
+              <spanx style="verb">http://oauth.net/discovery/1.0/consumer-identity/oob</spanx>
+              - Documents a human-accessible endpoint through which a Consumer
+              Identity MAY be obtained as defined in <xref target="manual_alloc" />.
+            </t>
+          </list>
+        </t>
+      </section>
+
+      <section title="Request Parameter Methods" anchor="request_parameter_types">
+        <t>
+          These types are used to document the request parameters methods supported by the
+          Service Provider as defined in <xref target="OAuth Core 1.0" /> section 5.2:
+
+          <list style="hanging">
+            <t hangText="Authentication Header:">
+              <spanx style="verb">http://oauth.net/core/1.0/parameters/auth-header</spanx>.
+            </t>
+            <t hangText="HTTP POST Body:">
+              <spanx style="verb">http://oauth.net/core/1.0/parameters/post-body</spanx>.
+            </t>
+            <t hangText="URI Query Parameters:">
+              <spanx style="verb">http://oauth.net/core/1.0/parameters/uri-query</spanx>.
+            </t>
+          </list>
+        </t>
+      </section>
+
+      <section title="Request Signature Methods" anchor="request_signature_types">
+        <t>
+          These types are used to document the signature methods supported by the Service
+          Provider:
+
+          <list style="hanging">
+            <t hangText="HMAC-SHA1:">
+              <spanx style="verb">http://oauth.net/core/1.0/signature/HMAC-SHA1</spanx> - <xref target="OAuth Core 1.0" /> section 9.2.
+            </t>
+            <t hangText="RSA-SHA1:">
+              <spanx style="verb">http://oauth.net/core/1.0/signature/RSA-SHA1</spanx> - <xref target="OAuth Core 1.0" /> section 9.3.
+            </t>
+            <t hangText="PLAINTEXT:">
+              <spanx style="verb">http://oauth.net/core/1.0/signature/PLAINTEXT</spanx> - <xref target="OAuth Core 1.0" /> section 9.4.
+            </t>
+          </list>
+        </t>
+      </section>
+      
+    </section>
+
+    <section title="Establish Consumer Identity" anchor="consumer_identity">
+      <t>
+        <xref target="OAuth Core 1.0" /> requires Consumers to establish an
+        Consumer Identity prior to making OAuth requests, and leaves the
+        methods of establishing the Consumer Identity unspecified. The process
+        of establishing a Consumer Key and Consumer Secret can be complex
+        and can also require manual human interaction for legal, compliance,
+        and other reasons. However, there are some cases in which a simple
+        Consumer Identity is sufficient or not needed at all.
+      </t>
+      <t>
+        OAuth Discovery defines two Consumer Identity allocation scenarios: a statically allocated Consumer Identity or an endpoint through-which a
+        Consumer Identity MAY be established out-of-band. If a Consumer Identity has been established using the out-of-band method, the Consumer
+        SHOULD note the URI used, and check in future requests if other Protected Resources point to the same URI for obtaining a Consumer
+        Identity. If the same URI used to obtain a Consumer Identity is referenced by another Protected Resource, the Consumer MAY
+        use that identity to obtain an Access Token for the other resource.
+      </t>
+
+      <section title="Static Allocation" anchor="static_alloc">
+        <t>
+          Static Consumer Identity allocation is used when no Consumer Identity is
+          needed. In this case the Service Provider does not desire
+          tracking individual Consumers, or might provide limited
+          accessibility to unidentified Consumers. In this scenario, the
+          Service Provider assigns a default Consumer Identity in the
+          OAuth Descriptor.
+        </t>
+        <t>
+          Static allocation is identified using the service type:
+          <spanx style="verb">http://oauth.net/discovery/1.0/consumer-identity/static</spanx>.
+          The <spanx style="verb">Service</spanx> element MUST include at least one <spanx style="verb">LocalID</spanx> element
+          with the Consumer Key encoded per <xref target="OAuth Core 1.0" /> section 5.1. Any <spanx style="verb">URI</spanx> element
+          included SHALL be ignored. Static allocation does not include a Consumer Secret which is defined as an empty string. For example:
+
+          <figure>
+            <artwork>
+      &lt;Service&gt;
+        &lt;Type&gt;http://oauth.net/discovery/1.0/consumer-identity/static&lt;/Type&gt;
+        &lt;LocalID&gt;0685bd9184jfhq22&lt;/LocalID&gt;
+      &lt;/Service&gt;
+            </artwork>
+          </figure>
+        </t>
+      </section>
+
+      <section title="Out-of-band Allocation" anchor="manual_alloc">
+        <t>
+          Out-of-band Consumer Identity allocation is used when the Service Provider requires
+          a Consumer registration process that cannot be performed
+          automatically or has unique requirements the Consumer Developer must comply with.
+          OAuth Discovery does not address this scenario expect
+          for enabling the Service Provider to provide a human-readable
+          endpoint, and associating Consumer Identities obtained via that
+          endpoint to its URI, enabling Consumer Identity reusability. This allows Consumer to use OAuth
+          Discovery with manually pre-established Consumer Identities.
+        </t>
+        <t>
+          Out-of-band allocation is identified using the service type:
+          <spanx style="verb">http://oauth.net/discovery/1.0/consumer-identity/oob</spanx>.
+          The <spanx style="verb">Service</spanx> element MUST include at least one <spanx style="verb">URI</spanx> element.
+          If no HTTP method is specified, the URI method defaults to GET. The result value of the request is undefined. For example:
+
+          <figure>
+            <artwork>
+      &lt;Service&gt;
+        &lt;Type&gt;http://oauth.net/discovery/1.0/consumer-identity/oob&lt;/Type&gt;
+        &lt;URI&gt;http://sp.example.com/consumer_apply&lt;/Type&gt;
+      &lt;/Service&gt;
+            </artwork>
+          </figure>
+        </t>
+      </section>
+
+    </section>
+    
+    <appendix title="Appendix A - Example">
+      <t>
+        This example demonstrate a simple Resource Description Document in which the Protected Resource's descriptor points to the 
+        OAuth Configuration contained within the same document, and Consumer Identity allocation is provided statically. Each of the
+        OAuth HTTP endpoints support the <spanx style="verb">HMAC-SHA1</spanx> signature method, while HTTPS endpoints use the
+        <spanx style="verb">PLAINTEXT</spanx> signature method. The Service Provider in this example supports sending request parameters
+        via URI query and the <spanx style="verb">Authorization</spanx> header, except for requesting User authorization which only supports
+        the URI query method. The Service Provider does not support parameters in the HTTP body.
+
+        <figure>
+          <artwork>
+  &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+  &lt;XRDS xmlns="xri://$xrds"&gt;
+    &lt;XRD xml:id="oauth" xmlns:simple="http://xrds-simple.net/core/1.0" xmlns="xri://$XRD*($v*2.0)" version="2.0"&gt;
+      &lt;Type&gt;xri://$xrds*simple&lt;/Type&gt;
+      &lt;Expires&gt;2008-12-31T23:59:59Z&lt;/Expires&gt;
+      &lt;Service priority="10"&gt;
+        &lt;Type&gt;http://oauth.net/core/1.0/endpoint/request&lt;/Type&gt;
+        &lt;Type&gt;http://oauth.net/core/1.0/parameters/auth-header&lt;/Type&gt;
+        &lt;Type&gt;http://oauth.net/core/1.0/parameters/uri-query&lt;/Type&gt;
+        &lt;Type&gt;http://oauth.net/core/1.0/signature/PLAINTEXT&lt;/Type&gt;
+        &lt;URI&gt;https://api.example.com/session/request&lt;/URI&gt;
+      &lt;/Service&gt;
+      &lt;Service priority="10"&gt;
+        &lt;Type&gt;http://oauth.net/core/1.0/endpoint/authorize&lt;/Type&gt;
+        &lt;Type&gt;http://oauth.net/core/1.0/parameters/uri-query&lt;/Type&gt;
+        &lt;URI&gt;https://api.example.com/session/login&lt;/URI&gt;
+      &lt;/Service&gt;
+      &lt;Service priority="10"&gt;
+        &lt;Type&gt;http://oauth.net/core/1.0/endpoint/access&lt;/Type&gt;
+        &lt;Type&gt;http://oauth.net/core/1.0/parameters/auth-header&lt;/Type&gt;
+        &lt;Type&gt;http://oauth.net/core/1.0/parameters/uri-query&lt;/Type&gt;
+        &lt;Type&gt;http://oauth.net/core/1.0/signature/PLAINTEXT&lt;/Type&gt;
+        &lt;URI&gt;https://api.example.com/session/activate&lt;/URI&gt;
+      &lt;/Service&gt;
+      &lt;Service priority="10"&gt;
+        &lt;Type&gt;http://oauth.net/core/1.0/endpoint/resource&lt;/Type&gt;
+        &lt;Type&gt;http://oauth.net/core/1.0/parameters/auth-header&lt;/Type&gt;
+        &lt;Type&gt;http://oauth.net/core/1.0/parameters/uri-query&lt;/Type&gt;
+        &lt;Type&gt;http://oauth.net/core/1.0/signature/HMAC-SHA1&lt;/Type&gt;
+      &lt;/Service&gt;
+      &lt;Service priority="10"&gt;
+        &lt;Type&gt;http://oauth.net/discovery/1.0/consumer-identity/static&lt;/Type&gt;
+        &lt;LocalID&gt;0685bd9184jfhq22&lt;/LocalID&gt;
+      &lt;/Service&gt;
+    &lt;/XRD&gt;
+    &lt;XRD xmlns="xri://$XRD*($v*2.0)" version="2.0"&gt;
+      &lt;Type&gt;xri://$xrds*simple&lt;/Type&gt;
+      &lt;Service priority="10"&gt;
+        &lt;Type&gt;http://oauth.net/discovery/1.0&lt;/Type&gt;
+        &lt;URI&gt;#oauth&lt;/URI&gt;
+      &lt;/Service&gt;
+    &lt;/XRD&gt;
+  &lt;/XRDS&gt;
+          </artwork>
+        </figure>
+      </t>
+    </appendix>
+    
+  </middle>
+
+  <back>
+
+    <references title="References">
+
+      <reference anchor="OAuth Core 1.0">
+        <front>
+          <title>OAuth Core 1.0</title>
+          <author initials="OCW" surname="OAuth" fullname="OAuth Core Workgroup">
+            <organization />
+          </author>
+        </front>
+        <format type="HTML" target="http://oauth.net/core/1.0" />
+      </reference>
+
+      <reference anchor="XRDS-Simple 1.0">
+        <front>
+          <title>XRDS-Simple 1.0</title>
+          <author initials="E.HL" surname="Hammer-Lahav" fullname="Eran Hammer-Lahav (Editor)">
+            <organization>Hueniverse</organization>
+          </author>
+        </front>
+        <format type="HTML" target="http://xrds-simple.net/core/1.0" />
+      </reference>
+
+      <reference anchor="RFC2606">
+        <front>
+          <title>Reserved Top Level DNS Names</title>
+          <author initials="D.E" surname="Eastlake" fullname="D. Eastlake">
+            <organization></organization>
+          </author>
+          <author initials="A.P" surname="Panitz" fullname="A. Panitz">
+            <organization></organization>
+          </author>
+        </front>
+        <seriesInfo name="RFC" value="2606" />
+      </reference>
+
+      <reference anchor="RFC2119">
+        <front>
+          <title>Key words for use in RFCs to Indicate Requirement Levels</title>
+          <author initials="B.S" surname="Bradner" fullname="Scott Bradner">
+            <organization>Alis Technologies</organization>
+          </author>
+        </front>
+        <seriesInfo name="RFC" value="2119" />
+      </reference>
+
+    </references>
+  </back>
+
+</rfc>

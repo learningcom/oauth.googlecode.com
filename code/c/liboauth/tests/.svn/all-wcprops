@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/1271/code/c/liboauth/tests
+END
+oauthsign.c
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/1088/code/c/liboauth/tests/oauthsign.c
+END
+oauthtest2.c
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/1271/code/c/liboauth/tests/oauthtest2.c
+END
+oauthbodyhash.c
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/1271/code/c/liboauth/tests/oauthbodyhash.c
+END
+commontest.c
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/1271/code/c/liboauth/tests/commontest.c
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/1264/code/c/liboauth/tests/Makefile.am
+END
+selftest_other.c
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/1271/code/c/liboauth/tests/selftest_other.c
+END
+oauthexample.c
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/1271/code/c/liboauth/tests/oauthexample.c
+END
+selftest_wiki.c
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/669/code/c/liboauth/tests/selftest_wiki.c
+END
+commontest.h
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/1268/code/c/liboauth/tests/commontest.h
+END
+selftest_eran.c
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/1271/code/c/liboauth/tests/selftest_eran.c
+END
+oauthtest.c
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/1271/code/c/liboauth/tests/oauthtest.c
+END
+oauthdatapost.c
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/1271/code/c/liboauth/tests/oauthdatapost.c
+END

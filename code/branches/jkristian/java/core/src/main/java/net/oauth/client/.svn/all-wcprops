@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/299/code/branches/jkristian/java/core/src/main/java/net/oauth/client
+END
+HttpClientPool.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/290/code/branches/jkristian/java/core/src/main/java/net/oauth/client/HttpClientPool.java
+END
+OAuthHttpClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/298/code/branches/jkristian/java/core/src/main/java/net/oauth/client/OAuthHttpClient.java
+END
+OAuthClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/299/code/branches/jkristian/java/core/src/main/java/net/oauth/client/OAuthClient.java
+END
+HttpMethodResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/299/code/branches/jkristian/java/core/src/main/java/net/oauth/client/HttpMethodResponse.java
+END

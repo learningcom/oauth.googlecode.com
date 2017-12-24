@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/409/code/ruby/oauth/lib/oauth/client
+END
+net_http.rb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/397/code/ruby/oauth/lib/oauth/client/net_http.rb
+END
+action_controller_request.rb
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/379/code/ruby/oauth/lib/oauth/client/action_controller_request.rb
+END
+helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/409/code/ruby/oauth/lib/oauth/client/helper.rb
+END

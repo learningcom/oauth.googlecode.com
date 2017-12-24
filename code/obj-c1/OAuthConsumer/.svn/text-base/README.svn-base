@@ -1,0 +1,16 @@
+Just a couple of comments on this framework.
+
+1. This is a back port to obj-c 1.x (think Mac OS 10.4.x) of Jon Crosby's OAuthConsumer framework for obj-c 2.x (think Leopard). All names and framework usage are identical between the two frameworks so code using the framework should not change regardless of which framework is used (if there are problems it's a bug).
+
+2. I used xcode 2.4.1 for this back port.
+
+3. The OAuthConsumer.framework has an "installation path" of "@executable_path/../Frameworks". This is so the framework can be embeddable in standalone applications. If this causes problems please let me know.
+
+4. Ruby is used for the unit test cases of the OAConsumerTestSuite target. The ruby file is OATestServer.rb and requires the 'sinatra' plugin (gem install sinatra). Also, if your ruby installation is NOT /usr/bin/ruby you will need to change the OADataFetcherTest.m file to point to the correct location.
+
+If you have any questions, I'll do my best to answer them.
+
+Thanks,
+George
+
+gffletch at aol dot com

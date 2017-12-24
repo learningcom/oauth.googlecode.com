@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/oauth-provider/web
+END
+banner.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/oauth-provider/web/banner.jsp
+END
+index.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/oauth-provider/web/index.jsp
+END
+authorize.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/oauth-provider/web/authorize.jsp
+END
+OAuthProblemException.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/oauth-provider/web/OAuthProblemException.jsp
+END

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><metadata>
+  <groupId>net.oauth</groupId>
+  <artifactId>oauth-core</artifactId>
+  <version>20081113</version>
+  <versioning>
+    <release>20090531</release>
+    <versions>
+      <version>20081113</version>
+      <version>20081126</version>
+      <version>20081218</version>
+      <version>20090105</version>
+      <version>20090121</version>
+      <version>20090221</version>
+      <version>20090315</version>
+      <version>20090408</version>
+      <version>20090522</version>
+      <version>20090530</version>
+      <version>20090531</version>
+    </versions>
+    <lastUpdated>20090612160520</lastUpdated>
+  </versioning>
+</metadata>

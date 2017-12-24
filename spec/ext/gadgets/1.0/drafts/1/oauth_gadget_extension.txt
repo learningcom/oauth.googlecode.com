@@ -1,0 +1,392 @@
+
+
+
+Implementers' Draft                                                OAuth
+                                                          April 22, 2008
+
+
+                    OAuth Gadgets Extension Draft 1
+
+
+Abstract
+
+   OAuth Core 1.0 defines a protocol for delegating user access to
+   Consumer applications without sharing the user's private credentials.
+   Sometimes, the consumer application plays host to a large number of
+   smaller applications ("gadgets").  In that case, the consumer
+   application may make OAuth requests on behalf of one of its hosted
+   gadgets.
+
+   This draft specifies a mechanism in which a consumer can express on
+   behalf of which of its hosted gadgets OAuth requests are being made
+   to a service provider.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OAuth                                                           [Page 1]
+
+                     OAuth Gadgets Extension Draft 1          April 2008
+
+
+Table of Contents
+
+   1.  Authors . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+   2.  Notation and Conventions  . . . . . . . . . . . . . . . . . . . 4
+   3.  Definitions . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+   4.  The Gadgets Extension Parameter . . . . . . . . . . . . . . . . 6
+   5.  References  . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OAuth                                                           [Page 2]
+
+                     OAuth Gadgets Extension Draft 1          April 2008
+
+
+1.  Authors
+
+      Dirk Balfanz (dirk@balfanz.net)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OAuth                                                           [Page 3]
+
+                     OAuth Gadgets Extension Draft 1          April 2008
+
+
+2.  Notation and Conventions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in [RFC2119].  Domain
+   name examples use [RFC2606].
+
+   Unless otherwise noted, this specification is written as a direct
+   continuation of [OAuth Core 1.0], inheriting the definitions and
+   guidelines set by it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OAuth                                                           [Page 4]
+
+                     OAuth Gadgets Extension Draft 1          April 2008
+
+
+3.  Definitions
+
+   Consumer Identity: The Consumer Key, Consumer Secret, and any other
+      information used to establish an identity for the Consumer such as
+      public key.
+
+   Gadget Server: An OAuth consumer, with its own consumer identity,
+      that hosts a number of smaller applications ("gadgets"), which
+      don't have their own consumer identity.
+
+   Gadget: An application hosted by a gadget server wishing to make
+      OAuth requests to a service provider.  Every gadget is located at
+      a specific URL, from which the gadget server obtains the gadget.
+      A gadget doesn't have its own consumer identity.  Instead, the
+      gadget server's consumer identity will be used when making the
+      OAuth requests on behalf of the gadget.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OAuth                                                           [Page 5]
+
+                     OAuth Gadgets Extension Draft 1          April 2008
+
+
+4.  The Gadgets Extension Parameter
+
+   This extension defines one additional OAuth parameter to be used in
+   OAuth requests originating from an OAuth consumer:
+
+   xoauth_app_url: The URL of the gadget originating the OAuth request.
+
+   A consumer MUST include the "xoauth_app_url" parameter in requests to
+   the the Request Token URL and Access Token URL at the Service
+   Provider (see Sections 6.1.1 and 6.3.1 of [OAuth Core 1.0]).  The
+   consumer MUST also include the "xoauth_app_url" parameter when
+   accessing protected resources (see Section 7 of [OAuth Core 1.0]).
+
+5.  References
+
+   [OAuth Core 1.0]
+              OAuth, OCW., "OAuth Core 1.0".
+
+   [RFC2119]  Bradner, B., "Key words for use in RFCs to Indicate
+              Requirement Levels", RFC 2119.
+
+   [RFC2606]  Eastlake, D. and A. Panitz, "Reserved Top Level DNS
+              Names", RFC 2606.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OAuth                                                           [Page 6]
+
+                     OAuth Gadgets Extension Draft 1          April 2008
+
+
+Author's Address
+
+   OAuth Extensions Workgroup
+
+   Email: spec@oauth.net
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OAuth                                                           [Page 7]
+

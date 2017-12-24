@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/1027/code/branches/jmkristian-2009-04/java/samples/oauth-provider
+END
+pom.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/989/code/branches/jmkristian-2009-04/java/samples/oauth-provider/pom.xml
+END
+readme
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/oauth-provider/readme
+END
+build.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/985/code/branches/jmkristian-2009-04/java/samples/oauth-provider/build.xml
+END

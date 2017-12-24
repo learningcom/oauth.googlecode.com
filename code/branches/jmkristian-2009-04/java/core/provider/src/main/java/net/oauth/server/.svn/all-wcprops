@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/982/code/branches/jmkristian-2009-04/java/core/provider/src/main/java/net/oauth/server
+END
+HttpRequestMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/!svn/ver/973/code/branches/jmkristian-2009-04/java/core/provider/src/main/java/net/oauth/server/HttpRequestMessage.java
+END
+OAuthServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/982/code/branches/jmkristian-2009-04/java/core/provider/src/main/java/net/oauth/server/OAuthServlet.java
+END

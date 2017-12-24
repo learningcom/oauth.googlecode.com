@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/1242/code/coldfusion/tests
+END
+alltests.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/673/code/coldfusion/tests/alltests.cfc
+END
+oauthsignaturemethod_plaintext.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/673/code/coldfusion/tests/oauthsignaturemethod_plaintext.cfc
+END
+oauthconsumer.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/673/code/coldfusion/tests/oauthconsumer.cfc
+END
+oauthconsumerdao.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/673/code/coldfusion/tests/oauthconsumerdao.cfc
+END
+oauthtoken.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/673/code/coldfusion/tests/oauthtoken.cfc
+END
+oauthtokendao.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/673/code/coldfusion/tests/oauthtokendao.cfc
+END
+encodingtest.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/1242/code/coldfusion/tests/encodingtest.cfc
+END
+oauthserver.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/1242/code/coldfusion/tests/oauthserver.cfc
+END
+oauthdatastore.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/673/code/coldfusion/tests/oauthdatastore.cfc
+END
+oauthsignaturemethod_hmac_sha1.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/673/code/coldfusion/tests/oauthsignaturemethod_hmac_sha1.cfc
+END
+oauthrequest.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/1242/code/coldfusion/tests/oauthrequest.cfc
+END

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/914/code/branches/termie/python/oauth
+END
+rsa.py
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/554/code/branches/termie/python/oauth/rsa.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/554/code/branches/termie/python/oauth/__init__.py
+END
+oauth.py
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/914/code/branches/termie/python/oauth/oauth.py
+END

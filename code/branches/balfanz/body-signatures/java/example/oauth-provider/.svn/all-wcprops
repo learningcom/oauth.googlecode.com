@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/oauth-provider
+END
+readme
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/oauth-provider/readme
+END
+build.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/oauth-provider/build.xml
+END
+pom.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/533/code/branches/balfanz/body-signatures/java/example/oauth-provider/pom.xml
+END

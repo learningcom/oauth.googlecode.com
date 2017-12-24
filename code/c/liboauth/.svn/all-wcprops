@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/svn/!svn/ver/1276/code/c/liboauth
+END
+AUTHORS
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/1240/code/c/liboauth/AUTHORS
+END
+oauth.pc.in
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/1239/code/c/liboauth/oauth.pc.in
+END
+ChangeLog
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/1275/code/c/liboauth/ChangeLog
+END
+Doxyfile.in
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/1271/code/c/liboauth/Doxyfile.in
+END
+COPYING.GPL
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/1191/code/c/liboauth/COPYING.GPL
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/1199/code/c/liboauth/README
+END
+COPYING.MIT
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/670/code/c/liboauth/COPYING.MIT
+END
+configure.ac
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/1271/code/c/liboauth/configure.ac
+END
+LICENSE.OpenSSL
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/1191/code/c/liboauth/LICENSE.OpenSSL
+END
+.gitignore
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/1275/code/c/liboauth/.gitignore
+END
+INSTALL
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/1268/code/c/liboauth/INSTALL
+END
+liboauth.lsm.in
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/1194/code/c/liboauth/liboauth.lsm.in
+END
+COPYING
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/1191/code/c/liboauth/COPYING
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/1271/code/c/liboauth/Makefile.am
+END
+NEWS
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/671/code/c/liboauth/NEWS
+END

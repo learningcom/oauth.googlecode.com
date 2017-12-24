@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/main/java/net/oauth/http
+END
+HttpResponseMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/main/java/net/oauth/http/HttpResponseMessage.java
+END
+HttpMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/main/java/net/oauth/http/HttpMessage.java
+END
+HttpMessageDecoder.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/main/java/net/oauth/http/HttpMessageDecoder.java
+END
+HttpClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/966/code/branches/jkristian/java-twitter/java/core/src/main/java/net/oauth/http/HttpClient.java
+END

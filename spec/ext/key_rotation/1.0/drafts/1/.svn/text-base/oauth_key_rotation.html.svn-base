@@ -1,0 +1,366 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en"><head><title>Implementers' Draft: OAuth Key Rotation Extension Draft 1</title>
+<meta http-equiv="Expires" content="Wed, 30 Apr 2008 17:41:52 +0000">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="OAuth Key Rotation Extension Draft 1">
+<meta name="generator" content="xml2rfc v1.30 (http://xml.resource.org/)">
+<style type='text/css'>
+<!--
+    body {
+        font-family: verdana, charcoal, helvetica, arial, sans-serif;
+        margin: 2em;
+        font-size: small ; color: #000000 ; background-color: #ffffff ; }
+    .title { color: #990000; font-size: x-large ;
+        font-weight: bold; text-align: right;
+        font-family: helvetica, monaco, "MS Sans Serif", arial, sans-serif;
+        background-color: transparent; }
+    .filename { color: #666666; font-size: 18px; line-height: 28px;
+        font-weight: bold; text-align: right;
+        font-family: helvetica, arial, sans-serif;
+        background-color: transparent; }
+    td.rfcbug { background-color: #000000 ; width: 30px ; height: 30px ;
+        text-align: justify; vertical-align: middle ; padding-top: 2px ; }
+    td.rfcbug span.RFC { color: #666666; font-weight: bold; text-decoration: none;
+        background-color: #000000 ;
+        font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+        font-size: x-small ; }
+    td.rfcbug span.hotText { color: #ffffff; font-weight: normal; text-decoration: none;
+        text-align: center ;
+        font-family: charcoal, monaco, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+        font-size: x-small ; background-color: #000000; }
+    /* info code from SantaKlauss at http://www.madaboutstyle.com/tooltip2.html */
+    div#counter{margin-top: 100px}
+
+    a.info{
+        position:relative; /*this is the key*/
+        z-index:24;
+        text-decoration:none}
+
+    a.info:hover{z-index:25; background-color:#990000 ; color: #ffffff ;}
+
+    a.info span{display: none}
+
+    a.info:hover span.info{ /*the span will display just on :hover state*/
+        display:block;
+        position:absolute;
+        font-size: smaller ;
+        top:2em; left:2em; width:15em;
+        padding: 2px ;
+        border:1px solid #333333;
+        background-color:#eeeeee; color:#990000;
+        text-align: left ;}
+
+     A { font-weight: bold; }
+     A:link { color: #990000; background-color: transparent ; }
+     A:visited { color: #333333; background-color: transparent ; }
+     A:active { color: #333333; background-color: transparent ; }
+
+    p { margin-left: 2em; margin-right: 2em; }
+    p.copyright { font-size: x-small ; }
+    p.toc { font-size: small ; font-weight: bold ; margin-left: 3em ;}
+    table.toc { margin: 0 0 0 3em; padding: 0; border: 0; vertical-align: text-top; }
+    td.toc { font-size: small; font-weight: bold; vertical-align: text-top; }
+
+    span.emph { font-style: italic; }
+    span.strong { font-weight: bold; }
+    span.verb, span.vbare { font-family: "Courier New", Courier, monospace ; }
+
+    span.vemph { font-style: italic; font-family: "Courier New", Courier, monospace ; }
+    span.vstrong { font-weight: bold; font-family: "Courier New", Courier, monospace ; }
+    span.vdeluxe { font-weight: bold; font-style: italic; font-family: "Courier New", Courier, monospace ; }
+
+    ol.text { margin-left: 2em; margin-right: 2em; }
+    ul.text { margin-left: 2em; margin-right: 2em; }
+    li { margin-left: 3em;  }
+
+    pre { margin-left: 3em; color: #333333;  background-color: transparent;
+        font-family: "Courier New", Courier, monospace ; font-size: small ;
+        text-align: left;
+        }
+
+    h3 { color: #333333; font-size: medium ;
+        font-family: helvetica, arial, sans-serif ;
+        background-color: transparent; }
+    h4 { font-size: small; font-family: helvetica, arial, sans-serif ; }
+
+    table.bug { width: 30px ; height: 15px ; }
+    td.bug { color: #ffffff ; background-color: #990000 ;
+        text-align: center ; width: 30px ; height: 15px ;
+         }
+    td.bug A.link2 { color: #ffffff ; font-weight: bold;
+        text-decoration: none;
+        font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, sans-serif;
+        font-size: x-small ; background-color: transparent }
+
+    td.header { color: #ffffff; font-size: x-small ;
+        font-family: arial, helvetica, sans-serif; vertical-align: top;
+        background-color: #666666 ; width: 33% ; }
+    td.author { font-weight: bold; margin-left: 4em; font-size: x-small ; }
+    td.author-text { font-size: x-small; }
+    table.full { vertical-align: top ; border-collapse: collapse ;
+        border-style: solid solid solid solid ;
+        border-color: black black black black ;
+        font-size: small ; text-align: center ; }
+    table.headers, table.none { vertical-align: top ; border-collapse: collapse ;
+        border-style: none;
+        font-size: small ; text-align: center ; }
+    table.full th { font-weight: bold ;
+        border-style: solid ;
+        border-color: black black black black ; }
+    table.headers th { font-weight: bold ;
+        border-style: none none solid none;
+        border-color: black black black black ; }
+    table.none th { font-weight: bold ;
+        border-style: none; }
+    table.full td {
+        border-style: solid solid solid solid ;
+        border-color: #333333 #333333 #333333 #333333 ; }
+    table.headers td, table.none td { border-style: none; }
+
+    hr { height: 1px }
+-->
+</style>
+</head>
+<body>
+<table summary="layout" cellpadding="0" cellspacing="2" class="bug" align="right"><tr><td class="bug"><a href="#toc" class="link2">&nbsp;TOC&nbsp;</a></td></tr></table>
+<table summary="layout" width="66%" border="0" cellpadding="0" cellspacing="0"><tr><td><table summary="layout" width="100%" border="0" cellpadding="2" cellspacing="1">
+<tr><td class="header">Implementers' Draft</td><td class="header"> OAuth</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">April 22, 2008</td></tr>
+</table></td></tr></table>
+<div align="right"><span class="title"><br />OAuth Key Rotation Extension Draft 1</span></div>
+
+<h3>Abstract</h3>
+
+<p>
+        OAuth Core 1.0 defines a protocol for delegating user access to
+        Consumer applications without sharing the user's private credentials.
+        Some consumer applications use the RSA_SHA1 signature method. To
+        verify RSA_SHA1 signatures, Service Providers need to be in possession
+        of an authentic copy of the consumer application's public key.
+
+</p>
+<p>
+        Whenever a consumer application changes the private key it uses to sign
+        its OAuth requests, Service Providers need to change the public
+        key they use to verify the requests. This draft specifies a mechanism
+        that allows consumers to signal which public key should be used to
+        verify requests they sign.
+
+</p><a name="toc"></a><br /><hr />
+<h3>Table of Contents</h3>
+<p class="toc">
+<a href="#anchor1">1.</a>&nbsp;
+Authors<br />
+<a href="#anchor2">2.</a>&nbsp;
+Notation and Conventions<br />
+<a href="#anchor3">3.</a>&nbsp;
+Definitions<br />
+<a href="#anchor4">4.</a>&nbsp;
+The Key Rotation Extension Parameter<br />
+<a href="#anchor5">5.</a>&nbsp;
+Signature Verification<br />
+<a href="#anchor6">6.</a>&nbsp;
+Best Practices for Choosing Public Key Identifiers<br />
+<a href="#rfc.references1">7.</a>&nbsp;
+References<br />
+<a href="#rfc.authors">&#167;</a>&nbsp;
+Author's Address<br />
+</p>
+<br clear="all" />
+
+<a name="anchor1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="bug" align="right"><tr><td class="bug"><a href="#toc" class="link2">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1"></a><h3>1.&nbsp;Authors</h3>
+
+<p>
+        </p>
+<blockquote class="text">
+<p>Dirk Balfanz (dirk@balfanz.net)
+</p>
+<p>Brian Eaton (beaton@google.com)
+</p>
+</blockquote><p>
+
+</p>
+<a name="anchor2"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="bug" align="right"><tr><td class="bug"><a href="#toc" class="link2">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2"></a><h3>2.&nbsp;Notation and Conventions</h3>
+
+<p>
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+        "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+        document are to be interpreted as described in <a class="info" href="#RFC2119">[RFC2119]<span> (</span><span class="info">Bradner, B., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; .</span><span>)</span></a>.
+        Domain name examples use <a class="info" href="#RFC2606">[RFC2606]<span> (</span><span class="info">Eastlake, D. and A. Panitz, &ldquo;Reserved Top Level DNS Names,&rdquo; .</span><span>)</span></a>.
+
+</p>
+<p>
+        Unless otherwise noted, this specification is written as a direct
+        continuation of <a class="info" href="#OAuth Core 1.0">[OAuth Core 1.0]<span> (</span><span class="info">OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a>, inheriting the
+        definitions and guidelines set by it.
+
+</p>
+<a name="anchor3"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="bug" align="right"><tr><td class="bug"><a href="#toc" class="link2">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3"></a><h3>3.&nbsp;Definitions</h3>
+
+<p>
+        </p>
+<blockquote class="text"><dl>
+<dt>Public Key Identifier:</dt>
+<dd>
+            A value, unique to an OAuth Consumer, that identifies one
+            out of a possible number of public keys, whose corresponding
+            private key is used by the Consumer to sign OAuth requests using
+            the RSA_SHA1 signature method, or perhaps other public-key based
+            signature methods defined in future OAuth extensions. The public
+            key identified by the Public Key Identifier can be used to
+            verify OAuth requests.
+
+</dd>
+</dl></blockquote><p>
+
+</p>
+<a name="anchor4"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="bug" align="right"><tr><td class="bug"><a href="#toc" class="link2">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4"></a><h3>4.&nbsp;The Key Rotation Extension Parameter</h3>
+
+<p>
+        This extension defines one additional OAuth parameter to be
+        used in OAuth requests originating from an OAuth Consumer:
+        </p>
+<blockquote class="text"><dl>
+<dt>xoauth_public_key:</dt>
+<dd>
+            The Public Key Identifier of the public key to be used to verify
+            an OAuth request signed by the OAuth Consumer.
+
+</dd>
+</dl></blockquote><p>
+
+</p>
+<p>
+        If a consumer uses the RSA_SHA1 signature method (or another
+        public-key-based signature method to be defined in future OAuth
+        extensions) to sign requests to the Request Token URL at the Service
+        Provider, then it MUST include the <span class="verb">xoauth_public_key</span>
+        parameter in those requests (see Section 6.1.1 of
+        <a class="info" href="#OAuth Core 1.0">[OAuth Core 1.0]<span> (</span><span class="info">OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a>). If the consumer does not use a
+        public-key-based signature method, then it MUST NOT include the
+        <span class="verb">xoauth_public_key</span> parameter.
+
+</p>
+<p>
+        If a consumer uses the RSA_SHA1 signature method (or another
+        public-key-based signature method to be defined in future OAuth
+        extensions) to sign requests to the Access Token URL at the Service
+        Provider, then it MUST include the <span class="verb">xoauth_public_key</span>
+        parameter in those requests (see Section 6.3.1 of
+        <a class="info" href="#OAuth Core 1.0">[OAuth Core 1.0]<span> (</span><span class="info">OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a>). If the consumer does not use a
+        public-key-based signature method, then it MUST NOT include the
+        <span class="verb">xoauth_public_key</span> parameter.
+
+</p>
+<p>
+        If a consumer uses the RSA_SHA1 signature method (or another
+        public-key-based signature method to be defined in future OAuth
+        extensions) to access protected resources at the Service
+        Provider, then it MUST include the <span class="verb">xoauth_public_key</span>
+        parameter in those access requests (see Section 7 of
+        <a class="info" href="#OAuth Core 1.0">[OAuth Core 1.0]<span> (</span><span class="info">OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a>). If the consumer does not use a
+        public-key-based signature method, then it MUST NOT include the
+        <span class="verb">xoauth_public_key</span> parameter.
+
+</p>
+<a name="anchor5"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="bug" align="right"><tr><td class="bug"><a href="#toc" class="link2">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5"></a><h3>5.&nbsp;Signature Verification</h3>
+
+<p>
+        It is up to the OAuth Consumer to define how Service Providers can,
+        given a Public Key Identifier, obtain a copy of the public key to which
+        the identifier refers.
+
+</p>
+<p>
+        The Service Provider SHALL obtain a copy of the public key identified
+        by the <span class="verb">xoauth_public_key</span> parameter included
+        in the OAuth request, and verify the signature according to
+        Section 9.3.2 of <a class="info" href="#OAuth Core 1.0">[OAuth Core 1.0]<span> (</span><span class="info">OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; .</span><span>)</span></a> (if the signature
+        method is RSA_SHA1) or other suitable mechanisms (if the signature type
+        is a different yet-to-be-defined public-key signature method).
+
+</p>
+<a name="anchor6"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="bug" align="right"><tr><td class="bug"><a href="#toc" class="link2">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6"></a><h3>6.&nbsp;Best Practices for Choosing Public Key Identifiers</h3>
+
+<p>
+        It is up to the OAuth Consumer to define how Service Providers can,
+        given a Public Key Identifier, obtain a copy of the public key to which
+        the identifier refers.
+
+</p>
+<p>
+        The OAuth Consumer SHOULD NOT use Public Key Identifiers that can
+        by themselves (i.e., without additional information) be used to locate
+        the public key. For example, the OAuth Consumer SHOULD NOT use URLs
+        that point to the public key as Public Key Identifiers.
+
+</p>
+<p>
+        The format of the Public Key Identifier SHOULD be chosen such that
+        service providers can authenticate the public key they obtain.
+        For example, an OAuth Consumer might specify
+        that its public keys are available at
+        <span class="verb"> https://www.example.com/pubkeys</span>
+        and that the Public Key Identifier sent in OAuth requests can be used
+        as a <span class="verb">pub_key_id</span> URI query parameter when accessing the
+        <span class="verb">https://www.example.com/pubkeys</span> URL. When
+        obtaining the public key, the Service Provider SHOULD use TLS to
+        authenticate the Consumer.
+
+</p>
+<p>
+        It is RECOMMENDED that the public key be distributed in form of X.509
+        certificates, either self-signed or issued by a certification authority.
+
+</p>
+<p>
+        The rationale behind these recommended best practices is that it should
+        be hard for an attacker to forge OAuth requests by using his own
+        private key and trick the Service Provider into automatically downloading
+        the attacker's public key. Instead, a Service Provider should always
+        get an authentic copy of the real OAuth Consumer's public key.
+
+</p>
+<a name="rfc.references1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="bug" align="right"><tr><td class="bug"><a href="#toc" class="link2">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>7.&nbsp;References</h3>
+<table width="99%" border="0">
+<tr><td class="author-text" valign="top"><a name="OAuth Core 1.0">[OAuth Core 1.0]</a></td>
+<td class="author-text">OAuth, OCW., &ldquo;<a href="http://oauth.net/core/1.0">OAuth Core 1.0</a>.&rdquo;</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2119">[RFC2119]</a></td>
+<td class="author-text">Bradner, B., &ldquo;<a href="ftp://ftp.isi.edu/in-notes/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a>,&rdquo; RFC&nbsp;2119.</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2606">[RFC2606]</a></td>
+<td class="author-text">Eastlake, D. and A. Panitz, &ldquo;<a href="ftp://ftp.isi.edu/in-notes/rfc2606.txt">Reserved Top Level DNS Names</a>,&rdquo; RFC&nbsp;2606.</td></tr>
+</table>
+
+<a name="rfc.authors"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="bug" align="right"><tr><td class="bug"><a href="#toc" class="link2">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>Author's Address</h3>
+<table width="99%" border="0" cellpadding="0" cellspacing="0">
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">OAuth Extensions Workgroup</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:spec@oauth.net">spec@oauth.net</a></td></tr>
+</table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-4292234-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+</body></html>

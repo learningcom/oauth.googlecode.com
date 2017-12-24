@@ -1,0 +1,55 @@
+10
+
+dir
+1276
+http://oauth.googlecode.com/svn/spec/ext
+http://oauth.googlecode.com/svn
+
+
+
+2009-12-19T16:58:27.985889Z
+1153
+hueniverse@gmail.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+f7ae4463-c52f-0410-a7dc-93bad6e629e8
+
+language_preference
+dir
+
+session
+dir
+
+consumer_request
+dir
+
+discovery
+dir
+
+key_rotation
+dir
+
+body_signature
+dir
+
+gadgets
+dir
+
+response_data_format
+dir
+
+body_hash
+dir
+

@@ -1,0 +1,647 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en"><head><title>Draft 1: OAuth Extension for Response Data Format - Draft 1</title>
+<meta http-equiv="Expires" content="Tue, 09 Sep 2008 16:49:40 +0000">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="OAuth Extension for Response Data Format - Draft 1">
+<meta name="keywords" content="OAuth, Extension, Response Data Format, Draft">
+<meta name="generator" content="xml2rfc v1.33 (http://xml.resource.org/)">
+<style type='text/css'><!--
+        body {
+                font-family: verdana, charcoal, helvetica, arial, sans-serif;
+                font-size: small; color: #000; background-color: #FFF;
+                margin: 2em;
+        }
+        h1, h2, h3, h4, h5, h6 {
+                font-family: helvetica, monaco, "MS Sans Serif", arial, sans-serif;
+                font-weight: bold; font-style: normal;
+        }
+        h1 { color: #900; background-color: transparent; text-align: right; }
+        h3 { color: #333; background-color: transparent; }
+
+        td.RFCbug {
+                font-size: x-small; text-decoration: none;
+                width: 30px; height: 30px; padding-top: 2px;
+                text-align: justify; vertical-align: middle;
+                background-color: #000;
+        }
+        td.RFCbug span.RFC {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: bold; color: #666;
+        }
+        td.RFCbug span.hotText {
+                font-family: charcoal, monaco, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: normal; text-align: center; color: #FFF;
+        }
+
+        table.TOCbug { width: 30px; height: 15px; }
+        td.TOCbug {
+                text-align: center; width: 30px; height: 15px;
+                color: #FFF; background-color: #900;
+        }
+        td.TOCbug a {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, sans-serif;
+                font-weight: bold; font-size: x-small; text-decoration: none;
+                color: #FFF; background-color: transparent;
+        }
+
+        td.header {
+                font-family: arial, helvetica, sans-serif; font-size: x-small;
+                vertical-align: top; width: 33%;
+                color: #FFF; background-color: #666;
+        }
+        td.author { font-weight: bold; font-size: x-small; margin-left: 4em; }
+        td.author-text { font-size: x-small; }
+
+        /* info code from SantaKlauss at http://www.madaboutstyle.com/tooltip2.html */
+        a.info {
+                /* This is the key. */
+                position: relative;
+                z-index: 24;
+                text-decoration: none;
+        }
+        a.info:hover {
+                z-index: 25;
+                color: #FFF; background-color: #900;
+        }
+        a.info span { display: none; }
+        a.info:hover span.info {
+                /* The span will display just on :hover state. */
+                display: block;
+                position: absolute;
+                font-size: smaller;
+                top: 2em; left: -5em; width: 15em;
+                padding: 2px; border: 1px solid #333;
+                color: #900; background-color: #EEE;
+                text-align: left;
+        }
+
+        a { font-weight: bold; }
+        a:link    { color: #900; background-color: transparent; }
+        a:visited { color: #633; background-color: transparent; }
+        a:active  { color: #633; background-color: transparent; }
+
+        p { margin-left: 2em; margin-right: 2em; }
+        p.copyright { font-size: x-small; }
+        p.toc { font-size: small; font-weight: bold; margin-left: 3em; }
+        table.toc { margin: 0 0 0 3em; padding: 0; border: 0; vertical-align: text-top; }
+        td.toc { font-size: small; font-weight: bold; vertical-align: text-top; }
+
+        ol.text { margin-left: 2em; margin-right: 2em; }
+        ul.text { margin-left: 2em; margin-right: 2em; }
+        li      { margin-left: 3em; }
+
+        /* RFC-2629 <spanx>s and <artwork>s. */
+        em     { font-style: italic; }
+        strong { font-weight: bold; }
+        dfn    { font-weight: bold; font-style: normal; }
+        cite   { font-weight: normal; font-style: normal; }
+        tt     { color: #036; }
+        tt, pre, pre dfn, pre em, pre cite, pre span {
+                font-family: "Courier New", Courier, monospace; font-size: small;
+        }
+        pre {
+                text-align: left; padding: 4px;
+                color: #000; background-color: #CCC;
+        }
+        pre dfn  { color: #900; }
+        pre em   { color: #66F; background-color: #FFC; font-weight: normal; }
+        pre .key { color: #33C; font-weight: bold; }
+        pre .id  { color: #900; }
+        pre .str { color: #000; background-color: #CFF; }
+        pre .val { color: #066; }
+        pre .rep { color: #909; }
+        pre .oth { color: #000; background-color: #FCF; }
+        pre .err { background-color: #FCC; }
+
+        /* RFC-2629 <texttable>s. */
+        table.all, table.full, table.headers, table.none {
+                font-size: small; text-align: center; border-width: 2px;
+                vertical-align: top; border-collapse: collapse;
+        }
+        table.all, table.full { border-style: solid; border-color: black; }
+        table.headers, table.none { border-style: none; }
+        th {
+                font-weight: bold; border-color: black;
+                border-width: 2px 2px 3px 2px;
+        }
+        table.all th, table.full th { border-style: solid; }
+        table.headers th { border-style: none none solid none; }
+        table.none th { border-style: none; }
+        table.all td {
+                border-style: solid; border-color: #333;
+                border-width: 1px 2px;
+        }
+        table.full td, table.headers td, table.none td { border-style: none; }
+
+        hr { height: 1px; }
+        hr.insert {
+                width: 80%; border-style: none; border-width: 0;
+                color: #CCC; background-color: #CCC;
+        }
+--></style>
+</head>
+<body>
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<table summary="layout" width="66%" border="0" cellpadding="0" cellspacing="0"><tr><td><table summary="layout" width="100%" border="0" cellpadding="2" cellspacing="1">
+<tr><td class="header">Draft 1</td><td class="header">P. Alavilli</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">AOL LLC</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">July 2008</td></tr>
+</table></td></tr></table>
+<h1><br />OAuth Extension for Response Data Format - Draft 1</h1>
+
+<h3>Abstract</h3>
+
+<p>This memo describes how a Consumer can request the Service Provider to return the OAuth response data in a different format (ex. json, xml, etc.).
+</p><a name="toc"></a><br /><hr />
+<h3>Table of Contents</h3>
+<p class="toc">
+<a href="#contrib">1.</a>&nbsp;
+Contributors<br />
+<a href="#conv">2.</a>&nbsp;
+Notation and Conventions<br />
+<a href="#defs">3.</a>&nbsp;
+Definitions<br />
+<a href="#desc">4.</a>&nbsp;
+Description<br />
+<a href="#parameter">5.</a>&nbsp;
+Parameter Specification<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#parameter-format">5.1.</a>&nbsp;
+Response Data Format Type<br />
+<a href="#ext-uri">6.</a>&nbsp;
+Extension Identifier<br />
+<a href="#processing">7.</a>&nbsp;
+Processing Rules<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#indirect-requests">7.1.</a>&nbsp;
+Indirect Requests<br />
+<a href="#schema">8.</a>&nbsp;
+Response Data Format<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#xml-schema">8.1.</a>&nbsp;
+XML<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#json-schema">8.2.</a>&nbsp;
+JSON<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#yaml-schema">8.3.</a>&nbsp;
+YAML<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#php-schema">8.4.</a>&nbsp;
+PHP<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#amf0-schema">8.5.</a>&nbsp;
+AMF0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#amf3-schema">8.6.</a>&nbsp;
+AMF3<br />
+<a href="#anchor1">Appendix&nbsp;A.</a>&nbsp;
+Response Data in XML Format with Service Specific Parameters<br />
+<a href="#anchor2">Appendix&nbsp;B.</a>&nbsp;
+Security considerations for xoauth_json_callback<br />
+<a href="#rfc.references1">9.</a>&nbsp;
+References<br />
+<a href="#rfc.authors">&#167;</a>&nbsp;
+Author's Address<br />
+</p>
+<br clear="all" />
+
+<a name="contrib"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1"></a><h3>1.&nbsp;
+Contributors</h3>
+
+<p>
+               </p>
+<blockquote class="text">
+<p>George Fletcher
+</p>
+</blockquote><p>
+            
+</p>
+<a name="conv"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2"></a><h3>2.&nbsp;
+Notation and Conventions</h3>
+
+<p>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, 
+	    “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, 
+	    and “OPTIONAL” in this document are to be interpreted as 
+	    described in <a class='info' href='#RFC2119'>[RFC2119]<span> (</span><span class='info'>Bradner, S., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; March&nbsp;1997.</span><span>)</span></a>. Domain name examples use 
+	    <a class='info' href='#RFC2606'>[RFC2606]<span> (</span><span class='info'>Eastlake, D. and A. Panitz, &ldquo;Reserved Top Level DNS Names,&rdquo; June&nbsp;1999.</span><span>)</span></a>.
+</p>
+<a name="defs"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3"></a><h3>3.&nbsp;
+Definitions</h3>
+
+<p>
+               </p>
+<blockquote class="text"><dl>
+<dt>Service Provider:</dt>
+<dd>A web application that allows 
+	      access via OAuth.
+</dd>
+<dt>Consumer:</dt>
+<dd>A website or application that uses 
+	      OAuth to access the Service Provider on behalf of the User.
+</dd>
+<dt>User:</dt>
+<dd>An individual who has an account with the 
+	      Service Provider.
+</dd>
+<dt>Response Data:</dt>
+<dd>Parameters returned by the Service Provider in response to an OAuth request.
+</dd>
+<dt>Response Code:</dt>
+<dd>A numeric code returned by the Service Provider indicating the result of the request (Ex. success, failure, unauthorized, etc.). The Service Provider SHOULD use the response codes defined in <a class='info' href='#RFC2616'>[RFC2616]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L., Leach, P., and T. Berners-Lee, &ldquo;Hypertext Transfer Protocol -- HTTP/1.1,&rdquo; June&nbsp;1999.</span><span>)</span></a> Section 10.
+</dd>
+<dt>Direct Request:</dt>
+<dd>A request is initiated by the Consumer to a Service Provider endpoint URL. Direct Request mechanism is used for the Request Token and Access Token requests as defined in <a class='info' href='#oauth_core_1_0'>OAuth Core 1.0<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; December&nbsp;2007.</span><span>)</span></a>.
+</dd>
+<dt>Indirect Request:</dt>
+<dd>A request is initiated by the Consumer through an User-Agent to a Service Provider endpoint URL. Indirect Request mechanism is used for the Authorization request as defined in the <a class='info' href='#oauth_core_1_0'>OAuth Core 1.0<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; December&nbsp;2007.</span><span>)</span></a>.
+</dd>
+</dl></blockquote><p>
+            
+</p>
+<a name="desc"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4"></a><h3>4.&nbsp;
+Description</h3>
+
+<p> 
+			In certain cases it is necessary or prudent for the Consumer 
+            to request the Service Provider to return the response data in a different format in the response body (Ex. json, xml, amf3, php, yaml, etc.) in both direct (Request Token and Access Token) and indirect (Authorization) requests.	
+			
+</p>
+<p>The most common use case is a Javascript based Consumer running in a browser on a domain (Ex. sampleblog.com) that's not the same as the Service Provider's domain (Ex. example.provider.com). In this case usually the Javascript Consumers use the &lt;SCRIPT&gt; tag injection mechanism (called 'JSONP') to make cross domain requests to the Service Provider. One of the side effects of using the JSONP mechanism is to have the response data also returned in 'JSON' <a class='info' href='#RFC4627'>[RFC4627]<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a>format. Similar to 'JSON' there have been other data serialization formats defined to help applications built in other technologies like Flash, PHP, Java, C/C++, etc.. Some of them include 'amf0', 'amf3', and 'php' targeting specific technologies and some are more generic formats like 'yaml' and 'xml'.
+</p>
+<p>This Response Data Format Specification addresses such requirements so a Consumer can request the Service Provider to return data in a specific format instead of the default format (a form-encoded string using '&amp;' and '=' signs to separate name-value pairs) encoded as specified in the OAuth Core 1.0 Specification.<a class='info' href='#oauth_core_1_0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; December&nbsp;2007.</span><span>)</span></a>
+</p>
+<a name="parameter"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5"></a><h3>5.&nbsp;
+Parameter Specification</h3>
+
+<p>This extension defines a new parameter that the Consumer can use to request the Service Provider to return the response data in a specific format instead of the default format as specified in the OAuth Core 1.0 Specification<a class='info' href='#oauth_core_1_0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; December&nbsp;2007.</span><span>)</span></a> . Please see section <a class='info' href='#ext-uri'>Extension Identifier<span> (</span><span class='info'>Extension Identifier</span><span>)</span></a> for information on how the Service Provider can advertise the supported response data formats.
+</p>
+<p>As specified in Section 5 &amp; 5.1 in the OAuth Core 1.0 Specification<a class='info' href='#oauth_core_1_0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; December&nbsp;2007.</span><span>)</span></a>, all parameter names and values are case sensitive, and MUST be encoded to be URL safe. 
+</p>
+<a name="parameter-format"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.1"></a><h3>5.1.&nbsp;
+Response Data Format Type</h3>
+
+<p>The OAuth Response Data Format MUST be specified with the 
+	    parameter name 'xoauth_response_format'. The value of the parameter 
+	    MUST be a URI, which is used for referring to the response format values. <a class='info' href='#schema'>Section&nbsp;8<span> (</span><span class='info'>Response Data Format</span><span>)</span></a> specifies the format of the data returned in the response body.
+</p>
+<p> To identity the Response Data Format, each format is given a unique URI:
+</p>
+<p>
+			</p>
+<blockquote class="text">
+<p>XML:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>http://oauth.net/ext/response_data_format/types/xml</pre></div>
+<p>JSON:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>http://oauth.net/ext/response_data_format/types/json</pre></div>
+<p>PHP:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>http://oauth.net/ext/response_data_format/types/php</pre></div>
+<p>YAML:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>http://oauth.net/ext/response_data_format/types/yaml</pre></div>
+<p>AMF0:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>http://oauth.net/ext/response_data_format/types/amf0</pre></div>
+<p>AMF3:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>http://oauth.net/ext/response_data_format/types/amf3</pre></div>
+<p>OAUTH [default - same as when xoauth_response_format is not specified]:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>http://oauth.net/ext/response_data_format/types/oauth</pre></div>
+</blockquote><p>
+			
+</p>
+<p> Ex. 
+            </p>
+<blockquote class="text">
+<p>xoauth_response_format = http%3A//schema.oauth.net/ext/response_data_format/types/json
+</p>
+</blockquote><p>
+            
+</p>
+<a name="ext-uri"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6"></a><h3>6.&nbsp;
+Extension Identifier</h3>
+
+<p>The Service Provider can advertise that it supports this
+	    extension by listing the following URI in the public documentation
+	    that also describes the public endpoints. When using OAuth Discovery as defined in <a class='info' href='#oauth_disco_1_0'>[OAuth Discovery 1.0]<span> (</span><span class='info'>Hammer-Lahav, E., &ldquo;OAuth Discovery 1.0 Draft 1,&rdquo; December&nbsp;2007.</span><span>)</span></a>, the Response Data Format Type extension service type URI is: <tt>http://oauth.net/ext/response_data_format/1.0</tt>. It follows the same rules and workflow as the <tt>http://oauth.net/core/1.0/endpoint/resource</tt> service type. 
+            
+</p>
+<p>The Service Provider can also advertise the response formats that are supported by specifying the response data format values as defined in <a class='info' href='#parameter-format'>Response Data Format<span> (</span><span class='info'>Response Data Format Type</span><span>)</span></a> section. 
+</p>
+<p> Sample Discovery entry:
+			</p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+      &lt;Service&gt;
+        &lt;Type&gt;http://oauth.net/ext/response_data_format/1.0&lt;/Type&gt;
+        &lt;Type&gt;http://oauth.net/ext/response_data_format/types/xml&lt;/Type&gt;
+        &lt;Type&gt;http://oauth.net/ext/response_data_format/types/json&lt;/Type&gt;
+        &lt;Type&gt;http://oauth.net/ext/response_data_format/types/oauth&lt;/Type&gt;
+      &lt;/Service&gt;
+</pre></div><p>
+			
+			
+</p>
+<a name="processing"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.7"></a><h3>7.&nbsp;
+Processing Rules</h3>
+
+<p>If the response format value provided by the Consumer is not supported by the Service Provider, the Service Provider MUST format the response data as defined in the OAuth Core 1.0 Specification.<a class='info' href='#oauth_core_1_0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; December&nbsp;2007.</span><span>)</span></a>
+</p>
+<p>The Consumer MAY specify the response data format by 
+	    adding the xoauth_response_format parameter to any Service Provider endpoints (both direct and indirect requests) that
+	    supports the extension. However it is recommended that the Consumer SHOULD first determine if the Service Provider supports the extension before adding the parameter.
+</p>
+<p>
+			When requesting the response data format as "JSON", the Consumers MAY pass the 'xoauth_json_callback' with the JSONP callback and the Service Provider MUST return a JSONP callback using the value from the 'xoauth_json_callback' parameter.
+			
+</p>
+<p> When returning response data in the format requested by the Consumer, the Service Provider MUST set the HTTP 'Content-Type' header with the appropriate value that corresponds to the response data format. The 'Content-Type' header SHOULD also include a 'CharSet' to let the Consumer know which character set is used in the response data.
+			
+</p>
+<p> It is RECOMMENDED that the Service Providers SHOULD also return the response data in the same format in case of errors and MAY return Service Provider specific data in the same format to make it easy for the Consumers to handle the response data in a consistent way.
+</p>
+<a name="indirect-requests"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.7.1"></a><h3>7.1.&nbsp;
+Indirect Requests</h3>
+
+<p>Service Providers MUST support "xoauth_response_format" parameter in the Indirect Requests only if the Consumer provides the "oauth_callback" parameter and HTTP POST method (not using 301/302/303 redirects) is used to redirect the user back to the Consumer. 
+</p>
+<ul class="text">
+<li>If the Service Provider is using a HTTP POST method to redirect the user back to the Consumer's "oauth_callback" URL, then the response data in the requested format as specified in the "xoauth_response_format" parameter, goes in the HTTP POST body.
+</li>
+<li>If the Service Provider is using a HTTP GET method (a redirect based on HTTP status codes 301/302/303) to redirect the user back to the Consumer's "oauth_callback" URL, the "xoauth_response_format" MUST be ignored and the response data SHOULD be returned in the default format (form encoded parameters) as defined in the <a class='info' href='#oauth_core_1_0'>[OAuth Core 1.0]<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; December&nbsp;2007.</span><span>)</span></a>
+</li>
+</ul>
+<a name="schema"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.8"></a><h3>8.&nbsp;
+Response Data Format</h3>
+
+<p>The following sections define the format of the response data for the different format types defined in the <a class='info' href='#parameter-format'>Response Data Format Type<span> (</span><span class='info'>Response Data Format Type</span><span>)</span></a> section. When the Consumer requests the response data in a different format than the default format specified in <a class='info' href='#oauth_core_1_0'>OAuth Core 1.0<span> (</span><span class='info'>OAuth, OCW., &ldquo;OAuth Core 1.0,&rdquo; December&nbsp;2007.</span><span>)</span></a>, the Service Provider (if it supports this extension) MUST return the response data as specified below. The Service Provider MAY add additional parameters in the response data but they MUST be included inside the 'response' object as per the given response data format. The Service Providers SHALL document the additional parameters if any in their own documentation. 
+</p>
+<p>Below is the XML Schema representation of the response data format. The response data in other (non-xml) formats MUST follow the same schema and convert it to it's language specifics as described below.
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified"&gt;
+&lt;xs:element name="response"&gt;
+	&lt;xs:complexType&gt;
+	&lt;xs:sequence&gt;
+		&lt;xs:element name="oauth_parameter" minOccurs="0" maxOccurs="unbounded"&gt;
+			&lt;xs:complexType&gt;
+				&lt;xs:simpleContent&gt;
+					&lt;xs:extension base="xs:string"&gt;
+						&lt;xs:attribute name="name" type="xs:string" use="required"/&gt;
+					&lt;/xs:extension&gt;
+				&lt;/xs:simpleContent&gt;
+			&lt;/xs:complexType&gt;
+		&lt;/xs:element&gt;
+		&lt;xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/&gt;
+	&lt;/xs:sequence&gt;
+	&lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;/xs:schema&gt;
+</pre></div><p>
+
+</p>
+<a name="xml-schema"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.8.1"></a><h3>8.1.&nbsp;
+XML</h3>
+
+<p>The XML format directly derives from the XML Schema defined above. Service Providers may add their service specific parameters in the response. Please refer to <a class='info' href='#xml'>[xml]<span> (</span><span class='info'>, &ldquo;XML,&rdquo; .</span><span>)</span></a> for more information on XML format. 
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+&lt;response&gt;
+	&lt;oauth_parameter name="oauth_token"&gt;token&lt;/oauth_parameter&gt;
+	&lt;oauth_parameter name="oauth_token_secret"&gt;secret&lt;/oauth_parameter&gt;
+&lt;/response&gt;
+</pre></div><p>
+
+			
+</p>
+<p>
+			'Content-Type' HTTP response header value MUST be:
+				
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>Content-Type: text/xml</pre></div><p>
+
+</p>
+			
+
+<a name="json-schema"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.8.2"></a><h3>8.2.&nbsp;
+JSON</h3>
+
+<p>The JSON format represents data as JavaScript literals. The object literal produced by JSON can be directly evaluated by a JSON parser. Please refer to <a class='info' href='#json'>[json]<span> (</span><span class='info'>, &ldquo;JSON,&rdquo; .</span><span>)</span></a> for more information on JSON format. 
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+{"response":{"oauth_parameter":{ "oauth_token": "token", "oauth_token_secret": "secret"	}}}
+</pre></div><p>
+
+</p>
+<p>
+			'Content-Type' HTTP response header value MUST be :
+				
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>Content-Type: text/json</pre></div><p>
+
+</p>
+				
+				
+<p>If the Consumer needs the response as a callback (JSONP), the xoauth_json_callback parameter MUST be passed as one of the input parameter as defined in the <a class='info' href='#processing'>Processing Rules section<span> (</span><span class='info'>Processing Rules</span><span>)</span></a>. 
+</p>
+			
+
+<a name="yaml-schema"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.8.3"></a><h3>8.3.&nbsp;
+YAML</h3>
+
+<p>YAML is a human-friendly, cross language, Unicode based data serialization language designed around the common native data strutures of modern programming languages. <a class='info' href='#yaml'>[yaml]<span> (</span><span class='info'>, &ldquo;YAML,&rdquo; .</span><span>)</span></a> 
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+'response' =&gt; {
+    'oauth_parameter' =&gt; {
+		'oauth_token' =&gt; 'token',
+		'oauth_token_secet' =&gt; 'secret'
+	}
+}
+</pre></div><p>
+
+</p>
+<p>
+			'Content-Type' HTTP response header value MUST be :
+				
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>Content-Type: text/yaml</pre></div><p>
+
+</p>
+			
+
+<a name="php-schema"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.8.4"></a><h3>8.4.&nbsp;
+PHP</h3>
+
+<p>Serialized PHP is a data encoding format for PHP programming language to easily store and transmit data. The Serialized PHP data can be directly evaluated by using the built in 'unserialize' function in PHP. The general format of the PHP data is:
+				</p>
+<blockquote class="text"><dl>
+<dt></dt>
+<dd>&lt;data type&gt;:&lt;length&gt;:&lt;value&gt;
+</dd>
+</dl></blockquote><p> 
+				Please refer to <a class='info' href='#serialized_php'>[serialized_php]<span> (</span><span class='info'>, &ldquo;Serialized PHP,&rdquo; .</span><span>)</span></a> and <a class='info' href='#serialized_php_yahoo'>[serialized_php_yahoo]<span> (</span><span class='info'>, &ldquo;Using Serialized PHP with Yahoo! Web Services,&rdquo; .</span><span>)</span></a> for more information on Serialized PHP data encoding format.
+				
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+a:1:{s:14:"response";a:1:{s:14:"oauth_parameter";a:2:{s:11:"oauth_token";s:5:"token";s:18:"oauth_token_secret";s::"secret"}}
+</pre></div><p>
+
+</p>
+<p>
+			'Content-Type' HTTP response header value MUST be :
+				
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>Content-Type: text/php</pre></div><p>
+
+</p>
+			
+
+<a name="amf0-schema"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.8.5"></a><h3>8.5.&nbsp;
+AMF0</h3>
+
+<p>AMF0 is a binary data format Flash uses to transfer information from and to a server. ActionScript 2.0 and earlier versions use AMF0 format.
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+response (object) {
+    oauth_parameter (object) {
+		oauth_token (string) = 'token'
+		oauth_token_secet (string) = 'secret'
+	}
+}
+</pre></div><p>
+
+</p>
+<p>
+			'Content-Type' HTTP response header value MUST be :
+				
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>Content-Type: application/x-amf</pre></div><p>
+
+</p>
+			
+
+<a name="amf3-schema"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.8.6"></a><h3>8.6.&nbsp;
+AMF3</h3>
+
+<p>AMF3 is a binary data format Flash uses to transfer information from and to a server. ActionScript 3 uses AMF3 format.<a class='info' href='#amf3_spec'>[amf3_spec]<span> (</span><span class='info'>Adobe Systems Inc., &ldquo;Action Message Format -- AMF3,&rdquo; .</span><span>)</span></a>
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+response (object) {
+    oauth_parameter (object) {
+		oauth_token (string) = 'token'
+		oauth_token_secet (string) = 'secret'
+	}
+}
+</pre></div><p>
+
+</p>
+<p>
+			'Content-Type' HTTP response header value MUST be :
+				
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>Content-Type: application/x-amf</pre></div><p>
+
+</p>
+			
+
+<a name="anchor1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.A"></a><h3>Appendix A.&nbsp;
+Response Data in XML Format with Service Specific Parameters</h3>
+
+<p> This is an example of sample response data in XML format from a Service Provider with some provider specific parameters.
+			  
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+&lt;response&gt;
+	&lt;oauth_parameter name="oauth_token"&gt;token&lt;/oauth_parameter&gt;
+	&lt;oauth_parameter name="oauth_token_secret"&gt;secret&lt;/oauth_parameter&gt;
+	&lt;sp_parameter1&gt;value1&lt;/sp_parameter&gt;
+	&lt;sp_data&gt;
+		&lt;somethingelse&gt;data&lt;/somethingelse&gt;
+	&lt;/sp_data&gt;
+&lt;/response&gt;
+</pre></div><p>
+
+</p>
+<a name="anchor2"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.B"></a><h3>Appendix B.&nbsp;
+Security considerations for xoauth_json_callback</h3>
+
+<p> Service Providers SHOULD apply necessary security filters on the xoauth_json_callback parameter value provided by the Consumers to prevent XSS attacks. 
+			  
+</p>
+<a name="rfc.references1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>9.&nbsp;References</h3>
+<table width="99%" border="0">
+<tr><td class="author-text" valign="top"><a name="RFC2119">[RFC2119]</a></td>
+<td class="author-text"><a href="mailto:sob@harvard.edu">Bradner, S.</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>,&rdquo; BCP&nbsp;14, RFC&nbsp;2119, March&nbsp;1997 (<a href="ftp://ftp.isi.edu/in-notes/rfc2119.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2119.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2119.xml">XML</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2606">[RFC2606]</a></td>
+<td class="author-text"><a href="mailto:dee3@us.ibm.com">Eastlake, D.</a> and <a href="mailto:buglady@fuschia.net">A. Panitz</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2606">Reserved Top Level DNS Names</a>,&rdquo; BCP&nbsp;32, RFC&nbsp;2606, June&nbsp;1999 (<a href="ftp://ftp.isi.edu/in-notes/rfc2606.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2616">[RFC2616]</a></td>
+<td class="author-text"><a href="mailto:fielding@ics.uci.edu">Fielding, R.</a>, <a href="mailto:jg@w3.org">Gettys, J.</a>, <a href="mailto:mogul@wrl.dec.com">Mogul, J.</a>, <a href="mailto:frystyk@w3.org">Frystyk, H.</a>, <a href="mailto:masinter@parc.xerox.com">Masinter, L.</a>, <a href="mailto:paulle@microsoft.com">Leach, P.</a>, and <a href="mailto:timbl@w3.org">T. Berners-Lee</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2616">Hypertext Transfer Protocol -- HTTP/1.1</a>,&rdquo; RFC&nbsp;2616, June&nbsp;1999 (<a href="ftp://ftp.isi.edu/in-notes/rfc2616.txt">TXT</a>, <a href="ftp://ftp.isi.edu/in-notes/rfc2616.ps">PS</a>, <a href="ftp://ftp.isi.edu/in-notes/rfc2616.pdf">PDF</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2616.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2616.xml">XML</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC4627">[RFC4627]</a></td>
+<td class="author-text">Crockford, D., &ldquo;<a href="http://tools.ietf.org/html/rfc4627">The application/json Media Type for JavaScript Object Notation (JSON)</a>,&rdquo; RFC&nbsp;4627, July&nbsp;2006 (<a href="ftp://ftp.isi.edu/in-notes/rfc4627.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="amf3_spec">[amf3_spec]</a></td>
+<td class="author-text">Adobe Systems Inc., &ldquo;<a href="http://download.macromedia.com/pub/labs/amf/amf3_spec_121207.pdf">Action Message Format -- AMF3</a>.&rdquo;</td></tr>
+<tr><td class="author-text" valign="top"><a name="json">[json]</a></td>
+<td class="author-text">&ldquo;<a href="http://www.json.org/">JSON</a>.&rdquo;</td></tr>
+<tr><td class="author-text" valign="top"><a name="oauth_core_1_0">[oauth_core_1_0]</a></td>
+<td class="author-text">OAuth, OCW., &ldquo;<a href="http://oauth.net/core/1.0">OAuth Core 1.0</a>,&rdquo; December&nbsp;2007.</td></tr>
+<tr><td class="author-text" valign="top"><a name="oauth_disco_1_0">[oauth_disco_1_0]</a></td>
+<td class="author-text"><a href="mailto:eran@hueniverse.com">Hammer-Lahav, E.</a>, &ldquo;<a href="http://oauth.googlecode.com/svn/spec/discovery/1.0/drafts/1/spec.html">OAuth Discovery 1.0 Draft 1</a>,&rdquo; December&nbsp;2007.</td></tr>
+<tr><td class="author-text" valign="top"><a name="serialized_php">[serialized_php]</a></td>
+<td class="author-text">&ldquo;<a href="http://us3.php.net/serialize">Serialized PHP</a>.&rdquo;</td></tr>
+<tr><td class="author-text" valign="top"><a name="serialized_php_yahoo">[serialized_php_yahoo]</a></td>
+<td class="author-text">&ldquo;<a href="http://developer.yahoo.com/common/phpserial.html">Using Serialized PHP with Yahoo! Web Services</a>.&rdquo;</td></tr>
+<tr><td class="author-text" valign="top"><a name="xml">[xml]</a></td>
+<td class="author-text">&ldquo;<a href="http://en.wikipedia.org/wiki/XML">XML</a>.&rdquo;</td></tr>
+<tr><td class="author-text" valign="top"><a name="yaml">[yaml]</a></td>
+<td class="author-text">&ldquo;<a href="http://yaml.org/">YAML</a>.&rdquo;</td></tr>
+</table>
+
+<a name="rfc.authors"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>Author's Address</h3>
+<table width="99%" border="0" cellpadding="0" cellspacing="0">
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Praveen Alavilli</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">AOL LLC</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:AlavilliPraveen@aol.com">AlavilliPraveen@aol.com</a></td></tr>
+</table>
+</body></html>
+
